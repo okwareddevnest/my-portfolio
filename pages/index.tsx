@@ -5,8 +5,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MacbookScroll } from '../components/ui/macbook-scroll';
 import { AnimatedBackground } from '../components/AnimatedBackground';
+import { usePortfolioStore } from '../store/store';
+import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 
 export default function Home() {
+  const projects = usePortfolioStore((state) => state.projects);
+  const featuredProjects = projects.slice(0, 2); // Get IThreeM and Fries Coin
+
   return (
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
       <AnimatedBackground />
@@ -68,9 +73,9 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="relative w-full overflow-hidden bg-gradient-to-b from-transparent to-gray-100 dark:to-gray-900">
-          <div className="absolute inset-0 bg-grid-white/10 dark:bg-grid-black/10" />
-          <div className="relative max-w-7xl mx-auto">
+        <div className="w-full relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-100/50 to-gray-100 dark:via-gray-900/50 dark:to-gray-900 pointer-events-none" />
+          <div className="h-[800px] relative">
             <MacbookScroll
               src="/projects-preview.png"
               title={
@@ -92,6 +97,87 @@ export default function Home() {
             />
           </div>
         </div>
+
+        {/* Featured Projects Section */}
+        <section className="relative z-10 py-20 px-4 bg-background dark:bg-background-dark">
+          <div className="container mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-3xl md:text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
+            >
+              Featured Projects
+            </motion.h2>
+
+            <div className="space-y-16">
+              {featuredProjects.map((project, index) => (
+                <motion.div
+                  key={project.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: index * 0.2 }}
+                  className="bg-card dark:bg-card-dark rounded-2xl overflow-hidden shadow-xl border border-border/10 dark:border-border-dark/10"
+                >
+                  <div className={`grid md:grid-cols-2 gap-8 ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
+                    <div className={`relative h-[300px] md:h-full ${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
+                      <Image
+                        src={project.previewImage}
+                        alt={project.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </div>
+
+                    <div className="p-8 flex flex-col justify-center">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-4 text-text dark:text-text-dark">
+                        {project.name}
+                      </h3>
+                      <p className="text-text/80 dark:text-text-dark/80 mb-6">
+                        {project.longDescription}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 text-sm rounded-full bg-primary/10 dark:bg-primary-dark/10 text-primary dark:text-primary-dark"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex gap-4">
+                        <a
+                          href={project.demoLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors"
+                        >
+                          <IconExternalLink className="w-5 h-5" />
+                          Visit Website
+                        </a>
+                        <a
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border dark:border-border-dark hover:bg-card dark:hover:bg-card-dark transition-colors"
+                        >
+                          <IconBrandGithub className="w-5 h-5" />
+                          View Source
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

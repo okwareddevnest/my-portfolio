@@ -1,22 +1,47 @@
 import { create } from 'zustand';
 
+interface Skill {
+  name: string;
+  level: number;
+}
+
+interface SkillCategory {
+  category: string;
+  items: Skill[];
+}
+
+interface Project {
+  name: string;
+  description: string;
+  longDescription: string;
+  previewImage: string;
+  technologies: string[];
+  githubLink: string;
+  demoLink?: string;
+}
+
+interface Blog {
+  title: string;
+  content: string;
+  link: string;
+}
+
+interface Certificate {
+  name: string;
+  issuer: string;
+  date: string;
+  link: string;
+}
+
 interface PortfolioState {
-  skills: { category: string; items: { name: string; level: number }[] }[];
-  projects: {
-    name: string;
-    description: string;
-    longDescription: string;
-    previewImage: string;
-    technologies: string[];
-    githubLink: string;
-    demoLink?: string;
-  }[];
-  blogs: { title: string; content: string; link: string }[];
-  certificates: { name: string; issuer: string; date: string; link: string }[];
-  addSkill: (skill: { name: string; description: string }) => void;
-  addProject: (project: { name: string; description: string; link: string }) => void;
-  addBlog: (blog: { title: string; content: string; link: string }) => void;
-  addCertificate: (cert: { name: string; issuer: string; date: string; link: string }) => void;
+  skills: SkillCategory[];
+  projects: Project[];
+  blogs: Blog[];
+  certificates: Certificate[];
+  addSkill: (category: string, skill: Skill) => void;
+  addProject: (project: Project) => void;
+  addBlog: (blog: Blog) => void;
+  addCertificate: (cert: Certificate) => void;
 }
 
 export const usePortfolioStore = create<PortfolioState>((set) => ({
@@ -53,6 +78,7 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
         { name: "Express.js", level: 90 },
         { name: "Django", level: 95 },
         { name: "FastAPI", level: 85 },
+        { name: "Rust", level: 90 },
         { name: "MongoDB", level: 85 },
         { name: "PostgreSQL", level: 85 }
       ]
@@ -94,6 +120,24 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
     }
   ],
   projects: [
+    {
+      name: "IThreeM - Decentralized Gaming Engine",
+      description: "A revolutionary decentralized 2D and 3D gaming engine built on the Internet Computer Protocol (ICP), enabling seamless game development and deployment on the blockchain.",
+      longDescription: "IThreeM is a groundbreaking decentralized gaming engine that leverages the power of the Internet Computer Protocol to revolutionize game development. Built with Rust and Motoko, it provides a robust platform for creating both 2D and 3D games that run entirely on the blockchain. The engine features advanced rendering capabilities, physics simulation, asset management, and blockchain integration for in-game assets and transactions.",
+      previewImage: "/ithreem-preview.png",
+      technologies: ["Rust", "Motoko", "Internet Computer", "WebGL", "WebAssembly", "Three.js", "Blockchain"],
+      githubLink: "https://github.com/okwareddevnest/ithreem",
+      demoLink: "https://ithreem.com"
+    },
+    {
+      name: "$FRYS - Fries Coin",
+      description: "The world's first meme coin dedicated to fries enthusiasts, built on the Internet Computer Protocol with an integrated NFT marketplace.",
+      longDescription: "Fries Coin ($FRYS) is a community-driven meme token built on the Internet Computer Protocol, celebrating the universal love for fries. As a core developer, I helped create not just a token, but a complete ecosystem including an NFT marketplace for fries-themed digital collectibles. The project leverages ICP's advanced features for high-performance token transactions and NFT trading, while fostering a fun and engaging community.",
+      previewImage: "/fries-preview.png",
+      technologies: ["Motoko", "Internet Computer", "DeFi", "NFT", "ICRC-1", "ICP", "Web3"],
+      githubLink: "https://github.com/friescoin",
+      demoLink: "https://friescoin.com"
+    },
     {
       name: "Tech Charity Platform",
       description: "A modern web platform that enables charitable donations through M-Pesa integration, featuring a responsive dashboard for tracking donations and impact metrics.",
@@ -148,8 +192,24 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
   ],
   blogs: [],
   certificates: [],
-  addSkill: (skill) => set((state) => ({ skills: [...state.skills, skill] })),
-  addProject: (project) => set((state) => ({ projects: [...state.projects, project] })),
-  addBlog: (blog) => set((state) => ({ blogs: [...state.blogs, blog] })),
-  addCertificate: (cert) => set((state) => ({ certificates: [...state.certificates, cert] })),
+  addSkill: (category: string, skill: Skill) => 
+    set((state) => ({
+      skills: state.skills.map(cat => 
+        cat.category === category
+          ? { ...cat, items: [...cat.items, skill] }
+          : cat
+      )
+    })),
+  addProject: (project: Project) => 
+    set((state) => ({ 
+      projects: [...state.projects, project] 
+    })),
+  addBlog: (blog: Blog) => 
+    set((state) => ({ 
+      blogs: [...state.blogs, blog] 
+    })),
+  addCertificate: (cert: Certificate) => 
+    set((state) => ({ 
+      certificates: [...state.certificates, cert] 
+    })),
 }));
