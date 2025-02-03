@@ -1,16 +1,23 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { motion } from 'framer-motion';
+import { AnimatedBackground } from '../components/AnimatedBackground';
 import { usePortfolioStore } from '../store/store';
 import { CardContainer, CardBody, CardItem } from '../components/ui/3d-card';
-import { AnimatedBackground } from '../components/AnimatedBackground';
-import Image from 'next/image';
 import { IconBrandGithub, IconExternalLink, IconArrowRight } from '@tabler/icons-react';
+import Image from 'next/image';
+import { Metadata } from '../components/Metadata';
 
 const Projects = () => {
   const projects = usePortfolioStore((state) => state.projects);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
+      <Metadata 
+        title="Projects"
+        description="Explore my portfolio of innovative projects, including IThreeM - a decentralized gaming engine, blockchain applications, and full-stack web solutions."
+        keywords="blockchain projects, decentralized gaming, web development, ICP, rust, typescript, full stack projects, IThreeM, Fries Coin"
+      />
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow flex flex-col items-center py-8">

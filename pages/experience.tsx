@@ -6,6 +6,7 @@ import { AnimatedBackground } from '../components/AnimatedBackground';
 import { Modal } from '../components/Modal';
 import { IconCalendar, IconMapPin, IconBuildingSkyscraper, IconDevices } from '@tabler/icons-react';
 import Image from 'next/image';
+import { Metadata } from '../components/Metadata';
 
 interface Experience {
   company: string;
@@ -171,6 +172,11 @@ const Experience = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Metadata 
+        title="Professional Experience"
+        description="Explore Dedan Okware's professional journey, including roles at Power Learn Project, IThreeM, and various software development positions."
+        keywords="software engineer experience, blockchain developer, ICP developer, rust developer, typescript developer, web development experience, decentralized gaming, IThreeM founder"
+      />
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">

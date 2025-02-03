@@ -6,6 +6,7 @@ import { AnimatedBackground } from '../components/AnimatedBackground';
 import { Modal } from '../components/Modal';
 import { IconCertificate, IconCalendar, IconExternalLink } from '@tabler/icons-react';
 import Image from 'next/image';
+import { Metadata } from '../components/Metadata';
 
 interface Certificate {
   name: string;
@@ -338,7 +339,12 @@ const Certificates = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
+      <Metadata 
+        title="Certificates & Achievements"
+        description="View my professional certifications and achievements in blockchain development, software engineering, cloud computing, and more. Including certifications from Dacade.org, Microsoft, IBM, and other leading institutions."
+        keywords="blockchain certificates, ICP development, rust programming, typescript, microsoft certifications, professional achievements"
+      />
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">

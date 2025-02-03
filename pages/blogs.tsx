@@ -3,10 +3,19 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { AnimatedBackground } from '../components/AnimatedBackground';
 import { IconPencil } from '@tabler/icons-react';
+import { usePortfolioStore } from '../store/store';
+import { Metadata } from '../components/Metadata';
 
 const Blogs = () => {
+  const blogs = usePortfolioStore((state) => state.blogs);
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
+      <Metadata 
+        title="Blog"
+        description="Read my latest thoughts and insights on blockchain development, web3 technologies, and software engineering best practices."
+        keywords="blockchain blog, web3 development, software engineering, technical writing, ICP development, rust programming"
+      />
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">

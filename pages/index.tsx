@@ -7,6 +7,7 @@ import { MacbookScroll } from '../components/ui/macbook-scroll';
 import { AnimatedBackground } from '../components/AnimatedBackground';
 import { usePortfolioStore } from '../store/store';
 import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
+import { Metadata } from '../components/Metadata';
 
 export default function Home() {
   const projects = usePortfolioStore((state) => state.projects);
@@ -14,6 +15,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
+      <Metadata 
+        title="Software Engineer"
+        description="Software Engineer specializing in blockchain development, decentralized applications, and innovative web solutions. Founder of IThreeM - a decentralized Gaming Engine."
+        keywords="software engineer, blockchain developer, ICP, rust, typescript, web development, decentralized gaming, IThreeM"
+      />
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow flex flex-col">
@@ -49,7 +55,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
           >
-            A passionate Full Stack Developer and founder of IThreeM - a decentralized Gaming Engine for 2D and 3D games built on ICP Blockchain. I specialize in building exceptional digital experiences and innovative blockchain solutions. With expertise in web development and blockchain technology, I&apos;m dedicated to pushing the boundaries of what&apos;s possible in decentralized gaming and web applications.
+            A passionate Software Engineer and founder of IThreeM - a decentralized Gaming Engine for 2D and 3D games built on ICP Blockchain. I specialize in building exceptional digital experiences and innovative blockchain solutions. With expertise in web development and blockchain technology, I&apos;m dedicated to pushing the boundaries of what&apos;s possible in decentralized gaming and web applications.
           </motion.p>
           
           <motion.div

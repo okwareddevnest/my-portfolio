@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { usePortfolioStore } from '../store/store';
 import { Modal } from '../components/Modal';
 import { useState } from 'react';
+import { Metadata } from '../components/Metadata';
 
 const SkillBar = ({ name, level }: { name: string; level: number }) => {
   return (
@@ -87,7 +88,12 @@ const Skills = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
+      <Metadata 
+        title="Skills & Expertise"
+        description="Discover my comprehensive skill set in software engineering, blockchain development, AI/ML, and cloud technologies. Expertise in Rust, TypeScript, Python, and more."
+        keywords="software engineering, blockchain development, rust programming, typescript, python, AI/ML, cloud computing, ICP, web3"
+      />
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">
