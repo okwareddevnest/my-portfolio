@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { MacbookScroll } from '../components/ui/macbook-scroll';
 import { AnimatedBackground } from '../components/AnimatedBackground';
 import { usePortfolioStore } from '../store/store';
-import { IconBrandGithub, IconExternalLink, IconBrandX, IconBrandLinkedin } from '@tabler/icons-react';
+import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 
 export default function Home() {
   const projects = usePortfolioStore((state) => state.projects);
