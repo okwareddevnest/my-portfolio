@@ -1,6 +1,5 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { motion } from 'framer-motion';
 import { AnimatedBackground } from '../components/AnimatedBackground';
 import { usePortfolioStore } from '../store/store';
 import { CardContainer, CardBody, CardItem } from '../components/ui/3d-card';
