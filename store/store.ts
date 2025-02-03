@@ -126,7 +126,7 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
       longDescription: "IThreeM is a groundbreaking decentralized gaming engine that leverages the power of the Internet Computer Protocol to revolutionize game development. Built with Rust and Motoko, it provides a robust platform for creating both 2D and 3D games that run entirely on the blockchain. The engine features advanced rendering capabilities, physics simulation, asset management, and blockchain integration for in-game assets and transactions.",
       previewImage: "/ithreem-preview.png",
       technologies: ["Rust", "Motoko", "Internet Computer", "WebGL", "WebAssembly", "Three.js", "Blockchain"],
-      githubLink: "https://github.com/okwareddevnest/ithreem",
+      githubLink: "https://github.com/okwareddevnest",
       demoLink: "https://ithreem.com"
     },
     {
@@ -135,8 +135,8 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
       longDescription: "Fries Coin ($FRYS) is a community-driven meme token built on the Internet Computer Protocol, celebrating the universal love for fries. As a core developer, I helped create not just a token, but a complete ecosystem including an NFT marketplace for fries-themed digital collectibles. The project leverages ICP's advanced features for high-performance token transactions and NFT trading, while fostering a fun and engaging community.",
       previewImage: "/fries-preview.png",
       technologies: ["Motoko", "Internet Computer", "DeFi", "NFT", "ICRC-1", "ICP", "Web3"],
-      githubLink: "https://github.com/friescoin",
-      demoLink: "https://friescoin.com"
+      githubLink: "https://github.com/okwareddevnest",
+      demoLink: "https://friescoin.xyz"
     },
     {
       name: "Tech Charity Platform",
@@ -191,7 +191,20 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
     }
   ],
   blogs: [],
-  certificates: [],
+  certificates: [
+    {
+      name: "ICP TypeScript Smart Contract 101",
+      issuer: "Dacade.org",
+      date: "2024",
+      link: "https://dacade.org/achievements/d18c8404-7900-4dfa-96e9-79a0bab5a439"
+    },
+    {
+      name: "ICP Rust Smart Contract 101",
+      issuer: "Dacade.org",
+      date: "2024",
+      link: "https://dacade.org/achievements/46a69cb6-5ffa-408b-8d65-5f3cfe0d2eba"
+    }
+  ],
   addSkill: (category: string, skill: Skill) => 
     set((state) => ({
       skills: state.skills.map(cat => 

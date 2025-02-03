@@ -25,6 +25,7 @@ const categoryColors = {
   "Coursera": "from-purple-500 to-purple-600",
   "IBM": "from-red-500 to-red-600",
   "Google": "from-green-500 to-green-600",
+  "Dacade.org": "from-orange-500 to-orange-600",
   "Others": "from-yellow-500 to-yellow-600",
 };
 
@@ -232,6 +233,24 @@ const certificates: Certificate[] = [
     description: "Intensive 5-week bootcamp covering AI fundamentals, NumPy, Pandas, Computer Vision, Deep Learning, and FastAPI deployment.",
     skills: ["AI", "NumPy", "Pandas", "Computer Vision", "Deep Learning", "FastAPI"],
     logo: "/companies/kabarak.png"
+  },
+  {
+    name: "ICP TypeScript Smart Contract 101",
+    issuer: "Dacade.org",
+    date: "2023",
+    link: "https://dacade.org/achievements/d18c8404-7900-4dfa-96e9-79a0bab5a439",
+    description: "Advanced certification in Internet Computer Protocol (ICP) smart contract development using TypeScript, covering blockchain fundamentals and dApp development.",
+    skills: ["TypeScript", "Smart Contracts", "ICP", "Blockchain", "DApp Development"],
+    logo: "/companies/dacade.png"
+  },
+  {
+    name: "ICP Rust Smart Contract 101",
+    issuer: "Dacade.org",
+    date: "2024",
+    link: "https://dacade.org/achievements/46a69cb6-5ffa-408b-8d65-5f3cfe0d2eba",
+    description: "Comprehensive training in developing smart contracts on the Internet Computer Protocol using Rust, focusing on performance and security.",
+    skills: ["Rust", "Smart Contracts", "ICP", "Blockchain", "Systems Programming"],
+    logo: "/companies/dacade.png"
   }
 ];
 

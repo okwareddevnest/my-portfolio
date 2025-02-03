@@ -1,5 +1,5 @@
 import Logo from './Logo';
-import { IconBrandGithub, IconBrandLinkedin, IconBrandTwitter } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandLinkedin, IconBrandX } from '@tabler/icons-react';
 
 const Footer = () => {
   return (
@@ -19,24 +19,27 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-colors"
+              aria-label="GitHub"
             >
               <IconBrandGithub className="w-6 h-6" />
             </a>
             <a
-              href="https://linkedin.com/in/dedan-okware"
+              href="https://www.linkedin.com/in/softcysec-dedan-okware/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-colors"
+              aria-label="LinkedIn"
             >
               <IconBrandLinkedin className="w-6 h-6" />
             </a>
             <a
-              href="https://twitter.com/okware_dedan"
+              href="https://x.com/okware_o"
               target="_blank"
               rel="noopener noreferrer"
               className="text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-colors"
+              aria-label="X (formerly Twitter)"
             >
-              <IconBrandTwitter className="w-6 h-6" />
+              <IconBrandX className="w-6 h-6" />
             </a>
           </div>
         </div>
