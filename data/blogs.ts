@@ -2,20 +2,20 @@ import { Blog } from '../store/store';
 
 export const blogs: Blog[] = [
   {
-    id: "7a7adf5e-9b58-4a95-a471-2a5b193b5220",
-    title: "New Post from twitter",
-    content: "View the full post on twitter",
-    publishedAt: "2025-02-04T11:03:51Z",
+    id: "f71a5398-ae00-4a06-96be-4a94a025e875",
+    title: "New Post from linkedin",
+    content: "View the full post on linkedin",
+    publishedAt: "2025-02-04T11:12:39Z",
     author: {
       name: "Dedan Okware",
       image: "/profile.png",
       role: "Software Engineer"
     },
-    tags: ["X", "Tech", "Development"],
+    tags: ["LinkedIn", "Professional", "Tech"],
     readTime: "1 min read",
     source: {
-      type: "twitter",
-      url: "https://x.com/okware_o/status/1884886199170449459"
+      type: "linkedin",
+      url: "https://www.linkedin.com/feed/update/urn:li:activity:7290958776021454848/"
     }
   },
   // Previous blogs will be added here
