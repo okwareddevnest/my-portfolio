@@ -1,0 +1,23 @@
+[
+  {
+    "id": "6c28da44-c010-4af6-8a5c-dab0fc5be3f7",
+    "title": "New Post from linkedin",
+    "content": "View the full post on linkedin",
+    "publishedAt": "2025-02-04T08:41:23Z",
+    "author": {
+      "name": "Dedan Okware",
+      "image": "/profile.png",
+      "role": "Software Engineer"
+    },
+    "tags": [
+      "LinkedIn",
+      "Professional",
+      "Tech"
+    ],
+    "readTime": "1 min read",
+    "source": {
+      "type": "linkedin",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7290652570107191298/"
+    }
+  }
+]
