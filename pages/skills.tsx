@@ -15,12 +15,12 @@ const SkillBar = ({ name, level }: { name: string; level: number }) => {
       transition={{ duration: 0.2 }}
     >
       <div className="flex justify-between mb-1">
-        <span className="text-sm font-medium text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">{name}</span>
+        <span className="text-sm font-medium text-text/80 dark:text-text-dark/80 group-hover:text-primary/90 dark:group-hover:text-primary-dark/90 transition-colors">{name}</span>
         <span className="text-sm font-medium text-text/60 dark:text-text-dark/60">{level}%</span>
       </div>
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+      <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2.5 overflow-hidden">
         <motion.div
-          className="bg-gradient-to-r from-primary to-accent dark:from-primary-dark dark:to-accent h-2.5"
+          className="bg-gradient-to-r from-primary/80 to-accent/80 dark:from-primary-dark/80 dark:to-accent-dark/80 h-2.5"
           initial={{ width: 0, opacity: 0 }}
           animate={{ width: `${level}%`, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -39,12 +39,12 @@ type CategoryKey =
   | "DevOps & Tools";
 
 const categoryColors: Record<CategoryKey, string> = {
-  "Programming Languages": "from-blue-500 to-purple-500",
-  "Frontend Frameworks & Libraries": "from-pink-500 to-orange-500",
-  "Backend Technologies": "from-green-500 to-teal-500",
-  "Blockchain Development": "from-indigo-500 to-blue-500",
-  "AI & Machine Learning": "from-purple-500 to-pink-500",
-  "DevOps & Tools": "from-orange-500 to-yellow-500"
+  "Programming Languages": "from-blue-400/80 to-purple-400/80 dark:from-blue-500/60 dark:to-purple-500/60",
+  "Frontend Frameworks & Libraries": "from-pink-400/80 to-orange-400/80 dark:from-pink-500/60 dark:to-orange-500/60",
+  "Backend Technologies": "from-green-400/80 to-teal-400/80 dark:from-green-500/60 dark:to-teal-500/60",
+  "Blockchain Development": "from-indigo-400/80 to-blue-400/80 dark:from-indigo-500/60 dark:to-blue-500/60",
+  "AI & Machine Learning": "from-purple-400/80 to-pink-400/80 dark:from-purple-500/60 dark:to-pink-500/60",
+  "DevOps & Tools": "from-orange-400/80 to-yellow-400/80 dark:from-orange-500/60 dark:to-yellow-500/60"
 };
 
 const categoryIcons: Record<CategoryKey, string> = {
@@ -98,7 +98,7 @@ const Skills = () => {
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">
         <motion.h1 
-          className="text-5xl font-bold mb-16 text-center text-text dark:text-text-dark"
+          className="text-4xl md:text-5xl font-bold mb-16 text-center text-text/90 dark:text-text-dark/90"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -116,19 +116,19 @@ const Skills = () => {
               key={category.category}
               variants={cardVariants}
               whileHover={{ 
-                scale: 1.05,
+                scale: 1.02,
                 transition: { duration: 0.2 }
               }}
-              className={`bg-gradient-to-br ${categoryColors[category.category as CategoryKey]} bg-opacity-5 backdrop-blur-sm
-                         border border-border/10 dark:border-border-dark/10 rounded-xl p-6
-                         shadow-lg hover:shadow-xl transition-all cursor-pointer
-                         dark:bg-card-dark/30`}
+              className={`bg-gradient-to-br ${categoryColors[category.category as CategoryKey]} 
+                         bg-opacity-10 backdrop-blur-sm
+                         border border-white/10 dark:border-white/5 rounded-xl p-6
+                         shadow-sm hover:shadow-md transition-all cursor-pointer
+                         dark:bg-black/20`}
               onClick={() => setSelectedCategory(category)}
             >
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-4xl">{categoryIcons[category.category as CategoryKey]}</span>
-                <h2 className="text-2xl font-bold text-text dark:text-text-dark
-                             bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <span className="text-3xl">{categoryIcons[category.category as CategoryKey]}</span>
+                <h2 className="text-xl font-bold text-text/90 dark:text-text-dark/90">
                   {category.category}
                 </h2>
               </div>
@@ -139,15 +139,15 @@ const Skills = () => {
                 {category.items.slice(0, 3).map((skill) => (
                   <span
                     key={skill.name}
-                    className="px-3 py-1 bg-primary/10 dark:bg-primary-dark/10 rounded-full
-                             text-sm text-primary dark:text-primary-dark"
+                    className="px-3 py-1 bg-white/10 dark:bg-white/5 rounded-full
+                             text-sm text-text/80 dark:text-text-dark/80"
                   >
                     {skill.name}
                   </span>
                 ))}
                 {category.items.length > 3 && (
-                  <span className="px-3 py-1 bg-primary/10 dark:bg-primary-dark/10 rounded-full
-                                 text-sm text-primary dark:text-primary-dark">
+                  <span className="px-3 py-1 bg-white/10 dark:bg-white/5 rounded-full
+                                 text-sm text-text/80 dark:text-text-dark/80">
                     +{category.items.length - 3} more
                   </span>
                 )}
@@ -168,7 +168,7 @@ const Skills = () => {
             <div className="flex items-center gap-4 mb-8">
               <span className="text-4xl">{categoryIcons[selectedCategory.category as CategoryKey]}</span>
               <div>
-                <h3 className="text-xl font-bold text-text dark:text-text-dark">
+                <h3 className="text-xl font-bold text-text/90 dark:text-text-dark/90">
                   {selectedCategory.category}
                 </h3>
                 <p className="text-text/60 dark:text-text-dark/60">

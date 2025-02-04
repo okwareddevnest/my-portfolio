@@ -21,13 +21,13 @@ interface Certificate {
 }
 
 const categoryColors = {
-  "Microsoft": "from-blue-500 to-blue-600",
-  "LinkedIn": "from-cyan-500 to-cyan-600",
-  "Coursera": "from-purple-500 to-purple-600",
-  "IBM": "from-red-500 to-red-600",
-  "Google": "from-green-500 to-green-600",
-  "Dacade.org": "from-orange-500 to-orange-600",
-  "Others": "from-yellow-500 to-yellow-600",
+  "Microsoft": "from-blue-400/80 to-blue-500/80 dark:from-blue-500/60 dark:to-blue-600/60",
+  "LinkedIn": "from-cyan-400/80 to-cyan-500/80 dark:from-cyan-500/60 dark:to-cyan-600/60",
+  "Coursera": "from-purple-400/80 to-purple-500/80 dark:from-purple-500/60 dark:to-purple-600/60",
+  "IBM": "from-red-400/80 to-red-500/80 dark:from-red-500/60 dark:to-red-600/60",
+  "Google": "from-green-400/80 to-green-500/80 dark:from-green-500/60 dark:to-green-600/60",
+  "Dacade.org": "from-orange-400/80 to-orange-500/80 dark:from-orange-500/60 dark:to-orange-600/60",
+  "Others": "from-yellow-400/80 to-yellow-500/80 dark:from-yellow-500/60 dark:to-yellow-600/60",
 };
 
 const certificates: Certificate[] = [
@@ -261,10 +261,12 @@ const CertificateCard = ({ certificate, onClick }: { certificate: Certificate; o
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      className={`bg-gradient-to-br ${color} bg-opacity-5 backdrop-blur-sm
-                 border border-border/10 dark:border-border-dark/10
-                 p-6 rounded-xl shadow-lg
-                 hover:shadow-xl transition-all cursor-pointer`}
+      className={`bg-gradient-to-br ${color} 
+                 bg-opacity-10 backdrop-blur-sm
+                 border border-white/10 dark:border-white/5
+                 p-6 rounded-xl shadow-sm
+                 hover:shadow-md transition-all cursor-pointer
+                 dark:bg-black/20`}
       onClick={onClick}
     >
       <div className="flex items-center gap-4 mb-4">
@@ -280,12 +282,12 @@ const CertificateCard = ({ certificate, onClick }: { certificate: Certificate; o
             />
           </div>
         ) : (
-          <div className="w-12 h-12 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center">
-            <IconCertificate className="w-6 h-6 text-primary dark:text-primary-dark" />
+          <div className="w-12 h-12 rounded-full bg-white/10 dark:bg-white/5 flex items-center justify-center">
+            <IconCertificate className="w-6 h-6 text-text/80 dark:text-text-dark/80" />
           </div>
         )}
         <div>
-          <h3 className="text-xl font-bold text-text dark:text-text-dark">{certificate.name}</h3>
+          <h3 className="text-lg font-bold text-text/90 dark:text-text-dark/90">{certificate.name}</h3>
           <p className="text-text/60 dark:text-text-dark/60">{certificate.issuer}</p>
         </div>
       </div>
@@ -300,17 +302,17 @@ const CertificateCard = ({ certificate, onClick }: { certificate: Certificate; o
           {certificate.skills.slice(0, 3).map((skill) => (
             <span
               key={skill}
-              className={`px-2 py-1 text-xs rounded-full
+              className="px-2 py-1 text-xs rounded-full
                        bg-white/10 dark:bg-white/5
-                       text-text dark:text-text-dark`}
+                       text-text/80 dark:text-text-dark/80"
             >
               {skill}
             </span>
           ))}
           {certificate.skills.length > 3 && (
-            <span className={`px-2 py-1 text-xs rounded-full
+            <span className="px-2 py-1 text-xs rounded-full
                          bg-white/10 dark:bg-white/5
-                         text-text dark:text-text-dark`}>
+                         text-text/80 dark:text-text-dark/80">
               +{certificate.skills.length - 3} more
             </span>
           )}
@@ -349,7 +351,7 @@ const Certificates = () => {
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">
         <motion.h1
-          className="text-5xl font-bold mb-16 text-center text-text dark:text-text-dark"
+          className="text-4xl md:text-5xl font-bold mb-16 text-center text-text/90 dark:text-text-dark/90"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -385,7 +387,7 @@ const Certificates = () => {
       >
         {selectedCertificate && (
           <div className="space-y-6">
-            <div className={`-mx-6 -mt-6 p-6 bg-gradient-to-br ${categoryColors[selectedCertificate.issuer as keyof typeof categoryColors] || categoryColors["Others"]} mb-6`}>
+            <div className={`-mx-6 -mt-6 p-6 bg-gradient-to-br ${categoryColors[selectedCertificate.issuer as keyof typeof categoryColors] || categoryColors["Others"]} bg-opacity-20 mb-6`}>
               <div className="flex items-center gap-4">
                 {selectedCertificate.logo ? (
                   <div className="relative w-16 h-16">
@@ -400,14 +402,14 @@ const Certificates = () => {
                   </div>
                 ) : (
                   <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
-                    <IconCertificate className="w-8 h-8 text-white" />
+                    <IconCertificate className="w-8 h-8 text-text/80 dark:text-text-dark/80" />
                   </div>
                 )}
                 <div>
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-2xl font-bold text-text/90 dark:text-text-dark/90">
                     {selectedCertificate.issuer}
                   </h3>
-                  <div className="flex items-center gap-2 text-white/80">
+                  <div className="flex items-center gap-2 text-text/60 dark:text-text-dark/60">
                     <IconCalendar className="w-5 h-5" />
                     <span>{selectedCertificate.date}</span>
                   </div>
@@ -423,13 +425,13 @@ const Certificates = () => {
 
             {selectedCertificate.description && (
               <div className="prose dark:prose-invert max-w-none">
-                <p>{selectedCertificate.description}</p>
+                <p className="text-text/80 dark:text-text-dark/80">{selectedCertificate.description}</p>
               </div>
             )}
 
             {selectedCertificate.skills && (
               <div>
-                <h4 className="text-lg font-semibold mb-3 text-text dark:text-text-dark">
+                <h4 className="text-lg font-semibold mb-3 text-text/90 dark:text-text-dark/90">
                   Skills & Technologies
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -437,8 +439,8 @@ const Certificates = () => {
                     <span
                       key={skill}
                       className="px-3 py-1 rounded-full
-                               bg-primary/10 dark:bg-primary-dark/10
-                               text-primary dark:text-primary-dark"
+                               bg-white/10 dark:bg-white/5
+                               text-text/80 dark:text-text-dark/80"
                     >
                       {skill}
                     </span>
@@ -452,8 +454,8 @@ const Certificates = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-md
-                       bg-primary text-white hover:bg-primary/90
-                       dark:bg-primary-dark dark:hover:bg-primary-dark/90
+                       bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10
+                       text-text/90 dark:text-text-dark/90
                        transition-colors"
             >
               <IconExternalLink className="w-5 h-5" />
