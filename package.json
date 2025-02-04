@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:script": "tsc -p scripts/tsconfig.json",
+    "post-to-blog": "npm run build:script && node dist/scripts/post-to-blog.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

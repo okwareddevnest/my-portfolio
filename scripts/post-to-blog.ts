@@ -5,8 +5,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import puppeteer from 'puppeteer';
-import { Blog } from '../store/store';
 import readline from 'readline';
+import { Blog } from '../store/store';
 
 const execAsync = promisify(exec);
 
@@ -124,11 +124,11 @@ async function extractTwitterPost(url: string, spinner: Spinner): Promise<PostDa
       content: data.content,
       title: data.content.split('\n')[0],
       preview: data.image || '',
-      tags: data.hashtags.length > 0 ? data.hashtags : ['Twitter', 'Social'],
+      tags: data.hashtags.length > 0 ? data.hashtags : ['X', 'Tech', 'Development'],
     };
   } catch (error) {
     spinner.stop();
-    console.error('\n❌ Error extracting Twitter post:', error);
+    console.error('\n❌ Error extracting X post:', error);
     throw error;
   }
 }
