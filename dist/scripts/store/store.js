@@ -1,28 +1,8 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.usePortfolioStore = void 0;
-var zustand_1 = require("zustand");
-exports.usePortfolioStore = (0, zustand_1.create)(function (set) { return ({
+const zustand_1 = require("zustand");
+exports.usePortfolioStore = (0, zustand_1.create)((set) => ({
     skills: [
         {
             category: "Programming Languages",
@@ -183,28 +163,19 @@ exports.usePortfolioStore = (0, zustand_1.create)(function (set) { return ({
             link: "https://dacade.org/achievements/46a69cb6-5ffa-408b-8d65-5f3cfe0d2eba"
         }
     ],
-    addSkill: function (category, skill) {
-        return set(function (state) { return ({
-            skills: state.skills.map(function (cat) {
-                return cat.category === category
-                    ? __assign(__assign({}, cat), { items: __spreadArray(__spreadArray([], cat.items, true), [skill], false) }) : cat;
-            })
-        }); });
-    },
-    addProject: function (project) {
-        return set(function (state) { return ({
-            projects: __spreadArray(__spreadArray([], state.projects, true), [project], false)
-        }); });
-    },
-    addBlog: function (blog) {
-        return set(function (state) { return ({
-            blogs: __spreadArray(__spreadArray([], state.blogs, true), [blog], false)
-        }); });
-    },
-    addCertificate: function (cert) {
-        return set(function (state) { return ({
-            certificates: __spreadArray(__spreadArray([], state.certificates, true), [cert], false)
-        }); });
-    },
-    removeBlog: function (id) { return set(function (state) { return ({ blogs: state.blogs.filter(function (b) { return b.id !== id; }) }); }); },
-}); });
+    addSkill: (category, skill) => set((state) => ({
+        skills: state.skills.map(cat => cat.category === category
+            ? { ...cat, items: [...cat.items, skill] }
+            : cat)
+    })),
+    addProject: (project) => set((state) => ({
+        projects: [...state.projects, project]
+    })),
+    addBlog: (blog) => set((state) => ({
+        blogs: [...state.blogs, blog]
+    })),
+    addCertificate: (cert) => set((state) => ({
+        certificates: [...state.certificates, cert]
+    })),
+    removeBlog: (id) => set((state) => ({ blogs: state.blogs.filter(b => b.id !== id) })),
+}));

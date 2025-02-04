@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:script": "tsc -p scripts/tsconfig.json",
-    "post-to-blog": "npm run build:script && node dist/scripts/post-to-blog.js"
+    "clean": "rm -rf dist",
+    "build:script": "npm run clean && tsc -p scripts/tsconfig.json",
+    "post-to-blog": "./scripts/post-to-blog.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -38,6 +39,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/uuid": "^9.0.8",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8.5.1",
