@@ -64,15 +64,19 @@ create_blog_post() {
 EOF
 )
 
-    # Create blogs.json if it doesn't exist
-    if [ ! -f "store/blogs.json" ]; then
-        echo "[]" > store/blogs.json
+    # Create or update local storage data
+    local storage_file=".next/cache/portfolio-storage.json"
+    mkdir -p .next/cache
+    
+    if [ -f "$storage_file" ]; then
+        # Update existing storage
+        local temp_file=$(mktemp)
+        jq --argjson new_post "$post" '.state.blogs = [$new_post] + (.state.blogs // [])' "$storage_file" > "$temp_file"
+        mv "$temp_file" "$storage_file"
+    else
+        # Create new storage
+        echo "{\"state\":{\"blogs\":[$post]},\"version\":0}" > "$storage_file"
     fi
-
-    # Add new post to blogs.json
-    local temp_file=$(mktemp)
-    jq --argjson new_post "$post" '. += [$new_post]' store/blogs.json > "$temp_file"
-    mv "$temp_file" store/blogs.json
 }
 
 # Main script
@@ -114,7 +118,7 @@ spinner $!
 echo -e "${GREEN}${CHECK} Blog post created${NC}"
 
 echo -e "\n${BLUE}${ARROW} Committing changes...${NC}"
-git add store/blogs.json
+git add .next/cache/portfolio-storage.json
 git commit -m "Add new blog post" &> /dev/null
 spinner $!
 echo -e "${GREEN}${CHECK} Changes committed${NC}"
