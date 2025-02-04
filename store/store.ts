@@ -20,10 +20,24 @@ interface Project {
   demoLink?: string;
 }
 
-interface Blog {
+export interface Blog {
+  id: string;
   title: string;
   content: string;
-  link: string;
+  publishedAt: string;
+  author: {
+    name: string;
+    image: string;
+    role: string;
+  };
+  tags: string[];
+  readTime: string;
+  thumbnail?: string;
+  source: {
+    type: 'linkedin' | 'twitter';
+    url: string;
+    preview?: string;
+  };
 }
 
 interface Certificate {
@@ -42,6 +56,7 @@ interface PortfolioState {
   addProject: (project: Project) => void;
   addBlog: (blog: Blog) => void;
   addCertificate: (cert: Certificate) => void;
+  removeBlog: (id: string) => void;
 }
 
 export const usePortfolioStore = create<PortfolioState>((set) => ({
@@ -225,4 +240,5 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
     set((state) => ({ 
       certificates: [...state.certificates, cert] 
     })),
+  removeBlog: (id: string) => set((state) => ({ blogs: state.blogs.filter(b => b.id !== id) })),
 }));
