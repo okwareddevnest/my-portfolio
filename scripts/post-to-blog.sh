@@ -45,49 +45,47 @@ create_blog_post() {
     # Create blog post JSON
     local post=$(cat <<EOF
 {
-  "id": "$id",
-  "title": "New Post from $platform",
-  "content": "View the full post on $platform",
-  "publishedAt": "$timestamp",
-  "author": {
-    "name": "Dedan Okware",
-    "image": "/profile.png",
-    "role": "Software Engineer"
+  id: "$id",
+  title: "New Post from $platform",
+  content: "View the full post on $platform",
+  publishedAt: "$timestamp",
+  author: {
+    name: "Dedan Okware",
+    image: "/profile.png",
+    role: "Software Engineer"
   },
-  "tags": $tags,
-  "readTime": "1 min read",
-  "source": {
-    "type": "$platform",
-    "url": "$url"
+  tags: $tags,
+  readTime: "1 min read",
+  source: {
+    type: "$platform",
+    url: "$url"
   }
 }
 EOF
 )
 
-    # Create or update local storage data
-    local storage_file=".next/cache/portfolio-storage.json"
-    mkdir -p .next/cache
+    # Update blogs data file
+    local data_file="data/blogs.ts"
     
-    if [ -f "$storage_file" ]; then
-        # Update existing storage
-        local temp_file=$(mktemp)
-        jq --argjson new_post "$post" '.state.blogs = [$new_post] + (.state.blogs // [])' "$storage_file" > "$temp_file"
-        mv "$temp_file" "$storage_file"
-    else
-        # Create new storage
-        echo "{\"state\":{\"blogs\":[$post]},\"version\":0}" > "$storage_file"
+    # Create the file if it doesn't exist
+    if [ ! -f "$data_file" ]; then
+        cat > "$data_file" <<EOF
+import { Blog } from '../store/store';
+
+export const blogs: Blog[] = [];
+
+export const addBlog = (blog: Blog) => {
+  blogs.unshift(blog);
+};
+EOF
     fi
+
+    # Add new blog post to the array
+    sed -i "/export const blogs: Blog\[\] = \[/a \ \ $post," "$data_file"
 }
 
 # Main script
 echo -e "\n${BLUE}🌟 Blog Post Automation${NC}\n"
-
-# Check if jq is installed
-if ! command -v jq &> /dev/null; then
-    echo -e "${RED}${CROSS} Error: jq is not installed. Please install it first:${NC}"
-    echo "sudo apt-get install jq"
-    exit 1
-fi
 
 # Get URL from user
 read -p "$(echo -e "${BLUE}${ARROW} Enter your LinkedIn or X post URL:${NC} ")" url
@@ -118,7 +116,7 @@ spinner $!
 echo -e "${GREEN}${CHECK} Blog post created${NC}"
 
 echo -e "\n${BLUE}${ARROW} Committing changes...${NC}"
-git add .next/cache/portfolio-storage.json
+git add data/blogs.ts
 git commit -m "Add new blog post" &> /dev/null
 spinner $!
 echo -e "${GREEN}${CHECK} Changes committed${NC}"

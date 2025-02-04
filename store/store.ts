@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { blogs as initialBlogs } from '../data/blogs';
 
 interface Skill {
   name: string;
@@ -208,7 +209,7 @@ export const usePortfolioStore = create<PortfolioState>()(
           githubLink: "https://github.com/okwareddevnest/AppTray"
         }
       ],
-      blogs: [],
+      blogs: initialBlogs,
       certificates: [
         {
           name: "ICP TypeScript Smart Contract 101",
