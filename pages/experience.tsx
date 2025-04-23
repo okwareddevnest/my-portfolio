@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -13,12 +13,50 @@ interface Experience {
   logo?: string;
   title: string;
   type: string;
-  duration: string;
+  startDate: string;
+  endDate?: string;
   location: string;
   description: string;
   skills: string[];
   isRemote?: boolean;
 }
+
+// Function to calculate duration between dates
+const calculateDuration = (startDate: string, endDate?: string): string => {
+  const start = new Date(startDate);
+  const end = endDate ? new Date(endDate) : new Date();
+  
+  const totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  
+  let duration = '';
+  if (years > 0) {
+    duration += `${years} yr${years > 1 ? 's' : ''}`;
+  }
+  
+  if (months > 0 || years === 0) {
+    if (years > 0) duration += ' ';
+    duration += `${months} mo${months > 1 ? 's' : ''}`;
+  }
+  
+  return duration;
+};
+
+// Format date for display (e.g., "Apr 2025")
+const formatDateDisplay = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+};
+
+// Generate the full duration string (e.g., "Apr 2025 - Present · 1 yr 2 mos")
+const getDurationString = (startDate: string, endDate?: string): string => {
+  const formattedStart = formatDateDisplay(startDate);
+  const formattedEnd = endDate ? formatDateDisplay(endDate) : 'Present';
+  const duration = calculateDuration(startDate, endDate);
+  
+  return `${formattedStart} - ${formattedEnd} · ${duration}`;
+};
 
 const experiences: Experience[] = [
   {
@@ -26,7 +64,7 @@ const experiences: Experience[] = [
     logo: "/companies/bonded.png",
     title: "Software Engineer",
     type: "Freelance",
-    duration: "Apr 2025 - Present · 1 mo",
+    startDate: "2025-04-01",
     location: "Kenya",
     description: "As a Software Engineer specializing in Blockchain Development on the ICP protocol and AI, I focused on building and maintaining applications at Bonded.",
     skills: ["Engineering", "Software Infrastructure", "Blockchain Development", "ICP Protocol", "AI"],
@@ -37,7 +75,7 @@ const experiences: Experience[] = [
     logo: "/companies/plp.jpeg",
     title: "Assistant Instructor",
     type: "Contract",
-    duration: "Oct 2024 - Present · 5 mos",
+    startDate: "2024-10-01",
     location: "Kenya",
     description: "Currently serving as an Assistant Instructor, focusing on instructor development and coaching.",
     skills: ["Instructor Development", "Instructional Coaching"],
@@ -48,7 +86,7 @@ const experiences: Experience[] = [
     logo: "/companies/i3m.png",
     title: "Founder",
     type: "Full-time",
-    duration: "Jan 2024 - Present · 1 yr 2 mos",
+    startDate: "2024-01-01",
     location: "Kenya",
     description: "Leading as the founder of IThreeM, focusing on innovative software solutions and business development.",
     skills: ["Business Ownership", "Start-up Ventures", "Start-up Leadership", "Start-ups Management", "Early Stage Ventures", "Software Development"],
@@ -59,7 +97,7 @@ const experiences: Experience[] = [
     logo: "/companies/freelance.png",
     title: "Software Developer",
     type: "Part-time",
-    duration: "Jul 2023 - Present · 1 yr 8 mos",
+    startDate: "2023-07-01",
     location: "Kenya",
     description: "Building software products revamping innovations in Africa at large",
     skills: ["Software Development", "Self-employment", "Gigs", "Commission Work", "Software Infrastructure"],
@@ -70,7 +108,7 @@ const experiences: Experience[] = [
     logo: "/companies/os.png",
     title: "Open Source Developer",
     type: "Part-time",
-    duration: "Jan 2023 - Present · 2 yrs 2 mos",
+    startDate: "2023-01-01",
     location: "Remote",
     description: "Building for experience",
     skills: ["Software Infrastructure", "Open-Source Software", "OSC", "Internet Software", "Engineering", "Linux", "Blockchain Developer"],
@@ -81,7 +119,8 @@ const experiences: Experience[] = [
     logo: "/companies/kabarak.webp",
     title: "Data Science & Machine Learning Instructor",
     type: "Contract",
-    duration: "Jan 2024 - Feb 2024 · 2 mos",
+    startDate: "2024-01-01",
+    endDate: "2024-02-29",
     location: "Nakuru, Kenya",
     description: "Training in a Data Science & Artificial Intelligence Bootcamp that runs for two months where we train students from scratch all the way to project deployment and business ready by challenging them in a hackathon.",
     skills: ["Data Science", "API Testing", "Data Analysis", "Python (Programming Language)", "Computer Vision", "SQL", "FastAPI"]
@@ -91,7 +130,8 @@ const experiences: Experience[] = [
     logo: "/companies/plp.jpeg",
     title: "Assistant Instructor || Data Engineering & Analysis",
     type: "Internship",
-    duration: "Oct 2022 - Jul 2023 · 10 mos",
+    startDate: "2022-10-01",
+    endDate: "2023-07-31",
     location: "Nairobi, Kenya",
     description: "I have been training learners in different cohorts on Python and all aspects of Web Development which would be version control(Git), Backend Development with Python etc. Data Analytics in the organization has been my suit, using Business Intelligence libraries and tools like Atoti, Apache Superset, Plotly Dash, Excel, ChartJS, Pivot tables, and Tableau among others.",
     skills: ["JavaScript", "Git", "Project Management", "Data Analysis", "Django REST Framework", "HTML5", "GitHub", "CSS", "Django", "LMS Support", "Python", "Data Analytics"]
@@ -100,6 +140,18 @@ const experiences: Experience[] = [
 
 const ExperienceCard = ({ experience, index, onClick }: { experience: Experience; index: number; onClick: () => void }) => {
   const isEven = index % 2 === 0;
+  const [durationString, setDurationString] = useState('');
+
+  useEffect(() => {
+    setDurationString(getDurationString(experience.startDate, experience.endDate));
+    
+    // Update duration every day at midnight
+    const timer = setInterval(() => {
+      setDurationString(getDurationString(experience.startDate, experience.endDate));
+    }, 86400000); // 24 hours
+    
+    return () => clearInterval(timer);
+  }, [experience.startDate, experience.endDate]);
 
   return (
     <motion.div
@@ -157,7 +209,7 @@ const ExperienceCard = ({ experience, index, onClick }: { experience: Experience
             <div className="space-y-2 mb-4">
               <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
                 <IconCalendar className="w-4 h-4" />
-                <span>{experience.duration}</span>
+                <span>{durationString}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
                 <IconMapPin className="w-4 h-4" />
@@ -199,6 +251,29 @@ const ExperienceCard = ({ experience, index, onClick }: { experience: Experience
 
 const Experience = () => {
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
+  const [durationStrings, setDurationStrings] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    // Initialize duration strings for all experiences
+    const initialDurations: Record<string, string> = {};
+    experiences.forEach(exp => {
+      const key = `${exp.company}-${exp.title}`;
+      initialDurations[key] = getDurationString(exp.startDate, exp.endDate);
+    });
+    setDurationStrings(initialDurations);
+    
+    // Update durations every day
+    const timer = setInterval(() => {
+      const updatedDurations: Record<string, string> = {};
+      experiences.forEach(exp => {
+        const key = `${exp.company}-${exp.title}`;
+        updatedDurations[key] = getDurationString(exp.startDate, exp.endDate);
+      });
+      setDurationStrings(updatedDurations);
+    }, 86400000); // 24 hours
+    
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -282,7 +357,7 @@ const Experience = () => {
                   </h3>
                   <div className="flex items-center gap-2 text-text/60 dark:text-text-dark/60">
                     <IconCalendar className="w-5 h-5" />
-                    <span>{selectedExperience.duration}</span>
+                    <span>{selectedExperience && durationStrings[`${selectedExperience.company}-${selectedExperience.title}`]}</span>
                   </div>
                 </div>
               </div>
