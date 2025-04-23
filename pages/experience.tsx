@@ -22,8 +22,19 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
+    company: "Bonded",
+    logo: "/companies/bonded.png",
+    title: "Software Engineer",
+    type: "Freelance",
+    duration: "Apr 2025 - Present · 1 mo",
+    location: "Kenya",
+    description: "As a Software Engineer specializing in Blockchain Development on the ICP protocol and AI, I focused on building and maintaining applications at Bonded.",
+    skills: ["Engineering", "Software Infrastructure", "Blockchain Development", "ICP Protocol", "AI"],
+    isRemote: true
+  },
+  {
     company: "Power Learn Project",
-    logo: "/companies/plp.png",
+    logo: "/companies/plp.jpeg",
     title: "Assistant Instructor",
     type: "Contract",
     duration: "Oct 2024 - Present · 5 mos",
@@ -34,6 +45,7 @@ const experiences: Experience[] = [
   },
   {
     company: "IThreeM - I3M",
+    logo: "/companies/i3m.png",
     title: "Founder",
     type: "Full-time",
     duration: "Jan 2024 - Present · 1 yr 2 mos",
@@ -44,6 +56,7 @@ const experiences: Experience[] = [
   },
   {
     company: "Freelance",
+    logo: "/companies/freelance.png",
     title: "Software Developer",
     type: "Part-time",
     duration: "Jul 2023 - Present · 1 yr 8 mos",
@@ -54,6 +67,7 @@ const experiences: Experience[] = [
   },
   {
     company: "Open Source",
+    logo: "/companies/os.png",
     title: "Open Source Developer",
     type: "Part-time",
     duration: "Jan 2023 - Present · 2 yrs 2 mos",
@@ -64,7 +78,7 @@ const experiences: Experience[] = [
   },
   {
     company: "Kabarak University",
-    logo: "/companies/kabarak.png",
+    logo: "/companies/kabarak.webp",
     title: "Data Science & Machine Learning Instructor",
     type: "Contract",
     duration: "Jan 2024 - Feb 2024 · 2 mos",
@@ -74,7 +88,7 @@ const experiences: Experience[] = [
   },
   {
     company: "Power Learn Project",
-    logo: "/companies/plp.png",
+    logo: "/companies/plp.jpeg",
     title: "Assistant Instructor || Data Engineering & Analysis",
     type: "Internship",
     duration: "Oct 2022 - Jul 2023 · 10 mos",
@@ -100,66 +114,82 @@ const ExperienceCard = ({ experience, index, onClick }: { experience: Experience
           whileHover={{ scale: 1.02 }}
           className="bg-card dark:bg-card-dark p-6 rounded-xl shadow-lg
                      border border-border/10 dark:border-border-dark/10
-                     hover:shadow-xl transition-all"
+                     hover:shadow-xl transition-all relative overflow-hidden"
         >
-          <div className="flex items-center gap-4 mb-4">
-            {experience.logo ? (
-              <div className="relative w-12 h-12">
+          {experience.logo && (
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+              <div className="absolute opacity-[0.12] dark:opacity-[0.15]">
                 <Image
                   src={experience.logo}
-                  alt={experience.company}
-                  className="rounded-full"
-                  fill
-                  sizes="48px"
-                  style={{ objectFit: 'cover' }}
+                  alt=""
+                  width={200}
+                  height={200}
+                  style={{ objectFit: 'contain' }}
+                  className="w-64 h-64 max-w-none"
                 />
               </div>
-            ) : (
-              <div className="w-12 h-12 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center">
-                <IconBuildingSkyscraper className="w-6 h-6 text-primary dark:text-primary-dark" />
+            </div>
+          )}
+          <div className="relative z-10">
+            <div className="flex items-center gap-4 mb-4">
+              {experience.logo ? (
+                <div className="relative w-12 h-12">
+                  <Image
+                    src={experience.logo}
+                    alt={experience.company}
+                    className="rounded-full"
+                    fill
+                    sizes="48px"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              ) : (
+                <div className="w-12 h-12 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center">
+                  <IconBuildingSkyscraper className="w-6 h-6 text-primary dark:text-primary-dark" />
+                </div>
+              )}
+              <div>
+                <h3 className="text-xl font-bold text-text dark:text-text-dark">{experience.title}</h3>
+                <p className="text-text/60 dark:text-text-dark/60">{experience.company}</p>
               </div>
-            )}
-            <div>
-              <h3 className="text-xl font-bold text-text dark:text-text-dark">{experience.title}</h3>
-              <p className="text-text/60 dark:text-text-dark/60">{experience.company}</p>
             </div>
-          </div>
-          
-          <div className="space-y-2 mb-4">
-            <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
-              <IconCalendar className="w-4 h-4" />
-              <span>{experience.duration}</span>
+            
+            <div className="space-y-2 mb-4">
+              <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
+                <IconCalendar className="w-4 h-4" />
+                <span>{experience.duration}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
+                <IconMapPin className="w-4 h-4" />
+                <span>{experience.location}</span>
+                {experience.isRemote && (
+                  <span className="flex items-center gap-1">
+                    <IconDevices className="w-4 h-4" />
+                    Remote
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
-              <IconMapPin className="w-4 h-4" />
-              <span>{experience.location}</span>
-              {experience.isRemote && (
-                <span className="flex items-center gap-1">
-                  <IconDevices className="w-4 h-4" />
-                  Remote
+
+            <div className="flex flex-wrap gap-2">
+              {experience.skills.slice(0, 3).map((skill) => (
+                <span
+                  key={skill}
+                  className="px-2 py-1 text-xs rounded-full
+                           bg-primary/10 dark:bg-primary-dark/10
+                           text-primary dark:text-primary-dark"
+                >
+                  {skill}
+                </span>
+              ))}
+              {experience.skills.length > 3 && (
+                <span className="px-2 py-1 text-xs rounded-full
+                             bg-primary/10 dark:bg-primary-dark/10
+                             text-primary dark:text-primary-dark">
+                  +{experience.skills.length - 3} more
                 </span>
               )}
             </div>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {experience.skills.slice(0, 3).map((skill) => (
-              <span
-                key={skill}
-                className="px-2 py-1 text-xs rounded-full
-                         bg-primary/10 dark:bg-primary-dark/10
-                         text-primary dark:text-primary-dark"
-              >
-                {skill}
-              </span>
-            ))}
-            {experience.skills.length > 3 && (
-              <span className="px-2 py-1 text-xs rounded-full
-                           bg-primary/10 dark:bg-primary-dark/10
-                           text-primary dark:text-primary-dark">
-                +{experience.skills.length - 3} more
-              </span>
-            )}
           </div>
         </motion.div>
       </div>
@@ -213,60 +243,76 @@ const Experience = () => {
         title={selectedExperience?.title}
       >
         {selectedExperience && (
-          <div className="space-y-6">
-            <div className="flex items-center gap-4">
-              {selectedExperience.logo ? (
-                <div className="relative w-16 h-16">
+          <div className="space-y-6 relative">
+            {selectedExperience.logo && (
+              <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                <div className="absolute opacity-[0.12] dark:opacity-[0.15] pointer-events-none">
                   <Image
                     src={selectedExperience.logo}
-                    alt={selectedExperience.company}
-                    className="rounded-full"
-                    fill
-                    sizes="64px"
-                    style={{ objectFit: 'cover' }}
+                    alt=""
+                    width={300}
+                    height={300}
+                    style={{ objectFit: 'contain' }}
+                    className="w-96 h-96 max-w-none"
                   />
                 </div>
-              ) : (
-                <div className="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center">
-                  <IconBuildingSkyscraper className="w-8 h-8 text-primary dark:text-primary-dark" />
+              </div>
+            )}
+            <div className="relative z-10">
+              <div className="flex items-center gap-4">
+                {selectedExperience.logo ? (
+                  <div className="relative w-16 h-16">
+                    <Image
+                      src={selectedExperience.logo}
+                      alt={selectedExperience.company}
+                      className="rounded-full"
+                      fill
+                      sizes="64px"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center">
+                    <IconBuildingSkyscraper className="w-8 h-8 text-primary dark:text-primary-dark" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="text-2xl font-bold text-text dark:text-text-dark">
+                    {selectedExperience.company}
+                  </h3>
+                  <div className="flex items-center gap-2 text-text/60 dark:text-text-dark/60">
+                    <IconCalendar className="w-5 h-5" />
+                    <span>{selectedExperience.duration}</span>
+                  </div>
+                </div>
+              </div>
+
+              {selectedExperience.description && (
+                <div className="prose dark:prose-invert max-w-none mt-4">
+                  <p>{selectedExperience.description}</p>
                 </div>
               )}
-              <div>
-                <h3 className="text-2xl font-bold text-text dark:text-text-dark">
-                  {selectedExperience.company}
-                </h3>
-                <div className="flex items-center gap-2 text-text/60 dark:text-text-dark/60">
-                  <IconCalendar className="w-5 h-5" />
-                  <span>{selectedExperience.duration}</span>
+
+              {selectedExperience.skills && (
+                <div className="mt-4">
+                  <h4 className="text-lg font-semibold mb-3 text-text dark:text-text-dark">
+                    Skills & Technologies
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedExperience.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1 rounded-full
+                                 bg-primary/10 dark:bg-primary-dark/10
+                                 text-primary dark:text-primary-dark"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
-
-            {selectedExperience.description && (
-              <div className="prose dark:prose-invert max-w-none">
-                <p>{selectedExperience.description}</p>
-              </div>
-            )}
-
-            {selectedExperience.skills && (
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-text dark:text-text-dark">
-                  Skills & Technologies
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedExperience.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 rounded-full
-                               bg-primary/10 dark:bg-primary-dark/10
-                               text-primary dark:text-primary-dark"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         )}
       </Modal>
