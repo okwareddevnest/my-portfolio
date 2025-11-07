@@ -140,6 +140,40 @@ export const usePortfolioStore = create<PortfolioState>()(
       ],
       projects: [
         {
+          name: "U-Download",
+          description: "Fast, beautiful YouTube downloader with zero dependencies - download videos and audio instantly with built-in tools for transcoding, trimming, and multi-connection acceleration.",
+          longDescription: "U-Download is a cross-platform desktop application built in Rust that revolutionizes YouTube downloading by bundling all required tools (yt-dlp, aria2c, ffmpeg) directly into the app. No external dependencies needed - just install and go! Features lightning-fast multi-connection downloads with aria2c acceleration, a beautiful modern UI with smooth animations, flexible format options (MP4 video or MP3 audio), precise per-second video trimming, and real-time progress tracking with live speed and ETA displays. Works seamlessly on Linux, Windows, and macOS with native packaging for each platform.",
+          previewImage: "/udownload-preview.png",
+          technologies: ["Rust", "Tauri", "React", "TypeScript", "yt-dlp", "aria2c", "ffmpeg", "Cross-Platform"],
+          githubLink: "https://github.com/okwareddevnest/U-Download",
+          demoLink: "https://u-download.vercel.app/"
+        },
+        {
+          name: "Gitok",
+          description: "Productivity boost for developers with 35+ custom Git commands and functions - streamline your Git workflow with auto-updates, interactive cheatsheets, and safety confirmations.",
+          longDescription: "Gitok transforms your Git experience with an extensive collection of 35+ carefully crafted Git aliases and functions designed to accelerate developer workflows. Built as a cross-platform shell script with native Fish Shell support, Gitok provides powerful commands like commit shortcuts, pushall, unpush, and an interactive gitcheatsheet. Features include an intelligent auto-update system with semantic versioning, safety confirmations for destructive operations, a fully automated CI/CD pipeline with GitHub Actions, and zero-configuration setup that works out of the box on Linux, macOS, Windows WSL, and Git Bash. The project demonstrates advanced shell scripting techniques with comprehensive error handling and user-friendly prompts.",
+          previewImage: "/gitok-preview.png",
+          technologies: ["Shell Script", "Bash", "Fish Shell", "Git", "GitHub Actions", "CI/CD", "Cross-Platform"],
+          githubLink: "https://github.com/okwareddevnest/gitok"
+        },
+        {
+          name: "OHMS 2.0 - Autonomous Agent Platform",
+          description: "Subscription-based AI agent platform on the Internet Computer that transforms natural language instructions into autonomous agents with verifiable on-chain execution and multi-agent collaboration.",
+          longDescription: "OHMS 2.0 (Onchain Hosting for Multi-Agent Systems) is a cutting-edge autonomous agent platform built entirely on the Internet Computer Protocol. It enables anyone to compose powerful AI agents from plain-language goals, delivering verifiable on-chain execution with transparent economics. The platform bridges decentralized coordination with best-in-class hosted LLMs via secure HTTPS outcalls, supporting multi-agent collaborations that can plan, act, and report autonomously. Built with a sophisticated architecture featuring an Agent Factory, Coordinator, Model & Tool Registry, and Subscription Economics system, all running as ICP canisters. The platform integrates with OpenAI-compatible APIs and custom enterprise LLM providers while maintaining full decentralization and transparency. OHMS 2.0 represents the future of autonomous AI systems with blockchain-verified execution and agent orchestration.",
+          previewImage: "/ohms-preview.png",
+          technologies: ["Rust", "TypeScript", "React 19", "Internet Computer", "ICP", "AI Agents", "LLM Integration", "WebAssembly", "Motoko"],
+          githubLink: "https://github.com/OHMS-DeAI",
+          demoLink: "https://weamn-piaaa-aaaah-arlca-cai.icp0.io/"
+        },
+        {
+          name: "RSON - Rust Serialized Object Notation",
+          description: "Next-generation data serialization format that evolves JSON with comments, rich types, and developer-friendly syntax while maintaining full backward compatibility.",
+          longDescription: "RSON (Rust Serialized Object Notation) is a revolutionary data serialization format designed to replace JSON with modern features while maintaining full backward compatibility. Every JSON file is valid RSON, but RSON offers so much more: native support for comments and documentation, a rich type system including structs, enums, optionals, and tuples, developer-friendly features like trailing commas and cleaner syntax, high-performance parsing with optional binary mode, and universal language support with libraries for all major programming languages. The project includes implementations in Rust (serde_rson), JavaScript/TypeScript (rson-js), Python (rson), and more. RSON solves the long-standing pain points of JSON configuration files by allowing inline documentation, better type safety, and more expressive data structures without sacrificing the simplicity and readability that made JSON popular. The format is production-ready and actively used in modern development workflows.",
+          previewImage: "/rson-preview.png",
+          technologies: ["Rust", "Serde", "TypeScript", "Python", "JavaScript", "Data Serialization", "Parser", "Compiler Design"],
+          githubLink: "https://github.com/RSON-Rust-Serialized-Object-Notation"
+        },
+        {
           name: "IThreeM - Decentralized Gaming Engine",
           description: "A revolutionary decentralized 2D and 3D gaming engine built on the Internet Computer Protocol (ICP), enabling seamless game development and deployment on the blockchain.",
           longDescription: "IThreeM is a groundbreaking decentralized gaming engine that leverages the power of the Internet Computer Protocol to revolutionize game development. Built with Rust and Motoko, it provides a robust platform for creating both 2D and 3D games that run entirely on the blockchain. The engine features advanced rendering capabilities, physics simulation, asset management, and blockchain integration for in-game assets and transactions.",
