@@ -82,11 +82,11 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="w-full relative">
+        <div className="w-full relative mb-32 md:mb-48">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-100/50 to-gray-100 dark:via-gray-900/50 dark:to-gray-900 pointer-events-none" />
-          <div className="h-[500px] md:h-[800px] relative">
+          <div className="relative">
             <MacbookScroll
-              src="/projects-preview.png"
+              src="/Screenshot%20From%202025-11-07%2017-58-19.png"
               title={
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
 
         {/* Featured Projects Section */}
-        <section className="relative z-10 py-12 md:py-20 px-4 bg-background dark:bg-background-dark">
+        <section className="relative z-10 py-12 md:py-20 px-4 bg-background dark:bg-background-dark mt-32 md:mt-48">
           <div className="container mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
