@@ -142,10 +142,10 @@ const Resume = () => {
     setProgress(10);
 
     try {
-      // Capture the resume content
+      // Capture the resume content with optimized settings
       setProgress(30);
       const canvas = await html2canvas(resumeRef.current, {
-        scale: 3,
+        scale: 2,  // Reduced from 3 to 2 for smaller file size
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
@@ -159,12 +159,13 @@ const Resume = () => {
       
       setProgress(60);
       
-      // Create PDF
-      const imgData = canvas.toDataURL('image/png');
+      // Create PDF with compression
+      const imgData = canvas.toDataURL('image/jpeg', 0.85); // JPEG with 85% quality instead of PNG
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
-        format: 'a4'
+        format: 'a4',
+        compress: true  // Enable PDF compression
       });
 
       const pdfWidth = 210; // A4 width in mm
@@ -179,14 +180,14 @@ const Resume = () => {
       let position = margin; // Start with top margin
 
       // Add first page
-      pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+      pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight, undefined, 'FAST'); // JPEG compression
       heightLeft -= (pdfHeight - margin * 2);
 
       // Add additional pages if needed
       while (heightLeft > 0) {
         position = -(imgHeight - heightLeft) + margin;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+        pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight, undefined, 'FAST');
         heightLeft -= (pdfHeight - margin * 2);
       }
 
@@ -432,38 +433,6 @@ const Resume = () => {
                   <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>Specialized in Blockchain, AI, and Full-Stack Development</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Features Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="p-6 bg-card dark:bg-card-dark rounded-xl border border-border/20 dark:border-border-dark/20">
-              <div className="text-3xl mb-3">📄</div>
-              <h3 className="font-bold text-text dark:text-text-dark mb-2">Professional Format</h3>
-              <p className="text-sm text-text/70 dark:text-text-dark/70">
-                Clean, ATS-friendly layout optimized for recruiters and hiring managers
-              </p>
-            </div>
-            <div className="p-6 bg-card dark:bg-card-dark rounded-xl border border-border/20 dark:border-border-dark/20">
-              <div className="text-3xl mb-3">⚡</div>
-              <h3 className="font-bold text-text dark:text-text-dark mb-2">Instant Download</h3>
-              <p className="text-sm text-text/70 dark:text-text-dark/70">
-                High-quality PDF generated instantly with all your latest achievements
-              </p>
-            </div>
-            <div className="p-6 bg-card dark:bg-card-dark rounded-xl border border-border/20 dark:border-border-dark/20">
-              <div className="text-3xl mb-3">🎯</div>
-              <h3 className="font-bold text-text dark:text-text-dark mb-2">Always Updated</h3>
-              <p className="text-sm text-text/70 dark:text-text-dark/70">
-                Automatically reflects your portfolio data ensuring accuracy
-              </p>
             </div>
           </div>
         </motion.div>
