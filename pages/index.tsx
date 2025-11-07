@@ -92,12 +92,12 @@ export default function Home() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-center space-y-2 md:space-y-4 px-4"
+                  className="text-center space-y-2 md:space-y-4 px-4 max-w-3xl mx-auto"
                 >
-                  <h2 className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300">
+                  <h2 className="text-xl sm:text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300">
                     Crafting Digital Experiences
                   </h2>
-                  <p className="text-lg md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-gray-500 dark:from-gray-300 dark:to-gray-400">
+                  <p className="text-base sm:text-lg md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-gray-500 dark:from-gray-300 dark:to-gray-400">
                     with Modern Technologies
                   </p>
                 </motion.div>
