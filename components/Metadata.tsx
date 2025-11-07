@@ -11,9 +11,11 @@ export const Metadata = ({
   title,
   description,
   keywords = "software engineer, blockchain developer, web development, ICP, rust, typescript",
-  ogImage = "/og-image.png"
+  ogImage = "/profile.png"
 }: MetadataProps) => {
   const fullTitle = title.includes('|') ? title : `${title} | Dedan Okware`;
+  const siteUrl = "https://my-portfolio-crypt.vercel.app";
+  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
   
   return (
     <Head>
@@ -29,14 +31,20 @@ export const Metadata = ({
       {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={fullOgImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:type" content="website" />
+      <meta property="og:url" content={siteUrl} />
+      <meta property="og:site_name" content="Dedan Okware - Portfolio" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@okwareddevnest" />
+      <meta name="twitter:creator" content="@okwareddevnest" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image" content={fullOgImage} />
       
       {/* Additional Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
