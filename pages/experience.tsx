@@ -65,9 +65,8 @@ const experiences: Experience[] = [
     title: "Founder & Lead Engineer",
     type: "Full-time",
     startDate: "2025-07-01",
-    endDate: "2025-10-31",
     location: "Remote",
-    description: "Founded and led the development of OHMS 2.0, an award-winning autonomous AI agent platform built entirely on the Internet Computer Protocol. Competed in the prestigious World Computer Hacker League (WCHL) by ICP Blockchain, winning both the Qualifications and Regional (African-Wide) rounds, and earning a spot to pitch at the Global Finale Round among the best projects in the world. Built a sophisticated architecture featuring an Agent Factory, Coordinator, Model & Tool Registry, and Subscription Economics system, all running as ICP canisters. The platform bridges decentralized coordination with best-in-class hosted LLMs via secure HTTPS outcalls, supporting multi-agent collaborations that can plan, act, and report autonomously.",
+    description: "Founded and currently leading the development of OHMS 2.0, an award-winning autonomous AI agent platform built entirely on the Internet Computer Protocol. During the 4-month hackathon phase (Jul-Oct 2025), competed in the prestigious World Computer Hacker League (WCHL) by ICP Blockchain, winning both the Qualifications and Regional (African-Wide) rounds, and earning a spot to pitch at the Global Finale Round among the best projects in the world. Continuing to build and scale the platform with a sophisticated architecture featuring an Agent Factory, Coordinator, Model & Tool Registry, and Subscription Economics system, all running as ICP canisters. The platform bridges decentralized coordination with best-in-class hosted LLMs via secure HTTPS outcalls, supporting multi-agent collaborations that can plan, act, and report autonomously.",
     skills: ["Rust", "TypeScript", "React 19", "Internet Computer", "ICP", "AI Agents", "LLM Integration", "WebAssembly", "Motoko", "System Architecture", "Competition Success", "Team Leadership"],
     isRemote: true
   },

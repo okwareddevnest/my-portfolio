@@ -133,8 +133,8 @@ export const usePortfolioStore = create<PortfolioState>()(
             { name: "Docker", level: 85 },
             { name: "Linux", level: 85 },
             { name: "CI/CD", level: 85 },
-            { name: "AWS", level: 80 },
-            { name: "Azure", level: 80 }
+            { name: "Azure", level: 80 },
+            { name: "Kubernetes", level: 75 }
           ]
         }
       ],
