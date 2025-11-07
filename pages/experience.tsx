@@ -60,11 +60,24 @@ const getDurationString = (startDate: string, endDate?: string): string => {
 
 const experiences: Experience[] = [
   {
+    company: "OHMS - Onchain Hosting for Multi-Agent Systems",
+    logo: "/companies/ohms.png",
+    title: "Founder & Lead Engineer",
+    type: "Full-time",
+    startDate: "2025-07-01",
+    endDate: "2025-10-31",
+    location: "Remote",
+    description: "Founded and led the development of OHMS 2.0, an award-winning autonomous AI agent platform built entirely on the Internet Computer Protocol. Competed in the prestigious World Computer Hacker League (WCHL) by ICP Blockchain, winning both the Qualifications and Regional (African-Wide) rounds, and earning a spot to pitch at the Global Finale Round among the best projects in the world. Built a sophisticated architecture featuring an Agent Factory, Coordinator, Model & Tool Registry, and Subscription Economics system, all running as ICP canisters. The platform bridges decentralized coordination with best-in-class hosted LLMs via secure HTTPS outcalls, supporting multi-agent collaborations that can plan, act, and report autonomously.",
+    skills: ["Rust", "TypeScript", "React 19", "Internet Computer", "ICP", "AI Agents", "LLM Integration", "WebAssembly", "Motoko", "System Architecture", "Competition Success", "Team Leadership"],
+    isRemote: true
+  },
+  {
     company: "Bonded",
     logo: "/companies/bonded.png",
     title: "Software Engineer",
-    type: "Freelance",
+    type: "Contract",
     startDate: "2025-04-01",
+    endDate: "2025-06-30",
     location: "Kenya",
     description: "As a Software Engineer specializing in Blockchain Development on the ICP protocol and AI, I focused on building and maintaining applications at Bonded.",
     skills: ["Engineering", "Software Infrastructure", "Blockchain Development", "ICP Protocol", "AI"],
@@ -73,12 +86,12 @@ const experiences: Experience[] = [
   {
     company: "Power Learn Project",
     logo: "/companies/plp.jpeg",
-    title: "Assistant Instructor",
+    title: "Module Lead Instructor",
     type: "Contract",
     startDate: "2024-10-01",
     location: "Kenya",
-    description: "Currently serving as an Assistant Instructor, focusing on instructor development and coaching.",
-    skills: ["Instructor Development", "Instructional Coaching"],
+    description: "Currently serving as a Module Lead Instructor, leading curriculum development and instruction across multiple cohorts. Part of a team that has successfully trained over 10,000 developers across Africa, empowering the next generation of software engineers with cutting-edge skills in web development, data science, and software engineering. Responsible for module design, content delivery, and mentoring other instructors.",
+    skills: ["Instructor Development", "Instructional Coaching", "Developer Training", "Technical Education", "Curriculum Development", "Module Leadership", "Content Design"],
     isRemote: true
   },
   {
@@ -133,8 +146,8 @@ const experiences: Experience[] = [
     startDate: "2022-10-01",
     endDate: "2023-07-31",
     location: "Nairobi, Kenya",
-    description: "I have been training learners in different cohorts on Python and all aspects of Web Development which would be version control(Git), Backend Development with Python etc. Data Analytics in the organization has been my suit, using Business Intelligence libraries and tools like Atoti, Apache Superset, Plotly Dash, Excel, ChartJS, Pivot tables, and Tableau among others.",
-    skills: ["JavaScript", "Git", "Project Management", "Data Analysis", "Django REST Framework", "HTML5", "GitHub", "CSS", "Django", "LMS Support", "Python", "Data Analytics"]
+    description: "Trained thousands of learners across multiple cohorts in Python and comprehensive Web Development, including version control (Git), Backend Development with Python, and Data Analytics. Specialized in Data Analytics, utilizing Business Intelligence libraries and tools like Atoti, Apache Superset, Plotly Dash, Excel, ChartJS, Pivot tables, and Tableau. Contributed to Power Learn Project's mission of training over 10,000 developers across Africa, building a strong foundation for the next generation of African tech talent.",
+    skills: ["JavaScript", "Git", "Project Management", "Data Analysis", "Django REST Framework", "HTML5", "GitHub", "CSS", "Django", "LMS Support", "Python", "Data Analytics", "Technical Training"]
   }
 ];
 

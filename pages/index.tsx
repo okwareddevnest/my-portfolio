@@ -11,7 +11,10 @@ import { Metadata } from '../components/Metadata';
 
 export default function Home() {
   const projects = usePortfolioStore((state) => state.projects);
-  const featuredProjects = projects.slice(0, 2); // Get IThreeM and Fries Coin
+  // Feature OHMS, GitOk, and U-Download as top projects
+  const featuredProjects = projects.filter(p => 
+    p.name.includes('OHMS') || p.name.includes('Gitok') || p.name.includes('U-Download')
+  ).slice(0, 3);
 
   return (
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
@@ -55,7 +58,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
           >
-            A passionate Software Engineer and founder of IThreeM - a decentralized Gaming Engine for 2D and 3D games built on ICP Blockchain. I specialize in building exceptional digital experiences and innovative blockchain solutions. With expertise in web development and blockchain technology, I&apos;m dedicated to pushing the boundaries of what&apos;s possible in decentralized gaming and web applications.
+            A passionate Software Engineer, Founder and Lead Engineer of OHMS 2.0 (Onchain Hosting for Multi-Agent Systems) - an award-winning autonomous AI agent platform that won the WCHL Regional Championship (Africa) and competed at the Global Finals. Also founder of IThreeM - a decentralized Gaming Engine for 2D and 3D games built on ICP Blockchain. I specialize in building exceptional digital experiences and innovative blockchain solutions. As a technical instructor, I&apos;ve trained over 10,000 developers across Africa through the Power Learn Project, empowering the next generation of software engineers. With expertise in web development, blockchain technology, AI agent systems, and developer education, I&apos;m dedicated to pushing the boundaries of what&apos;s possible in autonomous AI, decentralized gaming, web applications, and technical education.
           </motion.p>
           
           <motion.div
