@@ -3,8 +3,8 @@ import Footer from '../components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MacbookScroll } from '../components/ui/macbook-scroll';
-import { AnimatedBackground } from '../components/AnimatedBackground';
+import { ContainerScroll } from '../components/ui/container-scroll-animation';
+import { WavyBackground } from '../components/ui/wavy-background';
 import { usePortfolioStore } from '../store/store';
 import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 import { Metadata } from '../components/Metadata';
@@ -12,18 +12,25 @@ import { Metadata } from '../components/Metadata';
 export default function Home() {
   const projects = usePortfolioStore((state) => state.projects);
   // Feature OHMS, GitOk, and U-Download as top projects
-  const featuredProjects = projects.filter(p => 
+  const featuredProjects = projects.filter(p =>
     p.name.includes('OHMS') || p.name.includes('Gitok') || p.name.includes('U-Download')
   ).slice(0, 3);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
-      <Metadata 
+    <div className="min-h-screen flex flex-col">
+      <Metadata
         title="Software Engineer"
         description="Software Engineer specializing in blockchain development, decentralized applications, and innovative web solutions. Founder of IThreeM - a decentralized Gaming Engine."
         keywords="software engineer, blockchain developer, ICP, rust, typescript, web development, decentralized gaming, IThreeM"
       />
-      <AnimatedBackground />
+      <WavyBackground
+        className="bg-background dark:bg-background-dark"
+        colors={["#38bdf8", "#818cf8", "#22d3ee"]}
+        waveWidth={50}
+        blur={10}
+        speed="fast"
+        waveOpacity={1}
+      />
       <Navbar />
       <main className="flex-grow flex flex-col">
         <div className="container mx-auto px-4 flex flex-col items-center text-center py-6 md:py-10">
@@ -42,7 +49,7 @@ export default function Home() {
               priority
             />
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -51,7 +58,7 @@ export default function Home() {
           >
             Hi, I&apos;m Dedan Okware
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -60,7 +67,7 @@ export default function Home() {
           >
             A passionate Software Engineer, Founder and Lead Engineer of OHMS 2.0 (Onchain Hosting for Multi-Agent Systems) - an award-winning autonomous AI agent platform that won the WCHL Regional Championship (Africa) and competed at the Global Finals. Also founder of IThreeM - a decentralized Gaming Engine for 2D and 3D games built on ICP Blockchain. I specialize in building exceptional digital experiences and innovative blockchain solutions. As a technical instructor, I&apos;ve trained over 10,000 developers across Africa through the Power Learn Project, empowering the next generation of software engineers. With expertise in web development, blockchain technology, AI agent systems, and developer education, I&apos;m dedicated to pushing the boundaries of what&apos;s possible in autonomous AI, decentralized gaming, web applications, and technical education.
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,29 +89,28 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="w-full relative mb-32 md:mb-48">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-100/50 to-gray-100 dark:via-gray-900/50 dark:to-gray-900 pointer-events-none" />
-          <div className="relative">
-            <MacbookScroll
-              src="/Screenshot%20From%202025-11-07%2017-58-19.png"
-              title={
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-center space-y-2 md:space-y-4 px-4 max-w-3xl mx-auto"
-                >
-                  <h2 className="text-xl sm:text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300">
-                    Crafting Digital Experiences
-                  </h2>
-                  <p className="text-base sm:text-lg md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-gray-500 dark:from-gray-300 dark:to-gray-400">
-                    with Modern Technologies
-                  </p>
-                </motion.div>
-              }
-              showGradient
+        <div className="flex flex-col overflow-hidden">
+          <ContainerScroll
+            titleComponent={
+              <>
+                <h1 className="text-4xl font-semibold text-black dark:text-white">
+                  Crafting Digital Experiences <br />
+                  <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
+                    with Modern Tech
+                  </span>
+                </h1>
+              </>
+            }
+          >
+            <Image
+              src="/Screenshot From 2025-11-07 17-58-19.png"
+              alt="hero"
+              height={720}
+              width={1400}
+              className="mx-auto rounded-2xl object-cover h-full object-left-top draggable-false"
+              draggable={false}
             />
-          </div>
+          </ContainerScroll>
         </div>
 
         {/* Featured Projects Section */}

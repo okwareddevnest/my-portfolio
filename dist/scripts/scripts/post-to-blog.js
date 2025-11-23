@@ -214,7 +214,7 @@ async function main() {
         deploySpinner.stop();
         console.log('✅ Deployed to Vercel successfully!\n');
         console.log('🎉 Success! Your post has been added to your portfolio.');
-        console.log(`🔗 View it at: https://my-portfolio-crypt.vercel.app/blogs\n`);
+        console.log(`🔗 View it at: https://dedan-okware.vercel.app/blogs\n`);
     }
     catch (error) {
         console.error('\n❌ Error:', error);
