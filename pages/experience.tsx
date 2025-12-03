@@ -60,6 +60,28 @@ const getDurationString = (startDate: string, endDate?: string): string => {
 
 const experiences: Experience[] = [
   {
+    company: "Turing",
+    logo: "/companies/turing.jpeg",
+    title: "LLM Trainer",
+    type: "Contract",
+    startDate: "2025-11-01",
+    location: "Palo Alto, California, United States",
+    description: "Annotate and help train large language models that interpret and predict user workflows, enhancing the realism and usability of AI assistants.",
+    skills: ["Large Language Models (LLM)", "AI Training", "Data Annotation", "Machine Learning", "NLP"],
+    isRemote: true
+  },
+  {
+    company: "The Chaincademy",
+    logo: "/companies/thechaincademy_logo.jpeg",
+    title: "Software Engineer",
+    type: "Contract",
+    startDate: "2025-09-01",
+    location: "United Kingdom",
+    description: "Design and build user interfaces, develop backend logic, manage databases, integrate systems, implement authentication, work with Blockchain/Web3, develop APIs, ensure security and performance, test/debug, deploy to cloud, collaborate via version control, and maintain high code quality and documentation.",
+    skills: ["Software Design", "Software Infrastructure", "Blockchain Development", "Web3", "API Development", "Full-Stack Development", "System Integration", "Cloud Deployment"],
+    isRemote: true
+  },
+  {
     company: "OHMS - Onchain Hosting for Multi-Agent Systems",
     logo: "/companies/ohms.png",
     title: "Founder & Lead Engineer",
@@ -74,10 +96,10 @@ const experiences: Experience[] = [
     company: "Bonded",
     logo: "/companies/bonded.png",
     title: "Software Engineer",
-    type: "Contract",
+    type: "Freelance",
     startDate: "2025-04-01",
-    endDate: "2025-06-30",
-    location: "Kenya",
+    endDate: "2025-07-31",
+    location: "London, United Kingdom",
     description: "As a Software Engineer specializing in Blockchain Development on the ICP protocol and AI, I focused on building and maintaining applications at Bonded.",
     skills: ["Engineering", "Software Infrastructure", "Blockchain Development", "ICP Protocol", "AI"],
     isRemote: true
@@ -85,11 +107,11 @@ const experiences: Experience[] = [
   {
     company: "Power Learn Project",
     logo: "/companies/plp.jpeg",
-    title: "Module Lead Instructor",
+    title: "Software Engineering Instructor",
     type: "Contract",
     startDate: "2024-10-01",
     location: "Kenya",
-    description: "Currently serving as a Module Lead Instructor, leading curriculum development and instruction across multiple cohorts. Part of a team that has successfully trained over 10,000 developers across Africa, empowering the next generation of software engineers with cutting-edge skills in web development, data science, and software engineering. Responsible for module design, content delivery, and mentoring other instructors.",
+    description: "Currently serving as a Software Engineering Instructor, leading curriculum development and instruction across multiple cohorts. Part of a team that has successfully trained over 10,000 developers across Africa, empowering the next generation of software engineers with cutting-edge skills in web development, data science, and software engineering. Responsible for module design, content delivery, and mentoring other instructors.",
     skills: ["Instructor Development", "Instructional Coaching", "Developer Training", "Technical Education", "Curriculum Development", "Module Leadership", "Content Design"],
     isRemote: true
   },

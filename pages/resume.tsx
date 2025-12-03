@@ -18,6 +18,29 @@ const Resume = () => {
 
   const experiences = [
     {
+      company: "Turing",
+      title: "LLM Trainer",
+      duration: "Nov 2025 - Present",
+      location: "Palo Alto, California, United States · Remote",
+      achievements: [
+        "Annotate and help train large language models that interpret and predict user workflows",
+        "Enhancing the realism and usability of AI assistants",
+        "Contributing to cutting-edge AI development and model improvement"
+      ]
+    },
+    {
+      company: "The Chaincademy",
+      title: "Software Engineer",
+      duration: "Sep 2025 - Present",
+      location: "United Kingdom · Remote",
+      achievements: [
+        "Design and build user interfaces, develop backend logic, manage databases",
+        "Work with Blockchain/Web3, develop APIs, ensure security and performance",
+        "Implement authentication, integrate systems, deploy to cloud",
+        "Maintain high code quality and documentation"
+      ]
+    },
+    {
       company: "OHMS - Onchain Hosting for Multi-Agent Systems",
       title: "Founder & Lead Engineer",
       duration: "Jul 2025 - Present",
@@ -33,8 +56,8 @@ const Resume = () => {
     {
       company: "Bonded",
       title: "Software Engineer",
-      duration: "Apr 2025 - Jun 2025",
-      location: "Kenya",
+      duration: "Apr 2025 - Jul 2025",
+      location: "London, United Kingdom · Remote",
       achievements: [
         "Specialized in Blockchain Development on ICP protocol",
         "Developed and maintained AI-powered applications",
@@ -43,9 +66,9 @@ const Resume = () => {
     },
     {
       company: "Power Learn Project",
-      title: "Module Lead Instructor",
+      title: "Software Engineering Instructor",
       duration: "Oct 2024 - Present",
-      location: "Kenya",
+      location: "Kenya · Remote",
       achievements: [
         "Leading curriculum development and instruction across multiple cohorts",
         "Part of team that trained over 10,000 developers across Africa",
@@ -291,7 +314,7 @@ const Resume = () => {
               {/* Header */}
               <div className="text-center mb-8 pb-6 border-b-2 border-gray-300" style={{ textAlign: 'center', borderBottom: '2px solid #999', marginBottom: '24px', paddingBottom: '20px' }}>
                 <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '8px', color: '#000', textAlign: 'center' }}>DEDAN OKWARE</h1>
-                <p className="text-xl text-gray-700 mb-3" style={{ fontSize: '18px', marginBottom: '12px', color: '#333', textAlign: 'center' }}>Software Engineer | AI & Blockchain Specialist | Technical Educator</p>
+                <p className="text-xl text-gray-700 mb-3" style={{ fontSize: '18px', marginBottom: '12px', color: '#333', textAlign: 'center' }}>Software Engineer | LLM Trainer | AI & Blockchain Specialist | Technical Educator</p>
                 <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600" style={{ fontSize: '14px', color: '#666', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', textAlign: 'center', width: '100%' }}>
                   <span style={{ color: '#666' }}>📧 soft.eng.dedan@gmail.com</span>
                   <span style={{ color: '#666' }}>📍 Kenya</span>
@@ -304,7 +327,7 @@ const Resume = () => {
               <div className="mb-8" style={{ marginBottom: '24px' }}>
                 <h2 className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '12px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>PROFESSIONAL SUMMARY</h2>
                 <p className="text-gray-700 leading-relaxed" style={{ color: '#444', lineHeight: '1.8', fontSize: '14px' }}>
-                  Award-winning Software Engineer and Founder of OHMS 2.0 (Onchain Hosting for Multi-Agent Systems), currently leading ongoing development after winning WCHL Regional Championship (Africa) during the 4-month hackathon phase and competing at the Global Finals. Also founder of IThreeM, a decentralized gaming engine on ICP Blockchain. Technical educator with proven impact training over 10,000 developers across Africa through Power Learn Project. Expertise in Rust, blockchain development, AI agent systems, full-stack web development, and developer education.
+                  Award-winning Software Engineer, LLM Trainer at Turing, and Founder of OHMS 2.0 (Onchain Hosting for Multi-Agent Systems), currently leading ongoing development after winning WCHL Regional Championship (Africa) during the 4-month hackathon phase and competing at the Global Finals. Currently working as Software Engineer at The Chaincademy building Web3/Blockchain solutions. Also founder of IThreeM, a decentralized gaming engine on ICP Blockchain. Technical educator with proven impact training over 10,000 developers across Africa through Power Learn Project. Expertise in Rust, blockchain development, AI agent systems, LLM training, full-stack web development, and developer education.
                 </p>
               </div>
 
