@@ -165,8 +165,8 @@ const Resume = () => {
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
       <Metadata
         title="Resume"
-        description="Download Dedan Okware's professional resume - Award-winning Software Engineer, WCHL Regional Champion (Africa), and creator of developer tools trusted by thousands."
-        keywords="resume, CV, software engineer, blockchain developer, WCHL winner, full-stack developer, Rust developer, TypeScript developer, download resume, professional resume"
+        description="Download Dedan Okware's professional resume - Software Engineer with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
+        keywords="resume, CV, software engineer, blockchain developer, WCHL, hackathon, full-stack developer, Rust developer, TypeScript developer, download resume, professional resume"
       />
       <AnimatedBackground />
       <Navbar />
@@ -256,7 +256,7 @@ const Resume = () => {
               <div className="mb-8" style={{ marginBottom: '24px' }}>
                 <h2 className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '12px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>PROFESSIONAL SUMMARY</h2>
                 <p className="text-gray-700 leading-relaxed" style={{ color: '#444', lineHeight: '1.8', fontSize: '14px' }}>
-                  Award-winning Software Engineer with WCHL Regional Championship (Africa) and Global Finale participation. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source developer tools trusted by thousands worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). Proven track record delivering production-ready applications for clients across Africa and globally. Expertise in Rust, TypeScript, React, Node.js, ICP blockchain, and modern cloud deployment.
+                  Award-winning Software Engineer with WCHL 2nd Place finishes in National (Kenya) and Regional (Africa) rounds. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source developer tools trusted by thousands worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). Proven track record delivering production-ready applications for clients across Africa and globally. Expertise in Rust, TypeScript, React, Node.js, ICP blockchain, and modern cloud deployment.
                 </p>
               </div>
 
@@ -266,11 +266,11 @@ const Resume = () => {
                 <ul className="space-y-2 text-gray-700" style={{ color: '#444', fontSize: '14px' }}>
                   <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
                     <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🏆</span>
-                    <span style={{ color: '#444' }}>Winner of WCHL (World Computer Hacker League) Qualifications & Regional Round (Africa)</span>
+                    <span style={{ color: '#444' }}>WCHL Regional Round (Africa) - 2nd Place (September 2025)</span>
                   </li>
                   <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🌍</span>
-                    <span style={{ color: '#444' }}>WCHL Global Finale Participant - Pitched among best projects worldwide</span>
+                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🏆</span>
+                    <span style={{ color: '#444' }}>WCHL National Round (Kenya) - 2nd Place (August 2025)</span>
                   </li>
                   <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
                     <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🔧</span>
@@ -342,17 +342,17 @@ const Resume = () => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '16px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>CERTIFICATIONS & ACHIEVEMENTS</h2>
                 <div className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                   <div>
-                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>WCHL (World Computer Hacker League) - Regional Champion</p>
+                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>WCHL Regional Round (Africa) - 2nd Place</p>
                     <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Internet Computer Protocol (ICP) Blockchain</p>
                   </div>
-                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>2025</p>
+                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>Sep 2025</p>
                 </div>
                 <div className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                   <div>
-                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>WCHL Global Finale Participant</p>
+                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>WCHL National Round (Kenya) - 2nd Place</p>
                     <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Internet Computer Protocol (ICP) Blockchain</p>
                   </div>
-                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>2025</p>
+                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>Aug 2025</p>
                 </div>
                 {certificates.map((cert, idx) => (
                   <div key={idx} className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>

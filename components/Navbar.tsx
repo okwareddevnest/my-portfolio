@@ -14,6 +14,7 @@ const Navbar = () => {
     { href: '/', label: 'Home' },
     { href: '/projects', label: 'Projects' },
     { href: '/experience', label: 'Experience' },
+    { href: '/achievements', label: 'Achievements' },
     { href: '/skills', label: 'Skills' },
     { href: '/certificates', label: 'Certificates' },
     { href: '/blogs', label: 'Blog' },
@@ -60,7 +61,7 @@ const Navbar = () => {
           {/* Mobile Navigation Button */}
           <div className="md:hidden flex items-center gap-4">
             <ThemeToggle />
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-md text-text dark:text-text-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5 transition-colors"
               aria-label="Toggle menu"

@@ -65,7 +65,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
           >
-            A passionate Software Engineer and WCHL Regional Champion (Africa) with Global Finale participation. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source tools trusted by thousands of developers worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). With expertise in Rust, TypeScript, React, Node.js, and the Internet Computer Protocol, I&apos;m dedicated to building scalable, production-grade applications that solve real-world problems.
+            A passionate Software Engineer with WCHL 2nd Place finishes in National (Kenya) and Regional (Africa) rounds. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source tools trusted by thousands of developers worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). With expertise in Rust, TypeScript, React, Node.js, and the Internet Computer Protocol, I&apos;m dedicated to building scalable, production-grade applications that solve real-world problems.
           </motion.p>
 
           <motion.div
