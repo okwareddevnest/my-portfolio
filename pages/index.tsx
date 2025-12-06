@@ -65,7 +65,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
           >
-            A passionate Software Engineer, Founder and Lead Engineer of OHMS 2.0 (Onchain Hosting for Multi-Agent Systems) - an award-winning autonomous AI agent platform that won the WCHL Regional Championship (Africa) and competed at the Global Finals. Also founder of IThreeM - a decentralized Gaming Engine for 2D and 3D games built on ICP Blockchain. I specialize in building exceptional digital experiences and innovative blockchain solutions. As a technical instructor, I&apos;ve trained over 10,000 developers across Africa through the Power Learn Project, empowering the next generation of software engineers. With expertise in web development, blockchain technology, AI agent systems, and developer education, I&apos;m dedicated to pushing the boundaries of what&apos;s possible in autonomous AI, decentralized gaming, web applications, and technical education.
+            A passionate Software Engineer and WCHL Regional Champion (Africa) with Global Finale participation. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source tools trusted by thousands of developers worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). With expertise in Rust, TypeScript, React, Node.js, and the Internet Computer Protocol, I&apos;m dedicated to building scalable, production-grade applications that solve real-world problems.
           </motion.p>
 
           <motion.div

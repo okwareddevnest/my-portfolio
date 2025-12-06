@@ -13,21 +13,10 @@ const Resume = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const resumeRef = useRef<HTMLDivElement>(null);
-  
+
   const { skills, certificates } = usePortfolioStore();
 
   const experiences = [
-    {
-      company: "Turing",
-      title: "LLM Trainer",
-      duration: "Nov 2025 - Present",
-      location: "Palo Alto, California, United States · Remote",
-      achievements: [
-        "Annotate and help train large language models that interpret and predict user workflows",
-        "Enhancing the realism and usability of AI assistants",
-        "Contributing to cutting-edge AI development and model improvement"
-      ]
-    },
     {
       company: "The Chaincademy",
       title: "Software Engineer",
@@ -38,19 +27,6 @@ const Resume = () => {
         "Work with Blockchain/Web3, develop APIs, ensure security and performance",
         "Implement authentication, integrate systems, deploy to cloud",
         "Maintain high code quality and documentation"
-      ]
-    },
-    {
-      company: "OHMS - Onchain Hosting for Multi-Agent Systems",
-      title: "Founder & Lead Engineer",
-      duration: "Jul 2025 - Present",
-      location: "Remote",
-      achievements: [
-        "Founded and currently leading development of autonomous AI agent platform",
-        "Won WCHL (World Computer Hacker League) Qualifications & Regional Round (Africa) - 4-month hackathon phase",
-        "Pitched at WCHL Global Finale among best projects worldwide",
-        "Building sophisticated multi-agent AI architecture on Internet Computer",
-        "Integrating LLM providers via secure HTTPS outcalls with ongoing platform scaling"
       ]
     },
     {
@@ -65,37 +41,14 @@ const Resume = () => {
       ]
     },
     {
-      company: "Power Learn Project",
-      title: "Software Engineering Instructor",
-      duration: "Oct 2024 - Present",
-      location: "Kenya · Remote",
-      achievements: [
-        "Leading curriculum development and instruction across multiple cohorts",
-        "Part of team that trained over 10,000 developers across Africa",
-        "Responsible for module design, content delivery, and mentoring instructors",
-        "Empowering next generation of software engineers"
-      ]
-    },
-    {
-      company: "IThreeM - I3M",
-      title: "Founder",
-      duration: "Jan 2024 - Present",
-      location: "Kenya",
-      achievements: [
-        "Founded decentralized gaming engine on ICP Blockchain",
-        "Leading innovative software solutions and business development",
-        "Building platform for 2D and 3D blockchain games"
-      ]
-    },
-    {
       company: "Freelance",
-      title: "Software Developer",
-      duration: "Jul 2023 - Present",
+      title: "Freelance Software Engineer",
+      duration: "Apr 2023 - Mar 2025",
       location: "Kenya",
       achievements: [
-        "Building software products revamping innovations in Africa",
-        "Delivering custom software solutions for diverse clients",
-        "Full-stack development and software architecture"
+        "Delivered full-stack web applications and blockchain solutions for diverse clients",
+        "Built custom software products, APIs, and decentralized applications",
+        "Specialized in React, TypeScript, Node.js, Python, and ICP blockchain"
       ]
     },
     {
@@ -104,33 +57,9 @@ const Resume = () => {
       duration: "Jan 2023 - Present",
       location: "Remote",
       achievements: [
-        "Contributing to open-source projects and communities",
-        "Building tools and libraries for developer productivity",
-        "Blockchain and Linux systems development"
-      ]
-    },
-    {
-      company: "Kabarak University",
-      title: "Data Science & Machine Learning Instructor",
-      duration: "Jan 2024 - Feb 2024",
-      location: "Nakuru, Kenya",
-      achievements: [
-        "Trained students in Data Science & AI Bootcamp (2 months intensive)",
-        "Covered full stack from basics to project deployment",
-        "Mentored students through hackathon challenges",
-        "Technologies: Python, Computer Vision, SQL, FastAPI"
-      ]
-    },
-    {
-      company: "Power Learn Project",
-      title: "Assistant Instructor - Data Engineering & Analysis",
-      duration: "Oct 2022 - Jul 2023",
-      location: "Nairobi, Kenya",
-      achievements: [
-        "Trained thousands of learners across multiple cohorts in Python and Web Development",
-        "Specialized in Data Analytics using BI tools: Atoti, Apache Superset, Plotly Dash, Tableau",
-        "Taught version control (Git), Backend Development, Django, and data analysis",
-        "Contributed to training 10,000+ developers across Africa"
+        "Created Gitok - adopted by 2,000+ developers worldwide",
+        "Built U-Download - trusted by 1,500+ users globally",
+        "Contributing to open-source projects in blockchain and developer tools"
       ]
     }
   ];
@@ -160,7 +89,7 @@ const Resume = () => {
 
   const generatePDF = async () => {
     if (!resumeRef.current) return;
-    
+
     setIsGenerating(true);
     setProgress(10);
 
@@ -179,9 +108,9 @@ const Resume = () => {
         imageTimeout: 0,
         removeContainer: false
       });
-      
+
       setProgress(60);
-      
+
       // Create PDF with compression
       const imgData = canvas.toDataURL('image/jpeg', 0.85); // JPEG with 85% quality instead of PNG
       const pdf = new jsPDF({
@@ -195,10 +124,10 @@ const Resume = () => {
       const pdfHeight = 297; // A4 height in mm
       const margin = 10; // 10mm margins on all sides
       const contentWidth = pdfWidth - (margin * 2); // 190mm usable width
-      
+
       const imgWidth = contentWidth;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      
+
       let heightLeft = imgHeight;
       let position = margin; // Start with top margin
 
@@ -218,9 +147,9 @@ const Resume = () => {
 
       // Download the PDF
       pdf.save('Dedan_Okware_Resume.pdf');
-      
+
       setProgress(100);
-      
+
       setTimeout(() => {
         setIsGenerating(false);
         setProgress(0);
@@ -234,14 +163,14 @@ const Resume = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
-      <Metadata 
+      <Metadata
         title="Resume"
-        description="Download Dedan Okware's professional resume - Founder & Lead Engineer of OHMS 2.0, WCHL Regional Champion, and technical instructor training 10,000+ developers across Africa."
-        keywords="resume, CV, software engineer, blockchain developer, AI engineer, OHMS, WCHL winner, download resume, professional resume"
+        description="Download Dedan Okware's professional resume - Award-winning Software Engineer, WCHL Regional Champion (Africa), and creator of developer tools trusted by thousands."
+        keywords="resume, CV, software engineer, blockchain developer, WCHL winner, full-stack developer, Rust developer, TypeScript developer, download resume, professional resume"
       />
       <AnimatedBackground />
       <Navbar />
-      
+
       <main className="flex-grow container mx-auto px-4 py-12">
         {/* Hero Section */}
         <motion.div
@@ -258,7 +187,7 @@ const Resume = () => {
             <IconRocket className="w-8 h-8 text-accent" />
           </div>
           <p className="text-lg text-text/80 dark:text-text-dark/80 max-w-2xl mx-auto">
-            Download my comprehensive resume showcasing award-winning projects, international achievements, and impact training 10,000+ developers
+            Download my comprehensive resume showcasing award-winning projects, international achievements, and open-source tools trusted by thousands of developers
           </p>
         </motion.div>
 
@@ -288,13 +217,13 @@ const Resume = () => {
                 </>
               )}
             </span>
-            
+
             {/* Animated background */}
             <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            
+
             {/* Progress bar */}
             {isGenerating && (
-              <div 
+              <div
                 className="absolute bottom-0 left-0 h-1 bg-white/50 transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
@@ -314,7 +243,7 @@ const Resume = () => {
               {/* Header */}
               <div className="text-center mb-8 pb-6 border-b-2 border-gray-300" style={{ textAlign: 'center', borderBottom: '2px solid #999', marginBottom: '24px', paddingBottom: '20px' }}>
                 <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '8px', color: '#000', textAlign: 'center' }}>DEDAN OKWARE</h1>
-                <p className="text-xl text-gray-700 mb-3" style={{ fontSize: '18px', marginBottom: '12px', color: '#333', textAlign: 'center' }}>Software Engineer | LLM Trainer | AI & Blockchain Specialist | Technical Educator</p>
+                <p className="text-xl text-gray-700 mb-3" style={{ fontSize: '18px', marginBottom: '12px', color: '#333', textAlign: 'center' }}>Software Engineer | AI & Blockchain Specialist | Open Source Developer</p>
                 <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600" style={{ fontSize: '14px', color: '#666', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', textAlign: 'center', width: '100%' }}>
                   <span style={{ color: '#666' }}>📧 soft.eng.dedan@gmail.com</span>
                   <span style={{ color: '#666' }}>📍 Kenya</span>
@@ -327,7 +256,7 @@ const Resume = () => {
               <div className="mb-8" style={{ marginBottom: '24px' }}>
                 <h2 className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '12px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>PROFESSIONAL SUMMARY</h2>
                 <p className="text-gray-700 leading-relaxed" style={{ color: '#444', lineHeight: '1.8', fontSize: '14px' }}>
-                  Award-winning Software Engineer, LLM Trainer at Turing, and Founder of OHMS 2.0 (Onchain Hosting for Multi-Agent Systems), currently leading ongoing development after winning WCHL Regional Championship (Africa) during the 4-month hackathon phase and competing at the Global Finals. Currently working as Software Engineer at The Chaincademy building Web3/Blockchain solutions. Also founder of IThreeM, a decentralized gaming engine on ICP Blockchain. Technical educator with proven impact training over 10,000 developers across Africa through Power Learn Project. Expertise in Rust, blockchain development, AI agent systems, LLM training, full-stack web development, and developer education.
+                  Award-winning Software Engineer with WCHL Regional Championship (Africa) and Global Finale participation. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source developer tools trusted by thousands worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). Proven track record delivering production-ready applications for clients across Africa and globally. Expertise in Rust, TypeScript, React, Node.js, ICP blockchain, and modern cloud deployment.
                 </p>
               </div>
 
@@ -344,16 +273,12 @@ const Resume = () => {
                     <span style={{ color: '#444' }}>WCHL Global Finale Participant - Pitched among best projects worldwide</span>
                   </li>
                   <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>👥</span>
-                    <span style={{ color: '#444' }}>Trained over 10,000 developers across Africa through Power Learn Project</span>
+                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🔧</span>
+                    <span style={{ color: '#444' }}>Created Gitok: Developer productivity tool adopted by 2,000+ developers globally</span>
                   </li>
                   <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
                     <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>📱</span>
-                    <span style={{ color: '#444' }}>U-Download: Trusted by 1,500+ users worldwide</span>
-                  </li>
-                  <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>💻</span>
-                    <span style={{ color: '#444' }}>Gitok: Adopted by 2,000+ developers globally</span>
+                    <span style={{ color: '#444' }}>Built U-Download: Cross-platform YouTube downloader trusted by 1,500+ users worldwide</span>
                   </li>
                 </ul>
               </div>
@@ -440,10 +365,10 @@ const Resume = () => {
                 ))}
                 <div className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                   <div>
-                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>Power Learn Project - Trained 10,000+ Developers</p>
-                    <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Module Lead Instructor</p>
+                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>Open Source Developer Tools</p>
+                    <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Creator of Gitok (2K+ users) & U-Download (1.5K+ users)</p>
                   </div>
-                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>2024-Present</p>
+                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>2023-Present</p>
                 </div>
               </div>
 

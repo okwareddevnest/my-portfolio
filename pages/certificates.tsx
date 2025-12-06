@@ -198,16 +198,6 @@ const certificates: Certificate[] = [
     logo: "/companies/postman.png"
   },
   {
-    name: "Software Development",
-    issuer: "Power Learn Project",
-    date: "Jan 2023",
-    credentialId: "35320215603C122",
-    link: "https://example.com/plp",
-    description: "Comprehensive software development training program.",
-    skills: ["Test Automation", "Back-End Development", "Software Engineering"],
-    logo: "/companies/plp.png"
-  },
-  {
     name: "Foundations of User Experience (UX) Design",
     issuer: "Google",
     date: "Nov 2022",
@@ -216,24 +206,6 @@ const certificates: Certificate[] = [
     description: "Fundamentals of UX design principles and practices.",
     skills: ["UX Design", "User Research", "Design Thinking"],
     logo: "/companies/google.png"
-  },
-  {
-    name: "Data Science & Machine Learning",
-    issuer: "Kabarak University",
-    date: "February 2024",
-    link: "https://example.com/kabarak1",
-    description: "Advanced training in Data Science and Machine Learning, covering Python, Data Analysis, Computer Vision, and Deep Learning.",
-    skills: ["Python", "Data Science", "Machine Learning", "Computer Vision", "Deep Learning"],
-    logo: "/companies/kabarak.png"
-  },
-  {
-    name: "AI & Machine Learning Bootcamp",
-    issuer: "Kabarak University",
-    date: "February 2023",
-    link: "https://example.com/kabarak2",
-    description: "Intensive 5-week bootcamp covering AI fundamentals, NumPy, Pandas, Computer Vision, Deep Learning, and FastAPI deployment.",
-    skills: ["AI", "NumPy", "Pandas", "Computer Vision", "Deep Learning", "FastAPI"],
-    logo: "/companies/kabarak.png"
   },
   {
     name: "ICP TypeScript Smart Contract 101",
@@ -342,7 +314,7 @@ const Certificates = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
-      <Metadata 
+      <Metadata
         title="Certificates & Achievements"
         description="View my professional certifications and achievements in blockchain development, software engineering, cloud computing, and more. Including certifications from Dacade.org, Microsoft, IBM, and other leading institutions."
         keywords="blockchain certificates, ICP development, rust programming, typescript, microsoft certifications, professional achievements"

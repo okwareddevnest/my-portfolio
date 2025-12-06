@@ -25,21 +25,21 @@ interface Experience {
 const calculateDuration = (startDate: string, endDate?: string): string => {
   const start = new Date(startDate);
   const end = endDate ? new Date(endDate) : new Date();
-  
+
   const totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
-  
+
   let duration = '';
   if (years > 0) {
     duration += `${years} yr${years > 1 ? 's' : ''}`;
   }
-  
+
   if (months > 0 || years === 0) {
     if (years > 0) duration += ' ';
     duration += `${months} mo${months > 1 ? 's' : ''}`;
   }
-  
+
   return duration;
 };
 
@@ -54,22 +54,11 @@ const getDurationString = (startDate: string, endDate?: string): string => {
   const formattedStart = formatDateDisplay(startDate);
   const formattedEnd = endDate ? formatDateDisplay(endDate) : 'Present';
   const duration = calculateDuration(startDate, endDate);
-  
+
   return `${formattedStart} - ${formattedEnd} · ${duration}`;
 };
 
 const experiences: Experience[] = [
-  {
-    company: "Turing",
-    logo: "/companies/turing.jpeg",
-    title: "LLM Trainer",
-    type: "Contract",
-    startDate: "2025-11-01",
-    location: "Palo Alto, California, United States",
-    description: "Annotate and help train large language models that interpret and predict user workflows, enhancing the realism and usability of AI assistants.",
-    skills: ["Large Language Models (LLM)", "AI Training", "Data Annotation", "Machine Learning", "NLP"],
-    isRemote: true
-  },
   {
     company: "The Chaincademy",
     logo: "/companies/thechaincademy_logo.jpeg",
@@ -79,17 +68,6 @@ const experiences: Experience[] = [
     location: "United Kingdom",
     description: "Design and build user interfaces, develop backend logic, manage databases, integrate systems, implement authentication, work with Blockchain/Web3, develop APIs, ensure security and performance, test/debug, deploy to cloud, collaborate via version control, and maintain high code quality and documentation.",
     skills: ["Software Design", "Software Infrastructure", "Blockchain Development", "Web3", "API Development", "Full-Stack Development", "System Integration", "Cloud Deployment"],
-    isRemote: true
-  },
-  {
-    company: "OHMS - Onchain Hosting for Multi-Agent Systems",
-    logo: "/companies/ohms.png",
-    title: "Founder & Lead Engineer",
-    type: "Full-time",
-    startDate: "2025-07-01",
-    location: "Remote",
-    description: "Founded and currently leading the development of OHMS 2.0, an award-winning autonomous AI agent platform built entirely on the Internet Computer Protocol. During the 4-month hackathon phase (Jul-Oct 2025), competed in the prestigious World Computer Hacker League (WCHL) by ICP Blockchain, winning both the Qualifications and Regional (African-Wide) rounds, and earning a spot to pitch at the Global Finale Round among the best projects in the world. Continuing to build and scale the platform with a sophisticated architecture featuring an Agent Factory, Coordinator, Model & Tool Registry, and Subscription Economics system, all running as ICP canisters. The platform bridges decentralized coordination with best-in-class hosted LLMs via secure HTTPS outcalls, supporting multi-agent collaborations that can plan, act, and report autonomously.",
-    skills: ["Rust", "TypeScript", "React 19", "Internet Computer", "ICP", "AI Agents", "LLM Integration", "WebAssembly", "Motoko", "System Architecture", "Competition Success", "Team Leadership"],
     isRemote: true
   },
   {
@@ -105,36 +83,15 @@ const experiences: Experience[] = [
     isRemote: true
   },
   {
-    company: "Power Learn Project",
-    logo: "/companies/plp.jpeg",
-    title: "Software Engineering Instructor",
-    type: "Contract",
-    startDate: "2024-10-01",
-    location: "Kenya",
-    description: "Currently serving as a Software Engineering Instructor, leading curriculum development and instruction across multiple cohorts. Part of a team that has successfully trained over 10,000 developers across Africa, empowering the next generation of software engineers with cutting-edge skills in web development, data science, and software engineering. Responsible for module design, content delivery, and mentoring other instructors.",
-    skills: ["Instructor Development", "Instructional Coaching", "Developer Training", "Technical Education", "Curriculum Development", "Module Leadership", "Content Design"],
-    isRemote: true
-  },
-  {
-    company: "IThreeM - I3M",
-    logo: "/companies/i3m.png",
-    title: "Founder",
-    type: "Full-time",
-    startDate: "2024-01-01",
-    location: "Kenya",
-    description: "Leading as the founder of IThreeM, focusing on innovative software solutions and business development.",
-    skills: ["Business Ownership", "Start-up Ventures", "Start-up Leadership", "Start-ups Management", "Early Stage Ventures", "Software Development"],
-    isRemote: true
-  },
-  {
     company: "Freelance",
     logo: "/companies/freelance.png",
-    title: "Software Developer",
+    title: "Freelance Software Engineer",
     type: "Part-time",
-    startDate: "2023-07-01",
+    startDate: "2023-04-01",
+    endDate: "2025-03-31",
     location: "Kenya",
-    description: "Building software products revamping innovations in Africa at large",
-    skills: ["Software Development", "Self-employment", "Gigs", "Commission Work", "Software Infrastructure"],
+    description: "Delivered full-stack web applications and blockchain solutions for diverse clients across Africa and globally. Built custom software products, APIs, and decentralized applications using modern technologies including React, TypeScript, Node.js, Python, and ICP blockchain. Specialized in creating scalable, production-ready systems with robust architecture and security best practices.",
+    skills: ["Full-Stack Development", "Blockchain Development", "API Development", "Software Architecture", "React", "TypeScript", "Node.js", "Python"],
     isRemote: true
   },
   {
@@ -144,31 +101,9 @@ const experiences: Experience[] = [
     type: "Part-time",
     startDate: "2023-01-01",
     location: "Remote",
-    description: "Building for experience",
+    description: "Active contributor to open-source projects and communities. Building developer tools and libraries that enhance productivity for thousands of developers worldwide. Created Gitok (2,000+ users) and U-Download (1,500+ users) among other impactful projects.",
     skills: ["Software Infrastructure", "Open-Source Software", "OSC", "Internet Software", "Engineering", "Linux", "Blockchain Developer"],
     isRemote: true
-  },
-  {
-    company: "Kabarak University",
-    logo: "/companies/kabarak.webp",
-    title: "Data Science & Machine Learning Instructor",
-    type: "Contract",
-    startDate: "2024-01-01",
-    endDate: "2024-02-29",
-    location: "Nakuru, Kenya",
-    description: "Training in a Data Science & Artificial Intelligence Bootcamp that runs for two months where we train students from scratch all the way to project deployment and business ready by challenging them in a hackathon.",
-    skills: ["Data Science", "API Testing", "Data Analysis", "Python (Programming Language)", "Computer Vision", "SQL", "FastAPI"]
-  },
-  {
-    company: "Power Learn Project",
-    logo: "/companies/plp.jpeg",
-    title: "Assistant Instructor || Data Engineering & Analysis",
-    type: "Internship",
-    startDate: "2022-10-01",
-    endDate: "2023-07-31",
-    location: "Nairobi, Kenya",
-    description: "Trained thousands of learners across multiple cohorts in Python and comprehensive Web Development, including version control (Git), Backend Development with Python, and Data Analytics. Specialized in Data Analytics, utilizing Business Intelligence libraries and tools like Atoti, Apache Superset, Plotly Dash, Excel, ChartJS, Pivot tables, and Tableau. Contributed to Power Learn Project's mission of training over 10,000 developers across Africa, building a strong foundation for the next generation of African tech talent.",
-    skills: ["JavaScript", "Git", "Project Management", "Data Analysis", "Django REST Framework", "HTML5", "GitHub", "CSS", "Django", "LMS Support", "Python", "Data Analytics", "Technical Training"]
   }
 ];
 
@@ -178,12 +113,12 @@ const ExperienceCard = ({ experience, index, onClick }: { experience: Experience
 
   useEffect(() => {
     setDurationString(getDurationString(experience.startDate, experience.endDate));
-    
+
     // Update duration every day at midnight
     const timer = setInterval(() => {
       setDurationString(getDurationString(experience.startDate, experience.endDate));
     }, 86400000); // 24 hours
-    
+
     return () => clearInterval(timer);
   }, [experience.startDate, experience.endDate]);
 
@@ -239,7 +174,7 @@ const ExperienceCard = ({ experience, index, onClick }: { experience: Experience
                 <p className="text-text/60 dark:text-text-dark/60">{experience.company}</p>
               </div>
             </div>
-            
+
             <div className="space-y-2 mb-4">
               <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
                 <IconCalendar className="w-4 h-4" />
@@ -295,7 +230,7 @@ const Experience = () => {
       initialDurations[key] = getDurationString(exp.startDate, exp.endDate);
     });
     setDurationStrings(initialDurations);
-    
+
     // Update durations every day
     const timer = setInterval(() => {
       const updatedDurations: Record<string, string> = {};
@@ -305,15 +240,15 @@ const Experience = () => {
       });
       setDurationStrings(updatedDurations);
     }, 86400000); // 24 hours
-    
+
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Metadata 
+      <Metadata
         title="Professional Experience"
-        description="Explore Dedan Okware's professional journey, including roles at Power Learn Project, IThreeM, and various software development positions."
+        description="Explore Dedan Okware's professional journey as a Software Engineer, including roles at The Chaincademy, OHMS, Bonded, IThreeM, and various full-stack development positions."
         keywords="software engineer experience, blockchain developer, ICP developer, rust developer, typescript developer, web development experience, decentralized gaming, IThreeM founder"
       />
       <AnimatedBackground />
