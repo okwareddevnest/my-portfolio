@@ -20,7 +20,7 @@ const Resume = () => {
     {
       company: "The Chaincademy",
       title: "Software Engineer",
-      duration: "Sep 2025 - Present",
+      duration: "Aug 2025 - Present",
       location: "United Kingdom · Remote",
       achievements: [
         "Design and build user interfaces, develop backend logic, manage databases",

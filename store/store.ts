@@ -246,6 +246,12 @@ export const usePortfolioStore = create<PortfolioState>()(
       blogs: initialBlogs,
       certificates: [
         {
+          name: "Google Cybersecurity Professional Certificate, Cyber Security",
+          issuer: "Coursera",
+          date: "June 2023 - August 2023",
+          link: ""
+        },
+        {
           name: "ICP TypeScript Smart Contract 101",
           issuer: "Dacade.org",
           date: "2024",

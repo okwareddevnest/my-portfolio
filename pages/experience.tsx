@@ -64,7 +64,7 @@ const experiences: Experience[] = [
     logo: "/companies/thechaincademy_logo.jpeg",
     title: "Software Engineer",
     type: "Contract",
-    startDate: "2025-09-01",
+    startDate: "2025-08-01",
     location: "United Kingdom",
     description: "Design and build user interfaces, develop backend logic, manage databases, integrate systems, implement authentication, work with Blockchain/Web3, develop APIs, ensure security and performance, test/debug, deploy to cloud, collaborate via version control, and maintain high code quality and documentation.",
     skills: ["Software Design", "Software Infrastructure", "Blockchain Development", "Web3", "API Development", "Full-Stack Development", "System Integration", "Cloud Deployment"],
