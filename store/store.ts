@@ -87,7 +87,9 @@ export const usePortfolioStore = create<PortfolioState>()(
             { name: "Vue.js", level: 85 },
             { name: "TailwindCSS", level: 90 },
             { name: "Material-UI", level: 85 },
-            { name: "Framer Motion", level: 80 }
+            { name: "Framer Motion", level: 80 },
+            { name: "Redux", level: 85 },
+            { name: "WebSockets", level: 80 }
           ]
         },
         {
@@ -99,7 +101,13 @@ export const usePortfolioStore = create<PortfolioState>()(
             { name: "FastAPI", level: 85 },
             { name: "Rust", level: 90 },
             { name: "MongoDB", level: 85 },
-            { name: "PostgreSQL", level: 85 }
+            { name: "PostgreSQL", level: 85 },
+            { name: "REST APIs", level: 95 },
+            { name: "GraphQL", level: 85 },
+            { name: "gRPC", level: 80 },
+            { name: "Microservices", level: 85 },
+            { name: "Redis", level: 80 },
+            { name: "MySQL", level: 85 }
           ]
         },
         {
@@ -134,7 +142,17 @@ export const usePortfolioStore = create<PortfolioState>()(
             { name: "Linux", level: 85 },
             { name: "CI/CD", level: 85 },
             { name: "Azure", level: 80 },
-            { name: "Kubernetes", level: 75 }
+            { name: "AWS", level: 80 },
+            { name: "Kubernetes", level: 75 },
+            { name: "Zapier", level: 85 },
+            { name: "Make (Integromat)", level: 85 },
+            { name: "n8n", level: 85 },
+            { name: "MCP Servers", level: 80 },
+            { name: "MCP Client in Zapier", level: 80 },
+            { name: "GitHub Actions", level: 85 },
+            { name: "Terraform", level: 75 },
+            { name: "Nginx", level: 80 },
+            { name: "Vercel", level: 90 }
           ]
         }
       ],
