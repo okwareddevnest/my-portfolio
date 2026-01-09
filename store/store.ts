@@ -259,6 +259,54 @@ export const usePortfolioStore = create<PortfolioState>()(
           previewImage: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=2074&auto=format&fit=crop",
           technologies: ["Python", "AppImage", "Debian Packaging", "Linux", "Desktop Integration"],
           githubLink: "https://github.com/okwareddevnest/AppTray"
+        },
+        {
+          name: "Make - Google Sheets Auto Reporting",
+          description: "Automated reporting system using Make (Integromat) that syncs data to Google Sheets and generates scheduled reports with real-time analytics.",
+          longDescription: "A comprehensive automation workflow built on Make (formerly Integromat) that streamlines data collection and reporting processes. The system automatically pulls data from multiple sources, processes and transforms it, and populates Google Sheets with structured reports. Features include scheduled daily/weekly report generation, conditional formatting based on KPIs, automatic chart updates, email notifications with report summaries, and integration with Slack for instant alerts. The workflow significantly reduces manual data entry and ensures stakeholders always have access to up-to-date analytics and insights.",
+          previewImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+          technologies: ["Make (Integromat)", "Google Sheets API", "REST APIs", "Automation", "Data Analytics", "Webhooks"],
+          githubLink: "https://github.com/okwareddevnest"
+        },
+        {
+          name: "Make - Smart Data Pipeline",
+          description: "Intelligent data pipeline using Make that automates data extraction, transformation, and loading (ETL) with error handling and monitoring.",
+          longDescription: "An advanced ETL automation solution built on Make that orchestrates complex data workflows across multiple platforms. The pipeline extracts data from various sources including APIs, databases, and file uploads, applies transformations and validations, and loads processed data into Google Sheets for analysis and visualization. Key features include automatic error detection and retry logic, data validation rules, duplicate prevention, historical data archiving, and comprehensive logging. The system includes a monitoring dashboard that tracks pipeline health and sends alerts for any anomalies or failures.",
+          previewImage: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2074&auto=format&fit=crop",
+          technologies: ["Make (Integromat)", "Google Sheets", "ETL", "Data Transformation", "Webhooks", "Error Handling"],
+          githubLink: "https://github.com/okwareddevnest"
+        },
+        {
+          name: "n8n - LinkedIn Auto Publisher",
+          description: "Automated content publishing workflow using n8n that schedules and posts professional content to LinkedIn with analytics tracking.",
+          longDescription: "A sophisticated social media automation workflow built on n8n that streamlines LinkedIn content publishing. The system allows for content scheduling, automatic posting at optimal engagement times, and integration with content management systems. Features include content queue management, hashtag optimization, image and document attachment support, engagement analytics tracking, and A/B testing for post performance. The workflow includes approval gates for content review and supports multi-account management for agencies and teams managing multiple LinkedIn profiles.",
+          previewImage: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?q=80&w=2074&auto=format&fit=crop",
+          technologies: ["n8n", "LinkedIn API", "OAuth 2.0", "Automation", "Social Media", "Content Scheduling"],
+          githubLink: "https://github.com/okwareddevnest"
+        },
+        {
+          name: "n8n - X (Twitter) Social Automation",
+          description: "Intelligent Twitter/X automation workflow using n8n for scheduled posting, engagement monitoring, and audience growth strategies.",
+          longDescription: "A powerful social media automation solution built on n8n for managing X (Twitter) presence. The workflow handles scheduled tweet publishing, thread creation, media uploads, and engagement tracking. Advanced features include sentiment analysis on mentions, automatic response suggestions, follower growth analytics, trending hashtag monitoring, and cross-posting from other platforms. The system respects API rate limits and includes queue management to ensure consistent posting without spam. Perfect for content creators, brands, and developers looking to maintain an active social media presence while focusing on core work.",
+          previewImage: "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=2074&auto=format&fit=crop",
+          technologies: ["n8n", "X (Twitter) API", "OAuth 2.0", "Automation", "Social Media", "Analytics"],
+          githubLink: "https://github.com/okwareddevnest"
+        },
+        {
+          name: "n8n - Portfolio Blog Auto Publisher",
+          description: "Automated blog publishing workflow using n8n that syncs content from my portfolio to multiple platforms with SEO optimization.",
+          longDescription: "An intelligent content distribution workflow built on n8n that automates blog publishing from my portfolio website. When new blog content is created, the system automatically formats and publishes it across multiple platforms including personal blogs, Medium, Dev.to, and Hashnode. Features include automatic SEO meta tag generation, canonical URL management to prevent duplicate content issues, image optimization and CDN upload, social media announcement triggers, and readership analytics aggregation. The workflow includes content templating for platform-specific formatting and maintains consistency across all publishing destinations.",
+          previewImage: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop",
+          technologies: ["n8n", "REST APIs", "Webhooks", "SEO", "Content Management", "Multi-platform Publishing"],
+          githubLink: "https://github.com/okwareddevnest"
+        },
+        {
+          name: "Zapier MCP - Hackathon Project Grader",
+          description: "Proprietary AI-powered grading system using Zapier with MCP integration to evaluate and score student tech projects from hackathons.",
+          longDescription: "A proprietary automated grading platform built on Zapier with MCP (Model Context Protocol) server integration designed for evaluating student technology projects submitted during hackathons. The system leverages AI capabilities through MCP to analyze code repositories, documentation quality, innovation factor, and technical implementation. Features include automated rubric-based scoring, plagiarism detection, code quality analysis, README evaluation, and comprehensive feedback generation. The platform integrates with GitHub/GitLab for repository access, generates detailed score breakdowns, and produces exportable reports for judges and organizers. This enterprise solution has been used to grade hundreds of hackathon submissions, significantly reducing evaluation time while maintaining consistency and fairness in scoring.",
+          previewImage: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop",
+          technologies: ["Zapier", "MCP Servers", "MCP Client", "AI/ML", "GitHub API", "Automation", "EdTech"],
+          githubLink: "https://github.com/okwareddevnest"
         }
       ],
       blogs: initialBlogs,
