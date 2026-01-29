@@ -69,6 +69,7 @@ export const usePortfolioStore = create<PortfolioState>()(
           category: "Programming Languages",
           items: [
             { name: "Python", level: 95 },
+            { name: "Golang", level: 85 },
             { name: "JavaScript", level: 90 },
             { name: "TypeScript", level: 90 },
             { name: "Rust", level: 85 },
@@ -330,28 +331,28 @@ export const usePortfolioStore = create<PortfolioState>()(
           link: "https://dacade.org/achievements/46a69cb6-5ffa-408b-8d65-5f3cfe0d2eba"
         }
       ],
-      addSkill: (category: string, skill: Skill) => 
+      addSkill: (category: string, skill: Skill) =>
         set((state) => ({
-          skills: state.skills.map(cat => 
+          skills: state.skills.map(cat =>
             cat.category === category
               ? { ...cat, items: [...cat.items, skill] }
               : cat
           )
         })),
-      addProject: (project: Project) => 
-        set((state) => ({ 
-          projects: [...state.projects, project] 
+      addProject: (project: Project) =>
+        set((state) => ({
+          projects: [...state.projects, project]
         })),
-      addBlog: (blog: Blog) => 
-        set((state) => ({ 
-          blogs: [blog, ...state.blogs] 
+      addBlog: (blog: Blog) =>
+        set((state) => ({
+          blogs: [blog, ...state.blogs]
         })),
-      addCertificate: (cert: Certificate) => 
-        set((state) => ({ 
-          certificates: [...state.certificates, cert] 
+      addCertificate: (cert: Certificate) =>
+        set((state) => ({
+          certificates: [...state.certificates, cert]
         })),
-      removeBlog: (id: string) => set((state) => ({ 
-        blogs: state.blogs.filter(b => b.id !== id) 
+      removeBlog: (id: string) => set((state) => ({
+        blogs: state.blogs.filter(b => b.id !== id)
       })),
     }),
     {

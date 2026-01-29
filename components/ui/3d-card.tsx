@@ -47,14 +47,9 @@ export const CardContainer = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={cn(
-        "relative group/card w-auto h-auto",
-        containerClassName
-      )}
+      className={cn("relative group/card w-auto h-auto", containerClassName)}
     >
-      <div className={cn("relative", className)}>
-        {children}
-      </div>
+      <div className={cn("relative", className)}>{children}</div>
     </div>
   );
 };
@@ -64,20 +59,8 @@ interface CardBodyProps {
   className?: string;
 }
 
-export const CardBody = ({
-  children,
-  className,
-}: CardBodyProps) => {
-  return (
-    <div
-      className={cn(
-        "h-full w-full p-4",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
+export const CardBody = ({ children, className }: CardBodyProps) => {
+  return <div className={cn("h-full w-full p-4", className)}>{children}</div>;
 };
 
 interface CardItemProps {

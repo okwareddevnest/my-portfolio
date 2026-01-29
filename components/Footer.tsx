@@ -1,5 +1,9 @@
-import Logo from './Logo';
-import { IconBrandGithub, IconBrandLinkedin, IconBrandX } from '@tabler/icons-react';
+import Logo from "./Logo";
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandX,
+} from "@tabler/icons-react";
 
 const Footer = () => {
   return (
@@ -12,7 +16,7 @@ const Footer = () => {
               Software Engineer | Blockchain Developer | AI Enthusiast
             </p>
           </div>
-          
+
           <div className="flex items-center gap-6">
             <a
               href="https://github.com/okwareddevnest"
@@ -43,7 +47,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        
+
         <div className="mt-8 pt-6 border-t border-border dark:border-border-dark">
           <p className="text-center text-sm text-text/60 dark:text-text-dark/60">
             © {new Date().getFullYear()} Dedan Okware. All rights reserved.

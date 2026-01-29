@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -11,10 +11,10 @@ interface ModalProps {
 export const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
   return (
@@ -66,4 +66,4 @@ export const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
       )}
     </AnimatePresence>
   );
-}; 
+};

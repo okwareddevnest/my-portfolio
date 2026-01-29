@@ -1,10 +1,17 @@
-import { IconClock, IconCalendar, IconBrandLinkedin, IconBrandX, IconArticle, IconPencil } from '@tabler/icons-react';
-import Image from 'next/image';
-import Head from 'next/head';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { AnimatedBackground } from '../components/AnimatedBackground';
-import { usePortfolioStore, Blog } from '../store/store';
+import {
+  IconClock,
+  IconCalendar,
+  IconBrandLinkedin,
+  IconBrandX,
+  IconArticle,
+  IconPencil,
+} from "@tabler/icons-react";
+import Image from "next/image";
+import Head from "next/head";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { AnimatedBackground } from "../components/AnimatedBackground";
+import { usePortfolioStore, Blog } from "../store/store";
 
 interface BlogCardProps {
   blog: Blog;
@@ -36,8 +43,12 @@ const BlogCard = ({ blog }: BlogCardProps) => (
             />
           </div>
           <div>
-            <h3 className="font-medium text-text dark:text-text-dark">{blog.author.name}</h3>
-            <p className="text-sm text-text/60 dark:text-text-dark/60">{blog.author.role}</p>
+            <h3 className="font-medium text-text dark:text-text-dark">
+              {blog.author.name}
+            </h3>
+            <p className="text-sm text-text/60 dark:text-text-dark/60">
+              {blog.author.role}
+            </p>
           </div>
         </div>
         {blog.source && (
@@ -47,18 +58,24 @@ const BlogCard = ({ blog }: BlogCardProps) => (
             rel="noopener noreferrer"
             className="flex items-center space-x-2 text-text/60 dark:text-text-dark/60 hover:text-primary dark:hover:text-primary-dark"
           >
-            {blog.source.type === 'linkedin' ? (
+            {blog.source.type === "linkedin" ? (
               <IconBrandLinkedin size={24} />
             ) : (
               <IconBrandX size={24} />
             )}
-            <span className="text-sm">View on {blog.source.type === 'linkedin' ? 'LinkedIn' : 'X'}</span>
+            <span className="text-sm">
+              View on {blog.source.type === "linkedin" ? "LinkedIn" : "X"}
+            </span>
           </a>
         )}
       </div>
 
-      <h2 className="text-xl font-semibold mb-2 text-text dark:text-text-dark">{blog.title}</h2>
-      <p className="text-text/80 dark:text-text-dark/80 mb-4 line-clamp-3">{blog.content}</p>
+      <h2 className="text-xl font-semibold mb-2 text-text dark:text-text-dark">
+        {blog.title}
+      </h2>
+      <p className="text-text/80 dark:text-text-dark/80 mb-4 line-clamp-3">
+        {blog.content}
+      </p>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {blog.tags.map((tag, index) => (
@@ -101,25 +118,40 @@ export default function Blogs() {
           content="Dedan Okware, Software Engineering, Blockchain Development, Web3, Technical Blog, Programming, Technology Insights"
         />
         {/* Open Graph */}
-        <meta property="og:title" content="Blog | Dedan Okware - Software Engineer" />
+        <meta
+          property="og:title"
+          content="Blog | Dedan Okware - Software Engineer"
+        />
         <meta
           property="og:description"
           content="Explore articles about software engineering, blockchain development, web3, and tech insights from Dedan Okware."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://dedan-okware.vercel.app/blogs" />
-        <meta property="og:image" content="https://dedan-okware.vercel.app/og-image.jpg" />
+        <meta
+          property="og:url"
+          content="https://dedan-okware.vercel.app/blogs"
+        />
+        <meta
+          property="og:image"
+          content="https://dedan-okware.vercel.app/og-image.jpg"
+        />
 
         {/* Twitter/X Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@okware_o" />
         <meta name="twitter:creator" content="@okware_o" />
-        <meta name="twitter:title" content="Blog | Dedan Okware - Software Engineer" />
+        <meta
+          name="twitter:title"
+          content="Blog | Dedan Okware - Software Engineer"
+        />
         <meta
           name="twitter:description"
           content="Explore articles about software engineering, blockchain development, web3, and tech insights from Dedan Okware."
         />
-        <meta name="twitter:image" content="https://dedan-okware.vercel.app/og-image.jpg" />
+        <meta
+          name="twitter:image"
+          content="https://dedan-okware.vercel.app/og-image.jpg"
+        />
 
         {/* Additional SEO */}
         <link rel="canonical" href="https://dedan-okware.vercel.app/blogs" />
@@ -132,7 +164,9 @@ export default function Blogs() {
 
         <main className="container mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-text dark:text-text-dark">Blog Posts</h1>
+            <h1 className="text-3xl font-bold text-text dark:text-text-dark">
+              Blog Posts
+            </h1>
             <div className="text-sm text-text/60 dark:text-text-dark/60 flex items-center gap-2">
               <IconPencil size={16} />
               Insights & Updates
@@ -144,7 +178,10 @@ export default function Blogs() {
               <div className="relative">
                 <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-primary to-primary-dark opacity-75 blur"></div>
                 <div className="relative bg-background dark:bg-background-dark rounded-full p-6">
-                  <IconArticle size={48} className="text-primary dark:text-primary-dark" />
+                  <IconArticle
+                    size={48}
+                    className="text-primary dark:text-primary-dark"
+                  />
                 </div>
               </div>
 
@@ -152,7 +189,9 @@ export default function Blogs() {
                 Crafting New Content
               </h2>
               <p className="text-text/60 dark:text-text-dark/60 text-center max-w-md mb-8">
-                I&apos;m working on exciting articles about software engineering, blockchain development, and tech insights. Follow me on social media to stay updated.
+                I&apos;m working on exciting articles about software
+                engineering, blockchain development, and tech insights. Follow
+                me on social media to stay updated.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -162,7 +201,10 @@ export default function Blogs() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-[#0A66C2] to-[#0077B5] text-white hover:opacity-90 transition-opacity group"
                 >
-                  <IconBrandLinkedin size={24} className="group-hover:scale-110 transition-transform" />
+                  <IconBrandLinkedin
+                    size={24}
+                    className="group-hover:scale-110 transition-transform"
+                  />
                   <span className="font-medium">Connect on LinkedIn</span>
                 </a>
                 <a
@@ -171,7 +213,10 @@ export default function Blogs() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-[#1DA1F2] to-[#1A8CD8] text-white hover:opacity-90 transition-opacity group"
                 >
-                  <IconBrandX size={24} className="group-hover:scale-110 transition-transform" />
+                  <IconBrandX
+                    size={24}
+                    className="group-hover:scale-110 transition-transform"
+                  />
                   <span className="font-medium">Follow on X</span>
                 </a>
               </div>

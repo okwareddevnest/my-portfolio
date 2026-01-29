@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export const AnimatedBackground = () => {
   return (
@@ -8,20 +8,22 @@ export const AnimatedBackground = () => {
 
       {/* Tech Background Images */}
       <div className="absolute inset-0 opacity-10 dark:opacity-[0.05]">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop")',
+            backgroundImage:
+              'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop")',
           }}
         />
       </div>
 
       {/* Code Pattern Overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-repeat opacity-5 dark:opacity-[0.02] mix-blend-overlay"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop")',
-          backgroundSize: 'cover',
+          backgroundImage:
+            'url("https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop")',
+          backgroundSize: "cover",
         }}
       />
 
@@ -69,14 +71,15 @@ export const AnimatedBackground = () => {
       </div>
 
       {/* Tech Icons Pattern */}
-      <div 
+      <div
         className="absolute inset-0 bg-repeat opacity-[0.03] dark:opacity-[0.01] mix-blend-overlay"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundImage:
+            'url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       />
     </div>
   );
-}; 
+};

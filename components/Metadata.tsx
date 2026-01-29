@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 interface MetadataProps {
   title: string;
@@ -11,11 +11,13 @@ export const Metadata = ({
   title,
   description,
   keywords = "software engineer, blockchain developer, web development, ICP, rust, typescript",
-  ogImage = "/profile.png"
+  ogImage = "/profile.png",
 }: MetadataProps) => {
-  const fullTitle = title.includes('|') ? title : `${title} | Dedan Okware`;
+  const fullTitle = title.includes("|") ? title : `${title} | Dedan Okware`;
   const siteUrl = "https://dedan-okware.vercel.app";
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+  const fullOgImage = ogImage.startsWith("http")
+    ? ogImage
+    : `${siteUrl}${ogImage}`;
 
   return (
     <Head>
@@ -52,4 +54,4 @@ export const Metadata = ({
       <meta name="author" content="Dedan Okware" />
     </Head>
   );
-}; 
+};

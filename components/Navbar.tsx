@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Logo } from './Logo';
-import ThemeToggle from './ThemeToggle';
-import { useState } from 'react';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { motion, AnimatePresence } from "framer-motion";
+import { Logo } from "./Logo";
+import ThemeToggle from "./ThemeToggle";
+import { useState } from "react";
 
 const Navbar = () => {
   const router = useRouter();
@@ -11,14 +11,14 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const links = [
-    { href: '/', label: 'Home' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/experience', label: 'Experience' },
-    { href: '/achievements', label: 'Achievements' },
-    { href: '/skills', label: 'Skills' },
-    { href: '/certificates', label: 'Certificates' },
-    { href: '/blogs', label: 'Blog' },
-    { href: '/resume', label: 'Resume' },
+    { href: "/", label: "Home" },
+    { href: "/projects", label: "Projects" },
+    { href: "/experience", label: "Experience" },
+    { href: "/achievements", label: "Achievements" },
+    { href: "/skills", label: "Skills" },
+    { href: "/certificates", label: "Certificates" },
+    { href: "/blogs", label: "Blog" },
+    { href: "/resume", label: "Resume" },
   ];
 
   return (
@@ -36,10 +36,11 @@ const Navbar = () => {
                 key={href}
                 href={href}
                 className={`relative flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium transition-colors
-                          ${currentPath === href
-                    ? 'text-primary dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/5'
-                    : 'text-text/80 dark:text-text-dark/80 hover:text-primary dark:hover:text-primary-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5'
-                  }`}
+                          ${
+                            currentPath === href
+                              ? "text-primary dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/5"
+                              : "text-text/80 dark:text-text-dark/80 hover:text-primary dark:hover:text-primary-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5"
+                          }`}
               >
                 <span className="relative">
                   {label}
@@ -98,7 +99,7 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
             className="md:hidden border-t border-border/10 dark:border-border-dark/10 bg-background/95 dark:bg-background-dark/95 backdrop-blur-md"
@@ -110,10 +111,11 @@ const Navbar = () => {
                   href={href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors
-                            ${currentPath === href
-                      ? 'text-primary dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/5'
-                      : 'text-text/80 dark:text-text-dark/80 hover:text-primary dark:hover:text-primary-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5'
-                    }`}
+                            ${
+                              currentPath === href
+                                ? "text-primary dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/5"
+                                : "text-text/80 dark:text-text-dark/80 hover:text-primary dark:hover:text-primary-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5"
+                            }`}
                 >
                   {label}
                 </Link>

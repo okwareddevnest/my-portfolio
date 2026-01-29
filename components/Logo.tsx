@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface LogoProps {
   className?: string;
@@ -28,9 +28,7 @@ export const Logo = ({ className = "w-32 h-8" }: LogoProps) => {
         animate={{ y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <span className="text-text dark:text-text-dark">
-          OKWARE
-        </span>
+        <span className="text-text dark:text-text-dark">OKWARE</span>
       </motion.div>
       <motion.div
         className="h-0.5 w-full bg-gradient-to-r from-primary to-accent"
@@ -42,4 +40,4 @@ export const Logo = ({ className = "w-32 h-8" }: LogoProps) => {
   );
 };
 
-export default Logo; 
+export default Logo;

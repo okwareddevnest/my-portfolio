@@ -1,24 +1,34 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { AnimatedBackground } from '../components/AnimatedBackground';
-import { Modal } from '../components/Modal';
-import { IconCalendar, IconMapPin, IconBuildingSkyscraper, IconDevices } from '@tabler/icons-react';
-import Image from 'next/image';
-import { Metadata } from '../components/Metadata';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { AnimatedBackground } from "../components/AnimatedBackground";
+import { Modal } from "../components/Modal";
+import {
+  IconCalendar,
+  IconMapPin,
+  IconBuildingSkyscraper,
+  IconDevices,
+  IconBriefcase,
+} from "@tabler/icons-react";
+import Image from "next/image";
+import { Metadata } from "../components/Metadata";
 
-interface Experience {
-  company: string;
-  logo?: string;
+interface Role {
   title: string;
   type: string;
   startDate: string;
   endDate?: string;
-  location: string;
   description: string;
   skills: string[];
+}
+
+interface Experience {
+  company: string;
+  logo?: string;
+  location: string;
   isRemote?: boolean;
+  roles: Role[];
 }
 
 // Function to calculate duration between dates
@@ -26,18 +36,20 @@ const calculateDuration = (startDate: string, endDate?: string): string => {
   const start = new Date(startDate);
   const end = endDate ? new Date(endDate) : new Date();
 
-  const totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  const totalMonths =
+    (end.getFullYear() - start.getFullYear()) * 12 +
+    (end.getMonth() - start.getMonth());
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
 
-  let duration = '';
+  let duration = "";
   if (years > 0) {
-    duration += `${years} yr${years > 1 ? 's' : ''}`;
+    duration += `${years} yr${years > 1 ? "s" : ""}`;
   }
 
   if (months > 0 || years === 0) {
-    if (years > 0) duration += ' ';
-    duration += `${months} mo${months > 1 ? 's' : ''}`;
+    if (years > 0) duration += " ";
+    duration += `${months} mo${months > 1 ? "s" : ""}`;
   }
 
   return duration;
@@ -46,170 +58,321 @@ const calculateDuration = (startDate: string, endDate?: string): string => {
 // Format date for display (e.g., "Apr 2025")
 const formatDateDisplay = (dateString: string): string => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 };
 
 // Generate the full duration string (e.g., "Apr 2025 - Present · 1 yr 2 mos")
 const getDurationString = (startDate: string, endDate?: string): string => {
   const formattedStart = formatDateDisplay(startDate);
-  const formattedEnd = endDate ? formatDateDisplay(endDate) : 'Present';
+  const formattedEnd = endDate ? formatDateDisplay(endDate) : "Present";
   const duration = calculateDuration(startDate, endDate);
 
   return `${formattedStart} - ${formattedEnd} · ${duration}`;
 };
 
+// Get the total duration for a company with multiple roles
+const getCompanyTotalDuration = (roles: Role[]): string => {
+  const startDates = roles.map((r) => new Date(r.startDate));
+  const endDates = roles.map((r) =>
+    r.endDate ? new Date(r.endDate) : new Date(),
+  );
+
+  const earliestStart = new Date(
+    Math.min(...startDates.map((d) => d.getTime())),
+  );
+  const latestEnd = new Date(Math.max(...endDates.map((d) => d.getTime())));
+
+  const hasOngoing = roles.some((r) => !r.endDate);
+
+  return calculateDuration(
+    earliestStart.toISOString(),
+    hasOngoing ? undefined : latestEnd.toISOString(),
+  );
+};
+
 const experiences: Experience[] = [
   {
-    company: "The Chaincademy",
-    logo: "/companies/thechaincademy_logo.jpeg",
-    title: "Software Engineer",
-    type: "Contract",
-    startDate: "2025-08-01",
-    location: "United Kingdom",
-    description: "Design and build user interfaces, develop backend logic, manage databases, integrate systems, implement authentication, work with Blockchain/Web3, develop APIs, ensure security and performance, test/debug, deploy to cloud, collaborate via version control, and maintain high code quality and documentation.",
-    skills: ["Software Design", "Software Infrastructure", "Blockchain Development", "Web3", "API Development", "Full-Stack Development", "System Integration", "Cloud Deployment"],
-    isRemote: true
+    company: "Power Learn Project Africa",
+    logo: "/companies/plp.jpeg",
+    location: "Nairobi, Kenya",
+    isRemote: false,
+    roles: [
+      {
+        title: "Full Stack Software Engineer",
+        type: "Consultancy",
+        startDate: "2026-01-01",
+        description:
+          "Working as a Consultant Software Engineer on LMS platform improvements and automation systems. Developed the HPF Assessment module for evaluating student performance. Self-hosted n8n automation instance on PLP servers and built webhook-based automations integrating with the LMS. Working across the full stack using Golang for backend services, Next.js and React.js for frontend, Strapi for CMS, Docker for containerization, and Scaleway servers for cloud infrastructure.",
+        skills: [
+          "Golang",
+          "Next.js",
+          "React.js",
+          "Strapi",
+          "Docker",
+          "n8n Automation",
+          "Webhooks",
+          "LMS Development",
+          "Scaleway",
+          "Cloud Infrastructure",
+        ],
+      },
+      {
+        title: "Software Development Instructor",
+        type: "Consultancy",
+        startDate: "2024-10-01",
+        description:
+          "Training students on Full Stack Development using the MERN Stack (MongoDB, Express.js, React.js, Node.js). Conducting live sessions, code reviews, and mentoring aspiring developers through the PLP Academy. Contributing to curriculum development and creating hands-on projects for practical learning experience.",
+        skills: [
+          "MERN Stack",
+          "MongoDB",
+          "Express.js",
+          "React.js",
+          "Node.js",
+          "Teaching",
+          "Mentorship",
+          "Curriculum Development",
+          "Code Review",
+        ],
+      },
+    ],
+  },
+  {
+    company: "DevTrader",
+    logo: "/companies/DevTrader-Logo.jpeg",
+    location: "Dubai, UAE",
+    isRemote: true,
+    roles: [
+      {
+        title: "Software Engineer",
+        type: "Contract",
+        startDate: "2025-08-01",
+        description:
+          "Working as a freelance developer through DevTrader, a subcontracting company based in Dubai, UAE that connects freelance developers with international clients. Design and build user interfaces, develop backend logic, manage databases, integrate systems, implement authentication, work with Blockchain/Web3, develop APIs, ensure security and performance, test/debug, deploy to cloud, collaborate via version control, and maintain high code quality and documentation.",
+        skills: [
+          "Software Design",
+          "Software Infrastructure",
+          "Blockchain Development",
+          "Web3",
+          "API Development",
+          "Full-Stack Development",
+          "System Integration",
+          "Cloud Deployment",
+        ],
+      },
+    ],
   },
   {
     company: "Bonded",
     logo: "/companies/bonded.png",
-    title: "Software Engineer",
-    type: "Freelance",
-    startDate: "2025-04-01",
-    endDate: "2025-07-31",
     location: "London, United Kingdom",
-    description: "As a Software Engineer specializing in Blockchain Development on the ICP protocol and AI, I focused on building and maintaining applications at Bonded.",
-    skills: ["Engineering", "Software Infrastructure", "Blockchain Development", "ICP Protocol", "AI"],
-    isRemote: true
+    isRemote: true,
+    roles: [
+      {
+        title: "Software Engineer",
+        type: "Contract",
+        startDate: "2025-04-01",
+        endDate: "2025-07-31",
+        description:
+          "Contracted as a Software Engineer specializing in Blockchain Development on the ICP protocol and AI. Focused on building and maintaining decentralized applications and AI-powered solutions at Bonded.",
+        skills: [
+          "Engineering",
+          "Software Infrastructure",
+          "Blockchain Development",
+          "ICP Protocol",
+          "AI",
+        ],
+      },
+    ],
   },
   {
     company: "Freelance",
     logo: "/companies/freelance.png",
-    title: "Freelance Software Engineer",
-    type: "Part-time",
-    startDate: "2023-04-01",
-    endDate: "2025-03-31",
     location: "Kenya",
-    description: "Delivered full-stack web applications and blockchain solutions for diverse clients across Africa and globally. Built custom software products, APIs, and decentralized applications using modern technologies including React, TypeScript, Node.js, Python, and ICP blockchain. Specialized in creating scalable, production-ready systems with robust architecture and security best practices.",
-    skills: ["Full-Stack Development", "Blockchain Development", "API Development", "Software Architecture", "React", "TypeScript", "Node.js", "Python"],
-    isRemote: true
+    isRemote: true,
+    roles: [
+      {
+        title: "Freelance Software Engineer",
+        type: "Part-time",
+        startDate: "2023-04-01",
+        endDate: "2025-03-31",
+        description:
+          "Delivered full-stack web applications and blockchain solutions for diverse clients across Africa and globally. Built custom software products, APIs, and decentralized applications using modern technologies including React, TypeScript, Node.js, Python, and ICP blockchain. Specialized in creating scalable, production-ready systems with robust architecture and security best practices.",
+        skills: [
+          "Full-Stack Development",
+          "Blockchain Development",
+          "API Development",
+          "Software Architecture",
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Python",
+        ],
+      },
+    ],
   },
   {
     company: "Open Source",
     logo: "/companies/os.png",
-    title: "Open Source Developer",
-    type: "Part-time",
-    startDate: "2023-01-01",
     location: "Remote",
-    description: "Active contributor to open-source projects and communities. Building developer tools and libraries that enhance productivity for thousands of developers worldwide. Created Gitok (2,000+ users) and U-Download (1,500+ users) among other impactful projects.",
-    skills: ["Software Infrastructure", "Open-Source Software", "OSC", "Internet Software", "Engineering", "Linux", "Blockchain Developer"],
-    isRemote: true
-  }
+    isRemote: true,
+    roles: [
+      {
+        title: "Open Source Developer",
+        type: "Part-time",
+        startDate: "2023-01-01",
+        description:
+          "Active contributor to open-source projects and communities. Building developer tools and libraries that enhance productivity for thousands of developers worldwide. Created Gitok (2,000+ users) and U-Download (1,500+ users) among other impactful projects.",
+        skills: [
+          "Software Infrastructure",
+          "Open-Source Software",
+          "OSC",
+          "Internet Software",
+          "Engineering",
+          "Linux",
+          "Blockchain Developer",
+        ],
+      },
+    ],
+  },
 ];
 
-const ExperienceCard = ({ experience, index, onClick }: { experience: Experience; index: number; onClick: () => void }) => {
+const ExperienceCard = ({
+  experience,
+  index,
+  onClick,
+}: {
+  experience: Experience;
+  index: number;
+  onClick: (role: Role) => void;
+}) => {
   const isEven = index % 2 === 0;
-  const [durationString, setDurationString] = useState('');
-
-  useEffect(() => {
-    setDurationString(getDurationString(experience.startDate, experience.endDate));
-
-    // Update duration every day at midnight
-    const timer = setInterval(() => {
-      setDurationString(getDurationString(experience.startDate, experience.endDate));
-    }, 86400000); // 24 hours
-
-    return () => clearInterval(timer);
-  }, [experience.startDate, experience.endDate]);
+  const hasMultipleRoles = experience.roles.length > 1;
+  const totalDuration = getCompanyTotalDuration(experience.roles);
 
   return (
     <motion.div
       initial={{ opacity: 0, x: isEven ? -50 : 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      onClick={onClick}
-      className={`relative flex items-center ${isEven ? 'justify-end' : ''} cursor-pointer group`}
+      className={`relative flex items-start ${isEven ? "justify-end" : ""}`}
     >
-      <div className={`w-full md:w-5/12 ${isEven ? 'md:mr-8' : 'md:ml-8'}`}>
+      <div className={`w-full md:w-5/12 ${isEven ? "md:mr-8" : "md:ml-8"}`}>
         <motion.div
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ scale: 1.01 }}
           className="bg-card dark:bg-card-dark p-6 rounded-xl shadow-lg
                      border border-border/10 dark:border-border-dark/10
                      hover:shadow-xl transition-all relative overflow-hidden"
         >
           {experience.logo && (
             <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-              <div className="absolute opacity-[0.12] dark:opacity-[0.15]">
+              <div className="absolute opacity-[0.08] dark:opacity-[0.10]">
                 <Image
                   src={experience.logo}
                   alt=""
                   width={200}
                   height={200}
-                  style={{ objectFit: 'contain' }}
+                  style={{ objectFit: "contain" }}
                   className="w-64 h-64 max-w-none"
                 />
               </div>
             </div>
           )}
           <div className="relative z-10">
+            {/* Company Header */}
             <div className="flex items-center gap-4 mb-4">
               {experience.logo ? (
-                <div className="relative w-12 h-12">
+                <div className="relative w-12 h-12 flex-shrink-0">
                   <Image
                     src={experience.logo}
                     alt={experience.company}
                     className="rounded-full"
                     fill
                     sizes="48px"
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: "cover" }}
                   />
                 </div>
               ) : (
-                <div className="w-12 h-12 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center flex-shrink-0">
                   <IconBuildingSkyscraper className="w-6 h-6 text-primary dark:text-primary-dark" />
                 </div>
               )}
               <div>
-                <h3 className="text-xl font-bold text-text dark:text-text-dark">{experience.title}</h3>
-                <p className="text-text/60 dark:text-text-dark/60">{experience.company}</p>
+                <h3 className="text-xl font-bold text-text dark:text-text-dark">
+                  {experience.company}
+                </h3>
+                <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
+                  <span>{totalDuration}</span>
+                  <span>·</span>
+                  <span>{experience.location}</span>
+                  {experience.isRemote && (
+                    <>
+                      <span>·</span>
+                      <span className="flex items-center gap-1">
+                        <IconDevices className="w-3 h-3" />
+                        Remote
+                      </span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2 mb-4">
-              <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
-                <IconCalendar className="w-4 h-4" />
-                <span>{durationString}</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60">
-                <IconMapPin className="w-4 h-4" />
-                <span>{experience.location}</span>
-                {experience.isRemote && (
-                  <span className="flex items-center gap-1">
-                    <IconDevices className="w-4 h-4" />
-                    Remote
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {experience.skills.slice(0, 3).map((skill) => (
-                <span
-                  key={skill}
-                  className="px-2 py-1 text-xs rounded-full
-                           bg-primary/10 dark:bg-primary-dark/10
-                           text-primary dark:text-primary-dark"
+            {/* Stacked Roles */}
+            <div
+              className={`${hasMultipleRoles ? "border-l-2 border-primary/30 dark:border-primary-dark/30 ml-6 pl-4" : ""}`}
+            >
+              {experience.roles.map((role, roleIndex) => (
+                <div
+                  key={`${role.title}-${roleIndex}`}
+                  className={`${roleIndex > 0 ? "mt-6 pt-4 border-t border-border/10 dark:border-border-dark/10" : ""} cursor-pointer group`}
+                  onClick={() => onClick(role)}
                 >
-                  {skill}
-                </span>
+                  {/* Role indicator dot for stacked roles */}
+                  {hasMultipleRoles && (
+                    <div className="absolute -ml-[22px] mt-1.5 w-3 h-3 rounded-full bg-primary dark:bg-primary-dark border-2 border-card dark:border-card-dark" />
+                  )}
+
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="text-lg font-semibold text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">
+                        {role.title}
+                      </h4>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-accent/20 text-accent dark:bg-accent/30 font-medium">
+                        {role.type}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-sm text-text/60 dark:text-text-dark/60 mb-3">
+                    <IconCalendar className="w-4 h-4" />
+                    <span>
+                      {getDurationString(role.startDate, role.endDate)}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {role.skills.slice(0, 3).map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-1 text-xs rounded-full
+                                 bg-primary/10 dark:bg-primary-dark/10
+                                 text-primary dark:text-primary-dark"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                    {role.skills.length > 3 && (
+                      <span
+                        className="px-2 py-1 text-xs rounded-full
+                                   bg-primary/10 dark:bg-primary-dark/10
+                                   text-primary dark:text-primary-dark"
+                      >
+                        +{role.skills.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                </div>
               ))}
-              {experience.skills.length > 3 && (
-                <span className="px-2 py-1 text-xs rounded-full
-                             bg-primary/10 dark:bg-primary-dark/10
-                             text-primary dark:text-primary-dark">
-                  +{experience.skills.length - 3} more
-                </span>
-              )}
             </div>
           </div>
         </motion.div>
@@ -218,38 +381,33 @@ const ExperienceCard = ({ experience, index, onClick }: { experience: Experience
   );
 };
 
+interface SelectedRoleInfo {
+  role: Role;
+  company: string;
+  logo?: string;
+  location: string;
+}
+
 const Experience = () => {
-  const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
-  const [durationStrings, setDurationStrings] = useState<Record<string, string>>({});
+  const [selectedRole, setSelectedRole] = useState<SelectedRoleInfo | null>(
+    null,
+  );
 
-  useEffect(() => {
-    // Initialize duration strings for all experiences
-    const initialDurations: Record<string, string> = {};
-    experiences.forEach(exp => {
-      const key = `${exp.company}-${exp.title}`;
-      initialDurations[key] = getDurationString(exp.startDate, exp.endDate);
+  const handleRoleClick = (experience: Experience, role: Role) => {
+    setSelectedRole({
+      role,
+      company: experience.company,
+      logo: experience.logo,
+      location: experience.location,
     });
-    setDurationStrings(initialDurations);
-
-    // Update durations every day
-    const timer = setInterval(() => {
-      const updatedDurations: Record<string, string> = {};
-      experiences.forEach(exp => {
-        const key = `${exp.company}-${exp.title}`;
-        updatedDurations[key] = getDurationString(exp.startDate, exp.endDate);
-      });
-      setDurationStrings(updatedDurations);
-    }, 86400000); // 24 hours
-
-    return () => clearInterval(timer);
-  }, []);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Metadata
         title="Professional Experience"
-        description="Explore Dedan Okware's professional journey as a Software Engineer, including roles at The Chaincademy, OHMS, Bonded, IThreeM, and various full-stack development positions."
-        keywords="software engineer experience, blockchain developer, ICP developer, rust developer, typescript developer, web development experience, decentralized gaming, IThreeM founder"
+        description="Explore Dedan Okware's professional journey as a Software Engineer, including roles at Power Learn Project Africa, DevTrader, Bonded, and various full-stack development positions."
+        keywords="software engineer experience, blockchain developer, ICP developer, golang developer, typescript developer, web development experience, LMS development, n8n automation"
       />
       <AnimatedBackground />
       <Navbar />
@@ -270,10 +428,10 @@ const Experience = () => {
           <div className="space-y-12">
             {experiences.map((experience, index) => (
               <ExperienceCard
-                key={`${experience.company}-${experience.title}`}
+                key={experience.company}
                 experience={experience}
                 index={index}
-                onClick={() => setSelectedExperience(experience)}
+                onClick={(role) => handleRoleClick(experience, role)}
               />
             ))}
           </div>
@@ -282,21 +440,21 @@ const Experience = () => {
       <Footer />
 
       <Modal
-        isOpen={!!selectedExperience}
-        onClose={() => setSelectedExperience(null)}
-        title={selectedExperience?.title}
+        isOpen={!!selectedRole}
+        onClose={() => setSelectedRole(null)}
+        title={selectedRole?.role.title}
       >
-        {selectedExperience && (
+        {selectedRole && (
           <div className="space-y-6 relative">
-            {selectedExperience.logo && (
+            {selectedRole.logo && (
               <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
                 <div className="absolute opacity-[0.12] dark:opacity-[0.15] pointer-events-none">
                   <Image
-                    src={selectedExperience.logo}
+                    src={selectedRole.logo}
                     alt=""
                     width={300}
                     height={300}
-                    style={{ objectFit: 'contain' }}
+                    style={{ objectFit: "contain" }}
                     className="w-96 h-96 max-w-none"
                   />
                 </div>
@@ -304,15 +462,15 @@ const Experience = () => {
             )}
             <div className="relative z-10">
               <div className="flex items-center gap-4">
-                {selectedExperience.logo ? (
+                {selectedRole.logo ? (
                   <div className="relative w-16 h-16">
                     <Image
-                      src={selectedExperience.logo}
-                      alt={selectedExperience.company}
+                      src={selectedRole.logo}
+                      alt={selectedRole.company}
                       className="rounded-full"
                       fill
                       sizes="64px"
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: "cover" }}
                     />
                   </div>
                 ) : (
@@ -322,28 +480,40 @@ const Experience = () => {
                 )}
                 <div>
                   <h3 className="text-2xl font-bold text-text dark:text-text-dark">
-                    {selectedExperience.company}
+                    {selectedRole.company}
                   </h3>
-                  <div className="flex items-center gap-2 text-text/60 dark:text-text-dark/60">
-                    <IconCalendar className="w-5 h-5" />
-                    <span>{selectedExperience && durationStrings[`${selectedExperience.company}-${selectedExperience.title}`]}</span>
+                  <p className="text-lg text-text/80 dark:text-text-dark/80">
+                    {selectedRole.role.title}
+                  </p>
+                  <div className="flex items-center gap-2 text-text/60 dark:text-text-dark/60 mt-1">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-accent/20 text-accent dark:bg-accent/30 font-medium">
+                      {selectedRole.role.type}
+                    </span>
+                    <span>·</span>
+                    <IconCalendar className="w-4 h-4" />
+                    <span className="text-sm">
+                      {getDurationString(
+                        selectedRole.role.startDate,
+                        selectedRole.role.endDate,
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {selectedExperience.description && (
+              {selectedRole.role.description && (
                 <div className="prose dark:prose-invert max-w-none mt-4">
-                  <p>{selectedExperience.description}</p>
+                  <p>{selectedRole.role.description}</p>
                 </div>
               )}
 
-              {selectedExperience.skills && (
+              {selectedRole.role.skills && (
                 <div className="mt-4">
                   <h4 className="text-lg font-semibold mb-3 text-text dark:text-text-dark">
                     Skills & Technologies
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {selectedExperience.skills.map((skill) => (
+                    {selectedRole.role.skills.map((skill) => (
                       <span
                         key={skill}
                         className="px-3 py-1 rounded-full
@@ -364,4 +534,4 @@ const Experience = () => {
   );
 };
 
-export default Experience; 
+export default Experience;

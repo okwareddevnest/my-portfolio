@@ -1,13 +1,18 @@
-import { useState, useRef } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { AnimatedBackground } from '../components/AnimatedBackground';
-import { usePortfolioStore } from '../store/store';
-import { motion } from 'framer-motion';
-import { Metadata } from '../components/Metadata';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-import { IconDownload, IconFileTypePdf, IconSparkles, IconRocket } from '@tabler/icons-react';
+import { useState, useRef } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { AnimatedBackground } from "../components/AnimatedBackground";
+import { usePortfolioStore } from "../store/store";
+import { motion } from "framer-motion";
+import { Metadata } from "../components/Metadata";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import {
+  IconDownload,
+  IconFileTypePdf,
+  IconSparkles,
+  IconRocket,
+} from "@tabler/icons-react";
 
 const Resume = () => {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -18,27 +23,50 @@ const Resume = () => {
 
   const experiences = [
     {
-      company: "The Chaincademy",
+      company: "Power Learn Project Africa",
+      title: "Full Stack Software Engineer",
+      duration: "Jan 2026 - Present",
+      location: "Nairobi, Kenya · Consultancy",
+      achievements: [
+        "Developed the HPF Assessment module for evaluating student performance on the LMS",
+        "Self-hosted n8n automation instance and built webhook integrations with the LMS",
+        "Built backend services using Golang and frontend with Next.js and React.js",
+        "Managed CMS with Strapi, containerization with Docker, deployed on Scaleway servers",
+      ],
+    },
+    {
+      company: "Power Learn Project Africa",
+      title: "Software Development Instructor",
+      duration: "Oct 2024 - Present",
+      location: "Nairobi, Kenya · Consultancy",
+      achievements: [
+        "Training students on Full Stack Development using the MERN Stack",
+        "Conducting live sessions, code reviews, and mentoring aspiring developers",
+        "Contributing to curriculum development and hands-on project creation",
+      ],
+    },
+    {
+      company: "DevTrader",
       title: "Software Engineer",
       duration: "Aug 2025 - Present",
-      location: "United Kingdom · Remote",
+      location: "Dubai, UAE · Remote · Contract",
       achievements: [
+        "Freelance developer through DevTrader subcontracting for international clients",
         "Design and build user interfaces, develop backend logic, manage databases",
         "Work with Blockchain/Web3, develop APIs, ensure security and performance",
-        "Implement authentication, integrate systems, deploy to cloud",
-        "Maintain high code quality and documentation"
-      ]
+        "Deploy to cloud, maintain high code quality and documentation",
+      ],
     },
     {
       company: "Bonded",
       title: "Software Engineer",
       duration: "Apr 2025 - Jul 2025",
-      location: "London, United Kingdom · Remote",
+      location: "London, United Kingdom · Remote · Contract",
       achievements: [
-        "Specialized in Blockchain Development on ICP protocol",
-        "Developed and maintained AI-powered applications",
-        "Delivered enterprise-grade software solutions"
-      ]
+        "Contracted for Blockchain Development on ICP protocol",
+        "Developed and maintained AI-powered decentralized applications",
+        "Delivered enterprise-grade software solutions",
+      ],
     },
     {
       company: "Freelance",
@@ -48,8 +76,8 @@ const Resume = () => {
       achievements: [
         "Delivered full-stack web applications and blockchain solutions for diverse clients",
         "Built custom software products, APIs, and decentralized applications",
-        "Specialized in React, TypeScript, Node.js, Python, and ICP blockchain"
-      ]
+        "Specialized in React, TypeScript, Node.js, Python, and ICP blockchain",
+      ],
     },
     {
       company: "Open Source",
@@ -59,32 +87,42 @@ const Resume = () => {
       achievements: [
         "Created Gitok - adopted by 2,000+ developers worldwide",
         "Built U-Download - trusted by 1,500+ users globally",
-        "Contributing to open-source projects in blockchain and developer tools"
-      ]
-    }
+        "Contributing to open-source projects in blockchain and developer tools",
+      ],
+    },
   ];
 
   const highlightedProjects = [
     {
       name: "OHMS 2.0",
-      description: "Award-winning autonomous AI agent platform - WCHL Regional Champion (Africa) & Global Finalist",
-      tech: ["Rust", "TypeScript", "React 19", "ICP", "AI Agents", "LLM Integration"]
+      description:
+        "Award-winning autonomous AI agent platform - WCHL Regional Champion (Africa) & Global Finalist",
+      tech: [
+        "Rust",
+        "TypeScript",
+        "React 19",
+        "ICP",
+        "AI Agents",
+        "LLM Integration",
+      ],
     },
     {
       name: "U-Download",
-      description: "Cross-platform YouTube downloader trusted by 1,500+ users worldwide",
-      tech: ["Rust", "Tauri", "React", "TypeScript"]
+      description:
+        "Cross-platform YouTube downloader trusted by 1,500+ users worldwide",
+      tech: ["Rust", "Tauri", "React", "TypeScript"],
     },
     {
       name: "Gitok",
-      description: "Git productivity tool adopted by 2,000+ developers worldwide",
-      tech: ["Shell Script", "Bash", "Fish Shell", "Git", "CI/CD"]
+      description:
+        "Git productivity tool adopted by 2,000+ developers worldwide",
+      tech: ["Shell Script", "Bash", "Fish Shell", "Git", "CI/CD"],
     },
     {
       name: "RSON",
       description: "Next-generation data serialization format evolving JSON",
-      tech: ["Rust", "Serde", "TypeScript", "Python", "Parser"]
-    }
+      tech: ["Rust", "Serde", "TypeScript", "Python", "Parser"],
+    },
   ];
 
   const generatePDF = async () => {
@@ -97,33 +135,33 @@ const Resume = () => {
       // Capture the resume content with optimized settings
       setProgress(30);
       const canvas = await html2canvas(resumeRef.current, {
-        scale: 2,  // Reduced from 3 to 2 for smaller file size
+        scale: 2, // Reduced from 3 to 2 for smaller file size
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff',
+        backgroundColor: "#ffffff",
         windowWidth: 1200,
         windowHeight: resumeRef.current.scrollHeight,
         scrollY: -window.scrollY,
         scrollX: -window.scrollX,
         imageTimeout: 0,
-        removeContainer: false
+        removeContainer: false,
       });
 
       setProgress(60);
 
       // Create PDF with compression
-      const imgData = canvas.toDataURL('image/jpeg', 0.85); // JPEG with 85% quality instead of PNG
+      const imgData = canvas.toDataURL("image/jpeg", 0.85); // JPEG with 85% quality instead of PNG
       const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: 'a4',
-        compress: true  // Enable PDF compression
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+        compress: true, // Enable PDF compression
       });
 
       const pdfWidth = 210; // A4 width in mm
       const pdfHeight = 297; // A4 height in mm
       const margin = 10; // 10mm margins on all sides
-      const contentWidth = pdfWidth - (margin * 2); // 190mm usable width
+      const contentWidth = pdfWidth - margin * 2; // 190mm usable width
 
       const imgWidth = contentWidth;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -132,21 +170,39 @@ const Resume = () => {
       let position = margin; // Start with top margin
 
       // Add first page
-      pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight, undefined, 'FAST'); // JPEG compression
-      heightLeft -= (pdfHeight - margin * 2);
+      pdf.addImage(
+        imgData,
+        "JPEG",
+        margin,
+        position,
+        imgWidth,
+        imgHeight,
+        undefined,
+        "FAST",
+      ); // JPEG compression
+      heightLeft -= pdfHeight - margin * 2;
 
       // Add additional pages if needed
       while (heightLeft > 0) {
         position = -(imgHeight - heightLeft) + margin;
         pdf.addPage();
-        pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight, undefined, 'FAST');
-        heightLeft -= (pdfHeight - margin * 2);
+        pdf.addImage(
+          imgData,
+          "JPEG",
+          margin,
+          position,
+          imgWidth,
+          imgHeight,
+          undefined,
+          "FAST",
+        );
+        heightLeft -= pdfHeight - margin * 2;
       }
 
       setProgress(90);
 
       // Download the PDF
-      pdf.save('Dedan_Okware_Resume.pdf');
+      pdf.save("Dedan_Okware_Resume.pdf");
 
       setProgress(100);
 
@@ -157,7 +213,7 @@ const Resume = () => {
     } catch {
       setIsGenerating(false);
       setProgress(0);
-      alert('Error generating PDF. Please try again.');
+      alert("Error generating PDF. Please try again.");
     }
   };
 
@@ -165,8 +221,8 @@ const Resume = () => {
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
       <Metadata
         title="Resume"
-        description="Download Dedan Okware's professional resume - Software Engineer with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
-        keywords="resume, CV, software engineer, blockchain developer, WCHL, hackathon, full-stack developer, Rust developer, TypeScript developer, download resume, professional resume"
+        description="Download Dedan Okware's professional resume - Software Engineer at Power Learn Project Africa and DevTrader, with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
+        keywords="resume, CV, software engineer, LMS developer, golang developer, WCHL, hackathon, full-stack developer, n8n automation, TypeScript developer, download resume, professional resume"
       />
       <AnimatedBackground />
       <Navbar />
@@ -187,7 +243,9 @@ const Resume = () => {
             <IconRocket className="w-8 h-8 text-accent" />
           </div>
           <p className="text-lg text-text/80 dark:text-text-dark/80 max-w-2xl mx-auto">
-            Download my comprehensive resume showcasing award-winning projects, international achievements, and open-source tools trusted by thousands of developers
+            Download my comprehensive resume showcasing award-winning projects,
+            international achievements, and open-source tools trusted by
+            thousands of developers
           </p>
         </motion.div>
 
@@ -239,70 +297,310 @@ const Resume = () => {
           className="max-w-4xl mx-auto"
         >
           <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-border/20 dark:border-border-dark/20">
-            <div ref={resumeRef} className="p-12 bg-white" style={{ fontFamily: 'Arial, sans-serif', color: '#333', lineHeight: '1.6', padding: '48px', maxWidth: '1000px', margin: '0 auto', boxSizing: 'border-box' }}>
+            <div
+              ref={resumeRef}
+              className="p-12 bg-white"
+              style={{
+                fontFamily: "Arial, sans-serif",
+                color: "#333",
+                lineHeight: "1.6",
+                padding: "48px",
+                maxWidth: "1000px",
+                margin: "0 auto",
+                boxSizing: "border-box",
+              }}
+            >
               {/* Header */}
-              <div className="text-center mb-8 pb-6 border-b-2 border-gray-300" style={{ textAlign: 'center', borderBottom: '2px solid #999', marginBottom: '24px', paddingBottom: '20px' }}>
-                <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '8px', color: '#000', textAlign: 'center' }}>DEDAN OKWARE</h1>
-                <p className="text-xl text-gray-700 mb-3" style={{ fontSize: '18px', marginBottom: '12px', color: '#333', textAlign: 'center' }}>Software Engineer | AI & Blockchain Specialist | Open Source Developer</p>
-                <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600" style={{ fontSize: '14px', color: '#666', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', textAlign: 'center', width: '100%' }}>
-                  <span style={{ color: '#666' }}>📧 soft.eng.dedan@gmail.com</span>
-                  <span style={{ color: '#666' }}>📍 Kenya</span>
-                  <span style={{ color: '#666' }}>🌐 github.com/okwareddevnest</span>
-                  <span style={{ color: '#666' }}>🔗 linkedin.com/in/softcysec-dedan-okware</span>
+              <div
+                className="text-center mb-8 pb-6 border-b-2 border-gray-300"
+                style={{
+                  textAlign: "center",
+                  borderBottom: "2px solid #999",
+                  marginBottom: "24px",
+                  paddingBottom: "20px",
+                }}
+              >
+                <h1
+                  className="text-4xl font-bold text-gray-900 mb-2"
+                  style={{
+                    fontSize: "36px",
+                    fontWeight: "bold",
+                    marginBottom: "8px",
+                    color: "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  DEDAN OKWARE
+                </h1>
+                <p
+                  className="text-xl text-gray-700 mb-3"
+                  style={{
+                    fontSize: "18px",
+                    marginBottom: "12px",
+                    color: "#333",
+                    textAlign: "center",
+                  }}
+                >
+                  Software Engineer | AI & Blockchain Specialist | Open Source
+                  Developer
+                </p>
+                <div
+                  className="flex flex-wrap justify-center gap-4 text-sm text-gray-600"
+                  style={{
+                    fontSize: "14px",
+                    color: "#666",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    gap: "16px",
+                    textAlign: "center",
+                    width: "100%",
+                  }}
+                >
+                  <span style={{ color: "#666" }}>
+                    📧 soft.eng.dedan@gmail.com
+                  </span>
+                  <span style={{ color: "#666" }}>📍 Kenya</span>
+                  <span style={{ color: "#666" }}>
+                    🌐 github.com/okwareddevnest
+                  </span>
+                  <span style={{ color: "#666" }}>
+                    🔗 linkedin.com/in/softcysec-dedan-okware
+                  </span>
                 </div>
               </div>
 
               {/* Professional Summary */}
-              <div className="mb-8" style={{ marginBottom: '24px' }}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '12px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>PROFESSIONAL SUMMARY</h2>
-                <p className="text-gray-700 leading-relaxed" style={{ color: '#444', lineHeight: '1.8', fontSize: '14px' }}>
-                  Award-winning Software Engineer with WCHL 2nd Place finishes in National (Kenya) and Regional (Africa) rounds. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source developer tools trusted by thousands worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). Proven track record delivering production-ready applications for clients across Africa and globally. Expertise in Rust, TypeScript, React, Node.js, ICP blockchain, and modern cloud deployment.
+              <div className="mb-8" style={{ marginBottom: "24px" }}>
+                <h2
+                  className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000",
+                    marginBottom: "12px",
+                    paddingBottom: "8px",
+                    borderBottom: "2px solid #3b82f6",
+                  }}
+                >
+                  PROFESSIONAL SUMMARY
+                </h2>
+                <p
+                  className="text-gray-700 leading-relaxed"
+                  style={{ color: "#444", lineHeight: "1.8", fontSize: "14px" }}
+                >
+                  Full Stack Software Engineer with expertise in building
+                  scalable web applications, LMS platforms, and automation
+                  systems. Currently contributing to Power Learn Project Africa
+                  as both a Full Stack Engineer developing assessment modules
+                  and backend services, and as a Software Development Instructor
+                  training cohorts in MERN stack development. Recognized for
+                  innovation in blockchain development with 2nd Place finishes
+                  at the WCHL National (Kenya) and Regional (Africa) rounds.
+                  Proven track record of delivering high-impact solutions,
+                  including open-source developer tools adopted by 3,500+ users
+                  globally. Proficient in Golang, TypeScript, React, Next.js,
+                  Node.js, Docker, and cloud infrastructure with a strong
+                  foundation in Web3 technologies and workflow automation.
                 </p>
               </div>
 
               {/* Key Achievements */}
-              <div className="mb-8" style={{ marginBottom: '24px' }}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '12px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>KEY ACHIEVEMENTS</h2>
-                <ul className="space-y-2 text-gray-700" style={{ color: '#444', fontSize: '14px' }}>
-                  <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🏆</span>
-                    <span style={{ color: '#444' }}>WCHL Regional Round (Africa) - 2nd Place (September 2025)</span>
+              <div className="mb-8" style={{ marginBottom: "24px" }}>
+                <h2
+                  className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000",
+                    marginBottom: "12px",
+                    paddingBottom: "8px",
+                    borderBottom: "2px solid #3b82f6",
+                  }}
+                >
+                  KEY ACHIEVEMENTS
+                </h2>
+                <ul
+                  className="space-y-2 text-gray-700"
+                  style={{ color: "#444", fontSize: "14px" }}
+                >
+                  <li
+                    className="flex items-start"
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    <span
+                      className="mr-2 text-blue-600 font-bold"
+                      style={{
+                        marginRight: "8px",
+                        color: "#3b82f6",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      🏆
+                    </span>
+                    <span style={{ color: "#444" }}>
+                      WCHL Regional Round (Africa) - 2nd Place (September 2025)
+                    </span>
                   </li>
-                  <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🏆</span>
-                    <span style={{ color: '#444' }}>WCHL National Round (Kenya) - 2nd Place (August 2025)</span>
+                  <li
+                    className="flex items-start"
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    <span
+                      className="mr-2 text-blue-600 font-bold"
+                      style={{
+                        marginRight: "8px",
+                        color: "#3b82f6",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      🏆
+                    </span>
+                    <span style={{ color: "#444" }}>
+                      WCHL National Round (Kenya) - 2nd Place (August 2025)
+                    </span>
                   </li>
-                  <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>🔧</span>
-                    <span style={{ color: '#444' }}>Created Gitok: Developer productivity tool adopted by 2,000+ developers globally</span>
+                  <li
+                    className="flex items-start"
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    <span
+                      className="mr-2 text-blue-600 font-bold"
+                      style={{
+                        marginRight: "8px",
+                        color: "#3b82f6",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      🔧
+                    </span>
+                    <span style={{ color: "#444" }}>
+                      Created Gitok: Developer productivity tool adopted by
+                      2,000+ developers globally
+                    </span>
                   </li>
-                  <li className="flex items-start" style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span className="mr-2 text-blue-600 font-bold" style={{ marginRight: '8px', color: '#3b82f6', fontWeight: 'bold' }}>📱</span>
-                    <span style={{ color: '#444' }}>Built U-Download: Cross-platform YouTube downloader trusted by 1,500+ users worldwide</span>
+                  <li
+                    className="flex items-start"
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    <span
+                      className="mr-2 text-blue-600 font-bold"
+                      style={{
+                        marginRight: "8px",
+                        color: "#3b82f6",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      📱
+                    </span>
+                    <span style={{ color: "#444" }}>
+                      Built U-Download: Cross-platform YouTube downloader
+                      trusted by 1,500+ users worldwide
+                    </span>
                   </li>
                 </ul>
               </div>
 
               {/* Professional Experience */}
-              <div className="mb-8" style={{ marginBottom: '24px' }}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '16px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>PROFESSIONAL EXPERIENCE</h2>
+              <div className="mb-8" style={{ marginBottom: "24px" }}>
+                <h2
+                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000",
+                    marginBottom: "16px",
+                    paddingBottom: "8px",
+                    borderBottom: "2px solid #3b82f6",
+                  }}
+                >
+                  PROFESSIONAL EXPERIENCE
+                </h2>
                 {experiences.map((exp, idx) => (
-                  <div key={idx} className="mb-6" style={{ marginBottom: '20px', pageBreakInside: 'avoid' }}>
-                    <div className="flex justify-between items-start mb-2" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                  <div
+                    key={idx}
+                    className="mb-6"
+                    style={{ marginBottom: "20px", pageBreakInside: "avoid" }}
+                  >
+                    <div
+                      className="flex justify-between items-start mb-2"
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        marginBottom: "8px",
+                      }}
+                    >
                       <div>
-                        <h3 className="text-lg font-bold text-gray-900" style={{ fontSize: '16px', fontWeight: 'bold', color: '#000' }}>{exp.title}</h3>
-                        <p className="text-gray-700 font-semibold" style={{ color: '#333', fontWeight: '600', fontSize: '14px' }}>{exp.company}</p>
+                        <h3
+                          className="text-lg font-bold text-gray-900"
+                          style={{
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            color: "#000",
+                          }}
+                        >
+                          {exp.title}
+                        </h3>
+                        <p
+                          className="text-gray-700 font-semibold"
+                          style={{
+                            color: "#333",
+                            fontWeight: "600",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {exp.company}
+                        </p>
                       </div>
-                      <div className="text-right text-sm text-gray-600" style={{ textAlign: 'right', fontSize: '13px', color: '#666' }}>
-                        <p style={{ color: '#666' }}>{exp.duration}</p>
-                        <p style={{ color: '#666' }}>{exp.location}</p>
+                      <div
+                        className="text-right text-sm text-gray-600"
+                        style={{
+                          textAlign: "right",
+                          fontSize: "13px",
+                          color: "#666",
+                        }}
+                      >
+                        <p style={{ color: "#666" }}>{exp.duration}</p>
+                        <p style={{ color: "#666" }}>{exp.location}</p>
                       </div>
                     </div>
-                    <ul className="space-y-1 ml-4" style={{ marginLeft: '16px' }}>
+                    <ul
+                      className="space-y-1 ml-4"
+                      style={{ marginLeft: "16px" }}
+                    >
                       {exp.achievements.map((achievement, i) => (
-                        <li key={i} className="text-gray-700 text-sm flex items-start" style={{ color: '#444', fontSize: '13px', display: 'flex', alignItems: 'flex-start', marginBottom: '4px' }}>
-                          <span className="mr-2" style={{ marginRight: '8px' }}>•</span>
-                          <span style={{ color: '#444' }}>{achievement}</span>
+                        <li
+                          key={i}
+                          className="text-gray-700 text-sm flex items-start"
+                          style={{
+                            color: "#444",
+                            fontSize: "13px",
+                            display: "flex",
+                            alignItems: "flex-start",
+                            marginBottom: "4px",
+                          }}
+                        >
+                          <span className="mr-2" style={{ marginRight: "8px" }}>
+                            •
+                          </span>
+                          <span style={{ color: "#444" }}>{achievement}</span>
                         </li>
                       ))}
                     </ul>
@@ -311,74 +609,298 @@ const Resume = () => {
               </div>
 
               {/* Featured Projects */}
-              <div className="mb-8" style={{ marginBottom: '24px' }}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '16px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>FEATURED PROJECTS</h2>
+              <div className="mb-8" style={{ marginBottom: "24px" }}>
+                <h2
+                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000",
+                    marginBottom: "16px",
+                    paddingBottom: "8px",
+                    borderBottom: "2px solid #3b82f6",
+                  }}
+                >
+                  FEATURED PROJECTS
+                </h2>
                 {highlightedProjects.map((project, idx) => (
-                  <div key={idx} className="mb-4" style={{ marginBottom: '16px' }}>
-                    <h3 className="text-lg font-bold text-gray-900" style={{ fontSize: '16px', fontWeight: 'bold', color: '#000' }}>{project.name}</h3>
-                    <p className="text-gray-700 text-sm mb-1" style={{ color: '#444', fontSize: '13px', marginBottom: '4px' }}>{project.description}</p>
-                    <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>
-                      <span className="font-semibold" style={{ fontWeight: '600' }}>Technologies:</span> {project.tech.join(', ')}
+                  <div
+                    key={idx}
+                    className="mb-4"
+                    style={{ marginBottom: "16px" }}
+                  >
+                    <h3
+                      className="text-lg font-bold text-gray-900"
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        color: "#000",
+                      }}
+                    >
+                      {project.name}
+                    </h3>
+                    <p
+                      className="text-gray-700 text-sm mb-1"
+                      style={{
+                        color: "#444",
+                        fontSize: "13px",
+                        marginBottom: "4px",
+                      }}
+                    >
+                      {project.description}
+                    </p>
+                    <p
+                      className="text-gray-600 text-sm"
+                      style={{ color: "#666", fontSize: "13px" }}
+                    >
+                      <span
+                        className="font-semibold"
+                        style={{ fontWeight: "600" }}
+                      >
+                        Technologies:
+                      </span>{" "}
+                      {project.tech.join(", ")}
                     </p>
                   </div>
                 ))}
               </div>
 
               {/* Technical Skills */}
-              <div className="mb-8" style={{ marginBottom: '24px' }}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '16px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>TECHNICAL SKILLS</h2>
+              <div className="mb-8" style={{ marginBottom: "24px" }}>
+                <h2
+                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000",
+                    marginBottom: "16px",
+                    paddingBottom: "8px",
+                    borderBottom: "2px solid #3b82f6",
+                  }}
+                >
+                  TECHNICAL SKILLS
+                </h2>
                 {skills.map((category, idx) => (
-                  <div key={idx} className="mb-3" style={{ marginBottom: '12px' }}>
-                    <p className="text-gray-900 font-bold mb-1" style={{ color: '#000', fontWeight: 'bold', marginBottom: '4px', fontSize: '14px' }}>{category.category}:</p>
-                    <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>
-                      {category.items.map(skill => skill.name).join(' • ')}
+                  <div
+                    key={idx}
+                    className="mb-3"
+                    style={{ marginBottom: "12px" }}
+                  >
+                    <p
+                      className="text-gray-900 font-bold mb-1"
+                      style={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        marginBottom: "4px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {category.category}:
+                    </p>
+                    <p
+                      className="text-gray-700 text-sm"
+                      style={{ color: "#444", fontSize: "13px" }}
+                    >
+                      {category.items.map((skill) => skill.name).join(" • ")}
                     </p>
                   </div>
                 ))}
               </div>
 
               {/* Certifications */}
-              <div className="mb-8" style={{ marginBottom: '24px' }}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '16px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>CERTIFICATIONS & ACHIEVEMENTS</h2>
-                <div className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+              <div className="mb-8" style={{ marginBottom: "24px" }}>
+                <h2
+                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000",
+                    marginBottom: "16px",
+                    paddingBottom: "8px",
+                    borderBottom: "2px solid #3b82f6",
+                  }}
+                >
+                  CERTIFICATIONS & ACHIEVEMENTS
+                </h2>
+                <div
+                  className="mb-2 flex justify-between items-start"
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    marginBottom: "8px",
+                  }}
+                >
                   <div>
-                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>WCHL Regional Round (Africa) - 2nd Place</p>
-                    <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Internet Computer Protocol (ICP) Blockchain</p>
+                    <p
+                      className="text-gray-900 font-bold text-sm"
+                      style={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      WCHL Regional Round (Africa) - 2nd Place
+                    </p>
+                    <p
+                      className="text-gray-700 text-sm"
+                      style={{ color: "#444", fontSize: "13px" }}
+                    >
+                      Internet Computer Protocol (ICP) Blockchain
+                    </p>
                   </div>
-                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>Sep 2025</p>
+                  <p
+                    className="text-gray-600 text-sm"
+                    style={{ color: "#666", fontSize: "13px" }}
+                  >
+                    Sep 2025
+                  </p>
                 </div>
-                <div className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                <div
+                  className="mb-2 flex justify-between items-start"
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    marginBottom: "8px",
+                  }}
+                >
                   <div>
-                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>WCHL National Round (Kenya) - 2nd Place</p>
-                    <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Internet Computer Protocol (ICP) Blockchain</p>
+                    <p
+                      className="text-gray-900 font-bold text-sm"
+                      style={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      WCHL National Round (Kenya) - 2nd Place
+                    </p>
+                    <p
+                      className="text-gray-700 text-sm"
+                      style={{ color: "#444", fontSize: "13px" }}
+                    >
+                      Internet Computer Protocol (ICP) Blockchain
+                    </p>
                   </div>
-                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>Aug 2025</p>
+                  <p
+                    className="text-gray-600 text-sm"
+                    style={{ color: "#666", fontSize: "13px" }}
+                  >
+                    Aug 2025
+                  </p>
                 </div>
                 {certificates.map((cert, idx) => (
-                  <div key={idx} className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                  <div
+                    key={idx}
+                    className="mb-2 flex justify-between items-start"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      marginBottom: "8px",
+                    }}
+                  >
                     <div>
-                      <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>{cert.name}</p>
-                      <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>{cert.issuer}</p>
+                      <p
+                        className="text-gray-900 font-bold text-sm"
+                        style={{
+                          color: "#000",
+                          fontWeight: "bold",
+                          fontSize: "14px",
+                        }}
+                      >
+                        {cert.name}
+                      </p>
+                      <p
+                        className="text-gray-700 text-sm"
+                        style={{ color: "#444", fontSize: "13px" }}
+                      >
+                        {cert.issuer}
+                      </p>
                     </div>
-                    <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>{cert.date}</p>
+                    <p
+                      className="text-gray-600 text-sm"
+                      style={{ color: "#666", fontSize: "13px" }}
+                    >
+                      {cert.date}
+                    </p>
                   </div>
                 ))}
-                <div className="mb-2 flex justify-between items-start" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                <div
+                  className="mb-2 flex justify-between items-start"
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    marginBottom: "8px",
+                  }}
+                >
                   <div>
-                    <p className="text-gray-900 font-bold text-sm" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>Open Source Developer Tools</p>
-                    <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Creator of Gitok (2K+ users) & U-Download (1.5K+ users)</p>
+                    <p
+                      className="text-gray-900 font-bold text-sm"
+                      style={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      Open Source Developer Tools
+                    </p>
+                    <p
+                      className="text-gray-700 text-sm"
+                      style={{ color: "#444", fontSize: "13px" }}
+                    >
+                      Creator of Gitok (2K+ users) & U-Download (1.5K+ users)
+                    </p>
                   </div>
-                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>2023-Present</p>
+                  <p
+                    className="text-gray-600 text-sm"
+                    style={{ color: "#666", fontSize: "13px" }}
+                  >
+                    2023-Present
+                  </p>
                 </div>
               </div>
 
               {/* Education */}
-              <div style={{ marginBottom: '24px' }}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500" style={{ fontSize: '24px', fontWeight: 'bold', color: '#000', marginBottom: '16px', paddingBottom: '8px', borderBottom: '2px solid #3b82f6' }}>EDUCATION & TRAINING</h2>
-                <div className="mb-3" style={{ marginBottom: '12px' }}>
-                  <p className="text-gray-900 font-bold" style={{ color: '#000', fontWeight: 'bold', fontSize: '14px' }}>Software Engineering & Computer Science</p>
-                  <p className="text-gray-700 text-sm" style={{ color: '#444', fontSize: '13px' }}>Continuous learning and professional development</p>
-                  <p className="text-gray-600 text-sm" style={{ color: '#666', fontSize: '13px' }}>Specialized in Blockchain, AI, and Full-Stack Development</p>
+              <div style={{ marginBottom: "24px" }}>
+                <h2
+                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000",
+                    marginBottom: "16px",
+                    paddingBottom: "8px",
+                    borderBottom: "2px solid #3b82f6",
+                  }}
+                >
+                  EDUCATION & TRAINING
+                </h2>
+                <div className="mb-3" style={{ marginBottom: "12px" }}>
+                  <p
+                    className="text-gray-900 font-bold"
+                    style={{
+                      color: "#000",
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                    }}
+                  >
+                    Software Engineering & Computer Science
+                  </p>
+                  <p
+                    className="text-gray-700 text-sm"
+                    style={{ color: "#444", fontSize: "13px" }}
+                  >
+                    Continuous learning and professional development
+                  </p>
+                  <p
+                    className="text-gray-600 text-sm"
+                    style={{ color: "#666", fontSize: "13px" }}
+                  >
+                    Specialized in Blockchain, AI, and Full-Stack Development
+                  </p>
                 </div>
               </div>
             </div>
@@ -392,4 +914,3 @@ const Resume = () => {
 };
 
 export default Resume;
-

@@ -1,27 +1,32 @@
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ContainerScroll } from '../components/ui/container-scroll-animation';
-import { WavyBackground } from '../components/ui/wavy-background';
-import { usePortfolioStore } from '../store/store';
-import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
-import { Metadata } from '../components/Metadata';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ContainerScroll } from "../components/ui/container-scroll-animation";
+import { WavyBackground } from "../components/ui/wavy-background";
+import { usePortfolioStore } from "../store/store";
+import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
+import { Metadata } from "../components/Metadata";
 
 export default function Home() {
   const projects = usePortfolioStore((state) => state.projects);
   // Feature OHMS, GitOk, and U-Download as top projects
-  const featuredProjects = projects.filter(p =>
-    p.name.includes('OHMS') || p.name.includes('Gitok') || p.name.includes('U-Download')
-  ).slice(0, 3);
+  const featuredProjects = projects
+    .filter(
+      (p) =>
+        p.name.includes("OHMS") ||
+        p.name.includes("Gitok") ||
+        p.name.includes("U-Download"),
+    )
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Metadata
         title="Software Engineer"
-        description="Software Engineer specializing in blockchain development, decentralized applications, and innovative web solutions. Founder of IThreeM - a decentralized Gaming Engine."
-        keywords="software engineer, blockchain developer, ICP, rust, typescript, web development, decentralized gaming, IThreeM"
+        description="Software Engineer specializing in LMS development, automation systems, blockchain development, and innovative web solutions. Currently at Power Learn Project Africa and DevTrader."
+        keywords="software engineer, blockchain developer, LMS development, n8n automation, golang developer, typescript, web development, ICP"
       />
       <WavyBackground
         className="bg-background dark:bg-background-dark"
@@ -65,7 +70,17 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
           >
-            A passionate Software Engineer with WCHL 2nd Place finishes in National (Kenya) and Regional (Africa) rounds. Currently building Web3/Blockchain solutions at The Chaincademy and delivering enterprise-grade software. Creator of open-source tools trusted by thousands of developers worldwide, including Gitok (2,000+ users) and U-Download (1,500+ users). With expertise in Rust, TypeScript, React, Node.js, and the Internet Computer Protocol, I&apos;m dedicated to building scalable, production-grade applications that solve real-world problems.
+            A passionate Software Engineer with WCHL 2nd Place finishes in
+            National (Kenya) and Regional (Africa) rounds. Currently serving as
+            Full Stack Software Engineer and Software Development Instructor at
+            Power Learn Project Africa, building LMS solutions and training the
+            next generation of Full Stack developers. Also delivering
+            Web3/Blockchain solutions through DevTrader. Creator of open-source
+            tools trusted by thousands of developers worldwide, including Gitok
+            (2,000+ users) and U-Download (1,500+ users). With expertise in
+            Golang, TypeScript, React, Next.js, Node.js, Docker, and the
+            Internet Computer Protocol, I&apos;m dedicated to building scalable,
+            production-grade applications that solve real-world problems.
           </motion.p>
 
           <motion.div
@@ -136,8 +151,12 @@ export default function Home() {
                   transition={{ duration: 0.7, delay: index * 0.2 }}
                   className="bg-card dark:bg-card-dark rounded-xl md:rounded-2xl overflow-hidden shadow-lg md:shadow-xl border border-border/10 dark:border-border-dark/10"
                 >
-                  <div className={`grid md:grid-cols-2 gap-4 md:gap-8 ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
-                    <div className={`relative h-[200px] md:h-full ${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
+                  <div
+                    className={`grid md:grid-cols-2 gap-4 md:gap-8 ${index % 2 === 1 ? "md:grid-flow-dense" : ""}`}
+                  >
+                    <div
+                      className={`relative h-[200px] md:h-full ${index % 2 === 1 ? "md:col-start-2" : ""}`}
+                    >
                       <Image
                         src={project.previewImage}
                         alt={project.name}

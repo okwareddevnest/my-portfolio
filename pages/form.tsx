@@ -1,10 +1,10 @@
-import { usePortfolioStore } from '../store/store';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { Button } from '../components/ui/button';
-import { ChangeEvent, FormEvent } from 'react';
-import { useState } from 'react';
-import { AnimatedBackground } from '../components/AnimatedBackground';
+import { usePortfolioStore } from "../store/store";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Button } from "../components/ui/button";
+import { ChangeEvent, FormEvent } from "react";
+import { useState } from "react";
+import { AnimatedBackground } from "../components/AnimatedBackground";
 
 interface FormData {
   category: string;
@@ -18,30 +18,30 @@ const categories = [
   "Backend Technologies",
   "Blockchain Development",
   "AI & Machine Learning",
-  "DevOps & Tools"
+  "DevOps & Tools",
 ];
 
 const FormPage = () => {
   const [formData, setFormData] = useState<FormData>({
     category: categories[0],
-    name: '',
-    level: 80
+    name: "",
+    level: 80,
   });
   const addSkill = usePortfolioStore((state) => state.addSkill);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addSkill(formData.category, { name: formData.name, level: formData.level });
-    setFormData({ category: categories[0], name: '', level: 80 });
+    setFormData({ category: categories[0], name: "", level: 80 });
   };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { id, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [id]: id === 'level' ? Number(value) : value
+      [id]: id === "level" ? Number(value) : value,
     }));
   };
 
@@ -50,10 +50,15 @@ const FormPage = () => {
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8 text-text dark:text-text-dark text-center">Add Skill</h1>
+        <h1 className="text-3xl font-bold mb-8 text-text dark:text-text-dark text-center">
+          Add Skill
+        </h1>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
           <div>
-            <label htmlFor="category" className="block text-sm font-medium text-text dark:text-text-dark mb-2">
+            <label
+              htmlFor="category"
+              className="block text-sm font-medium text-text dark:text-text-dark mb-2"
+            >
               Category
             </label>
             <select
@@ -70,7 +75,10 @@ const FormPage = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-text dark:text-text-dark mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-text dark:text-text-dark mb-2"
+            >
               Skill Name
             </label>
             <input
@@ -83,7 +91,10 @@ const FormPage = () => {
             />
           </div>
           <div>
-            <label htmlFor="level" className="block text-sm font-medium text-text dark:text-text-dark mb-2">
+            <label
+              htmlFor="level"
+              className="block text-sm font-medium text-text dark:text-text-dark mb-2"
+            >
               Proficiency Level (0-100)
             </label>
             <input

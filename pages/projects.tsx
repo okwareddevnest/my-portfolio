@@ -1,18 +1,22 @@
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { AnimatedBackground } from '../components/AnimatedBackground';
-import { usePortfolioStore } from '../store/store';
-import { CardContainer, CardBody, CardItem } from '../components/ui/3d-card';
-import { IconBrandGithub, IconExternalLink, IconArrowRight } from '@tabler/icons-react';
-import Image from 'next/image';
-import { Metadata } from '../components/Metadata';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { AnimatedBackground } from "../components/AnimatedBackground";
+import { usePortfolioStore } from "../store/store";
+import { CardContainer, CardBody, CardItem } from "../components/ui/3d-card";
+import {
+  IconBrandGithub,
+  IconExternalLink,
+  IconArrowRight,
+} from "@tabler/icons-react";
+import Image from "next/image";
+import { Metadata } from "../components/Metadata";
 
 const Projects = () => {
   const projects = usePortfolioStore((state) => state.projects);
 
   return (
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
-      <Metadata 
+      <Metadata
         title="Projects"
         description="Explore my portfolio of innovative projects, including IThreeM - a decentralized gaming engine, blockchain applications, and full-stack web solutions."
         keywords="blockchain projects, decentralized gaming, web development, ICP, rust, typescript, full stack projects, IThreeM, Fries Coin"
@@ -20,12 +24,17 @@ const Projects = () => {
       <AnimatedBackground />
       <Navbar />
       <main className="flex-grow flex flex-col items-center py-8">
-        <h1 className="text-3xl font-bold mb-8 text-text dark:text-text-dark">My Projects</h1>
+        <h1 className="text-3xl font-bold mb-8 text-text dark:text-text-dark">
+          My Projects
+        </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 w-full max-w-7xl">
           {projects.map((project, index) => (
             <CardContainer key={index} className="w-full">
               <CardBody className="bg-card dark:bg-card-dark border border-border dark:border-border-dark rounded-xl p-4 w-full h-full relative group/card">
-                <CardItem translateZ="50" className="w-full aspect-video relative rounded-lg overflow-hidden mb-4">
+                <CardItem
+                  translateZ="50"
+                  className="w-full aspect-video relative rounded-lg overflow-hidden mb-4"
+                >
                   <Image
                     src={project.previewImage}
                     alt={project.name}
@@ -34,7 +43,7 @@ const Projects = () => {
                     className="group-hover/card:scale-105 transition-transform duration-300"
                   />
                 </CardItem>
-                
+
                 <CardItem
                   translateZ="60"
                   className="w-full text-xl font-bold text-text dark:text-text-dark mb-2"
@@ -93,11 +102,17 @@ const Projects = () => {
           {/* View More Projects Card */}
           <CardContainer className="w-full">
             <CardBody className="bg-gradient-to-br from-primary/80 to-primary dark:from-primary-dark/80 dark:to-primary-dark border border-border dark:border-border-dark rounded-xl p-4 w-full h-full relative group/card flex flex-col items-center justify-center text-center">
-              <CardItem translateZ="50" className="text-white dark:text-white mb-4">
+              <CardItem
+                translateZ="50"
+                className="text-white dark:text-white mb-4"
+              >
                 <IconBrandGithub className="w-16 h-16 mb-4 mx-auto" />
-                <h3 className="text-xl font-bold mb-2">Explore More Projects</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Explore More Projects
+                </h3>
                 <p className="text-sm text-white/80 mb-6">
-                  Visit my GitHub profile to discover more projects and contributions
+                  Visit my GitHub profile to discover more projects and
+                  contributions
                 </p>
               </CardItem>
               <CardItem translateZ="80">
