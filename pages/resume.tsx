@@ -141,7 +141,7 @@ const Resume = () => {
       // Capture the resume content with optimized settings
       setProgress(30);
       const canvas = await html2canvas(resumeRef.current, {
-        scale: 2, // Reduced from 3 to 2 for smaller file size
+        scale: 2, // Good quality
         useCORS: true,
         logging: false,
         backgroundColor: "#ffffff",
@@ -155,55 +155,38 @@ const Resume = () => {
 
       setProgress(60);
 
-      // Create PDF with compression
-      const imgData = canvas.toDataURL("image/jpeg", 0.85); // JPEG with 85% quality instead of PNG
+      // Convert canvas to image
+      const imgData = canvas.toDataURL("image/jpeg", 0.90);
+
+      // A4 width in mm, height calculated based on content
+      const pdfWidth = 210; // A4 width in mm
+      const margin = 10; // 10mm margins
+      const contentWidth = pdfWidth - margin * 2;
+
+      // Calculate content height in mm (proportional to width)
+      const imgWidth = contentWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const pdfHeight = imgHeight + margin * 2; // Total page height
+
+      // Create PDF with custom height (single continuous page)
       const pdf = new jsPDF({
         orientation: "portrait",
         unit: "mm",
-        format: "a4",
-        compress: true, // Enable PDF compression
+        format: [pdfWidth, pdfHeight], // A4 width, content height
+        compress: true,
       });
 
-      const pdfWidth = 210; // A4 width in mm
-      const pdfHeight = 297; // A4 height in mm
-      const margin = 10; // 10mm margins on all sides
-      const contentWidth = pdfWidth - margin * 2; // 190mm usable width
-
-      const imgWidth = contentWidth;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      let heightLeft = imgHeight;
-      let position = margin; // Start with top margin
-
-      // Add first page
+      // Add the entire content as one image
       pdf.addImage(
         imgData,
         "JPEG",
         margin,
-        position,
+        margin,
         imgWidth,
         imgHeight,
         undefined,
-        "FAST",
-      ); // JPEG compression
-      heightLeft -= pdfHeight - margin * 2;
-
-      // Add additional pages if needed
-      while (heightLeft > 0) {
-        position = -(imgHeight - heightLeft) + margin;
-        pdf.addPage();
-        pdf.addImage(
-          imgData,
-          "JPEG",
-          margin,
-          position,
-          imgWidth,
-          imgHeight,
-          undefined,
-          "FAST",
-        );
-        heightLeft -= pdfHeight - margin * 2;
-      }
+        "FAST"
+      );
 
       setProgress(90);
 
@@ -379,7 +362,7 @@ const Resume = () => {
               </div>
 
               {/* Professional Summary */}
-              <div className="mb-8" style={{ marginBottom: "24px" }}>
+              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
                 <h2
                   className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
                   style={{
@@ -402,7 +385,7 @@ const Resume = () => {
               </div>
 
               {/* Core Competencies - ATS Keyword Section */}
-              <div className="mb-8" style={{ marginBottom: "24px" }}>
+              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
                 <h2
                   className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
                   style={{
@@ -441,7 +424,7 @@ const Resume = () => {
               </div>
 
               {/* Key Achievements */}
-              <div className="mb-8" style={{ marginBottom: "24px" }}>
+              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
                 <h2
                   className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
                   style={{
@@ -551,7 +534,7 @@ const Resume = () => {
               </div>
 
               {/* Professional Experience */}
-              <div className="mb-8" style={{ marginBottom: "24px" }}>
+              <div className="mb-8" style={{ marginBottom: "24px", pageBreakBefore: "auto" }}>
                 <h2
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
                   style={{
@@ -569,7 +552,7 @@ const Resume = () => {
                   <div
                     key={idx}
                     className="mb-6"
-                    style={{ marginBottom: "20px", pageBreakInside: "avoid" }}
+                    style={{ marginBottom: "20px", pageBreakInside: "avoid", breakInside: "avoid" }}
                   >
                     <div
                       className="flex justify-between items-start mb-2"
@@ -642,7 +625,7 @@ const Resume = () => {
               </div>
 
               {/* Featured Projects */}
-              <div className="mb-8" style={{ marginBottom: "24px" }}>
+              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
                 <h2
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
                   style={{
@@ -660,7 +643,7 @@ const Resume = () => {
                   <div
                     key={idx}
                     className="mb-4"
-                    style={{ marginBottom: "16px" }}
+                    style={{ marginBottom: "16px", pageBreakInside: "avoid", breakInside: "avoid" }}
                   >
                     <h3
                       className="text-lg font-bold text-gray-900"
@@ -699,7 +682,7 @@ const Resume = () => {
               </div>
 
               {/* Technical Skills */}
-              <div className="mb-8" style={{ marginBottom: "24px" }}>
+              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
                 <h2
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
                   style={{
@@ -717,7 +700,7 @@ const Resume = () => {
                   <div
                     key={idx}
                     className="mb-3"
-                    style={{ marginBottom: "12px" }}
+                    style={{ marginBottom: "12px", pageBreakInside: "avoid", breakInside: "avoid" }}
                   >
                     <p
                       className="text-gray-900 font-bold mb-1"
@@ -741,7 +724,7 @@ const Resume = () => {
               </div>
 
               {/* Certifications */}
-              <div className="mb-8" style={{ marginBottom: "24px" }}>
+              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
                 <h2
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
                   style={{
