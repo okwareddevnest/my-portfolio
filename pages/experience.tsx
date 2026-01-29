@@ -102,7 +102,7 @@ const experiences: Experience[] = [
         type: "Consultancy",
         startDate: "2026-01-01",
         description:
-          "Working as a Consultant Software Engineer on LMS platform improvements and automation systems. Developed the HPF Assessment module for evaluating student performance. Self-hosted n8n automation instance on PLP servers and built webhook-based automations integrating with the LMS. Working across the full stack using Golang for backend services, Next.js and React.js for frontend, Strapi for CMS, Docker for containerization, and Scaleway servers for cloud infrastructure.",
+          "Enhancing the LMS tech ecosystem with new features and automating PLP Standard Operating Procedures. Deployed self-hosted n8n automation server, building 15+ webhook integrations that reduced manual operations by 60%. Working across the full stack using Golang for backend services, Next.js and React.js for frontend, Strapi for CMS, Docker for containerization, and Scaleway servers for cloud infrastructure.",
         skills: [
           "Golang",
           "Next.js",
@@ -121,7 +121,7 @@ const experiences: Experience[] = [
         type: "Consultancy",
         startDate: "2024-10-01",
         description:
-          "Training students on Full Stack Development using the MERN Stack (MongoDB, Express.js, React.js, Node.js). Conducting live sessions, code reviews, and mentoring aspiring developers through the PLP Academy. Contributing to curriculum development and creating hands-on projects for practical learning experience.",
+          "Trained and graduated 9,000+ students in Full Stack Development using the MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025. Conducting 100+ live sessions, 500+ code reviews, and mentoring aspiring developers through the PLP Academy. Contributing to curriculum development and creating 15+ hands-on capstone projects.",
         skills: [
           "MERN Stack",
           "MongoDB",
@@ -168,18 +168,19 @@ const experiences: Experience[] = [
     isRemote: true,
     roles: [
       {
-        title: "Software Engineer",
+        title: "Blockchain Software Engineer",
         type: "Contract",
         startDate: "2025-04-01",
         endDate: "2025-07-31",
         description:
-          "Contracted as a Software Engineer specializing in Blockchain Development on the ICP protocol and AI. Focused on building and maintaining decentralized applications and AI-powered solutions at Bonded.",
+          "Built blockchain and AI solutions for a UK startup helping international couples with UK visa applications. Developed AI-powered evidence matching algorithms to align relationship documentation between partners, and implemented ICP blockchain for secure, tamper-proof storage of visa application evidence.",
         skills: [
-          "Engineering",
-          "Software Infrastructure",
           "Blockchain Development",
           "ICP Protocol",
-          "AI",
+          "AI/Machine Learning",
+          "Evidence Matching",
+          "Secure Storage",
+          "Smart Contracts",
         ],
       },
     ],

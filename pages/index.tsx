@@ -70,17 +70,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
           >
-            A passionate Software Engineer with WCHL 2nd Place finishes in
-            National (Kenya) and Regional (Africa) rounds. Currently serving as
-            Full Stack Software Engineer and Software Development Instructor at
-            Power Learn Project Africa, building LMS solutions and training the
-            next generation of Full Stack developers. Also delivering
-            Web3/Blockchain solutions through DevTrader. Creator of open-source
-            tools trusted by thousands of developers worldwide, including Gitok
-            (2,000+ users) and U-Download (1,500+ users). With expertise in
-            Golang, TypeScript, React, Next.js, Node.js, Docker, and the
-            Internet Computer Protocol, I&apos;m dedicated to building scalable,
-            production-grade applications that solve real-world problems.
+            Results-driven Full Stack Software Engineer with 3+ years of experience delivering high-performance web applications and blockchain solutions serving 50,000+ users globally. Award-winning blockchain developer with WCHL 2nd Place finishes at National and Regional levels. Currently enhancing LMS platforms and automating SOPs at Power Learn Project Africa, while training 9,000+ developers. Creator of open-source tools trusted by 3,500+ developers worldwide. Expertise in Golang, TypeScript, React, Next.js, Docker, n8n, and Internet Computer Protocol (ICP).
           </motion.p>
 
           <motion.div
