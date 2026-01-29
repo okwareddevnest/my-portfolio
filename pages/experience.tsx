@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -6,10 +6,8 @@ import { AnimatedBackground } from "../components/AnimatedBackground";
 import { Modal } from "../components/Modal";
 import {
   IconCalendar,
-  IconMapPin,
   IconBuildingSkyscraper,
   IconDevices,
-  IconBriefcase,
 } from "@tabler/icons-react";
 import Image from "next/image";
 import { Metadata } from "../components/Metadata";
