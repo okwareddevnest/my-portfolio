@@ -96,11 +96,11 @@ const experiences: Experience[] = [
     isRemote: false,
     roles: [
       {
-        title: "Full Stack Software Engineer",
+        title: "Full Stack Software Engineer & Instructor",
         type: "Consultancy",
-        startDate: "2026-01-01",
+        startDate: "2024-10-01",
         description:
-          "Enhancing the LMS tech ecosystem with new features and automating PLP Standard Operating Procedures. Deployed self-hosted n8n automation server, building 15+ webhook integrations that reduced manual operations by 60%. Working across the full stack using Golang for backend services, Next.js and React.js for frontend, Strapi for CMS, Docker for containerization, and Scaleway servers for cloud infrastructure.",
+          "Dual role combining software engineering and developer education. Engineering: Enhancing the LMS tech ecosystem with new features and automating PLP Standard Operating Procedures. Deployed self-hosted n8n automation server, building 15+ webhook integrations that reduced manual operations by 60%. Working across the full stack using Golang for backend services, Next.js and React.js for frontend, Strapi for CMS, Docker for containerization, and Scaleway servers for cloud infrastructure. Instruction: Trained and graduated 9,000+ students in Full Stack Development using the MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025. Conducting 100+ live sessions, 500+ code reviews, and mentoring aspiring developers through the PLP Academy. Contributing to curriculum development and creating 15+ hands-on capstone projects.",
         skills: [
           "Golang",
           "Next.js",
@@ -108,53 +108,12 @@ const experiences: Experience[] = [
           "Strapi",
           "Docker",
           "n8n Automation",
-          "Webhooks",
-          "LMS Development",
-          "Scaleway",
-          "Cloud Infrastructure",
-        ],
-      },
-      {
-        title: "Software Development Instructor",
-        type: "Consultancy",
-        startDate: "2024-10-01",
-        description:
-          "Trained and graduated 9,000+ students in Full Stack Development using the MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025. Conducting 100+ live sessions, 500+ code reviews, and mentoring aspiring developers through the PLP Academy. Contributing to curriculum development and creating 15+ hands-on capstone projects.",
-        skills: [
           "MERN Stack",
           "MongoDB",
-          "Express.js",
-          "React.js",
-          "Node.js",
           "Teaching",
           "Mentorship",
+          "LMS Development",
           "Curriculum Development",
-          "Code Review",
-        ],
-      },
-    ],
-  },
-  {
-    company: "DevTrader",
-    logo: "/companies/DevTrader-Logo.jpeg",
-    location: "Dubai, UAE",
-    isRemote: true,
-    roles: [
-      {
-        title: "Software Engineer",
-        type: "Contract",
-        startDate: "2025-08-01",
-        description:
-          "Working as a freelance developer through DevTrader, a subcontracting company based in Dubai, UAE that connects freelance developers with international clients. Design and build user interfaces, develop backend logic, manage databases, integrate systems, implement authentication, work with Blockchain/Web3, develop APIs, ensure security and performance, test/debug, deploy to cloud, collaborate via version control, and maintain high code quality and documentation.",
-        skills: [
-          "Software Design",
-          "Software Infrastructure",
-          "Blockchain Development",
-          "Web3",
-          "API Development",
-          "Full-Stack Development",
-          "System Integration",
-          "Cloud Deployment",
         ],
       },
     ],
@@ -405,7 +364,7 @@ const Experience = () => {
     <div className="min-h-screen flex flex-col">
       <Metadata
         title="Professional Experience"
-        description="Explore Dedan Okware's professional journey as a Software Engineer, including roles at Power Learn Project Africa, DevTrader, Bonded, and various full-stack development positions."
+        description="Explore Dedan Okware's professional journey as a Software Engineer, including roles at Power Learn Project Africa, Bonded, and various full-stack development positions."
         keywords="software engineer experience, blockchain developer, ICP developer, golang developer, typescript developer, web development experience, LMS development, n8n automation"
       />
       <AnimatedBackground />

@@ -24,38 +24,16 @@ const Resume = () => {
   const experiences = [
     {
       company: "Power Learn Project Africa",
-      title: "Full Stack Software Engineer",
-      duration: "Jan 2026 - Present",
+      title: "Software Engineer & Instructor",
+      duration: "Oct 2024 - Present",
       location: "Nairobi, Kenya · Consultancy",
       achievements: [
         "Automated PLP Standard Operating Procedures (SOPs) and LMS workflows by deploying self-hosted n8n server, building 15+ webhook integrations that reduced manual operations by 60%",
         "Enhanced and extended the existing LMS tech ecosystem with new features using Golang, Next.js, React.js, and Strapi CMS",
-        "Engineered RESTful backend services processing 10,000+ API requests daily with 99.9% uptime across Scaleway cloud infrastructure",
-        "Containerized deployment pipelines with Docker, improving release velocity and system reliability across the platform",
-      ],
-    },
-    {
-      company: "Power Learn Project Africa",
-      title: "Software Development Instructor",
-      duration: "Oct 2024 - Present",
-      location: "Nairobi, Kenya · Consultancy",
-      achievements: [
         "Trained and graduated 9,000+ students in Full Stack Development using MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025",
         "Conducted 100+ live coding sessions and performed 500+ code reviews, achieving 95% student project completion rate",
         "Developed comprehensive curriculum materials and 15+ hands-on capstone projects adopted as standard across the academy",
-        "Mentored aspiring developers through group and 1-on-1 sessions, with 80%+ of graduates securing technical roles",
-      ],
-    },
-    {
-      company: "DevTrader",
-      title: "Software Engineer",
-      duration: "Aug 2025 - Present",
-      location: "Dubai, UAE · Remote · Contract",
-      achievements: [
-        "Delivered 5+ full-stack applications for international clients through DevTrader's global subcontracting platform",
-        "Developed blockchain/Web3 solutions using Ethereum, Solidity, and Internet Computer Protocol (ICP) for DeFi applications",
-        "Designed and implemented secure RESTful and GraphQL APIs, reducing response latency by 35%",
-        "Deployed production applications to AWS and Vercel, maintaining 99.5% uptime with CI/CD pipelines using GitHub Actions",
+        "Containerized deployment pipelines with Docker, improving release velocity and system reliability across the platform",
       ],
     },
     {
@@ -210,7 +188,7 @@ const Resume = () => {
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
       <Metadata
         title="Resume"
-        description="Download Dedan Okware's professional resume - Software Engineer at Power Learn Project Africa and DevTrader, with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
+        description="Download Dedan Okware's professional resume - Full Stack Software Engineer & Instructor at Power Learn Project Africa, with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
         keywords="resume, CV, software engineer, LMS developer, golang developer, WCHL, hackathon, full-stack developer, n8n automation, TypeScript developer, download resume, professional resume"
       />
       <AnimatedBackground />
