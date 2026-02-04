@@ -85,6 +85,7 @@ export const usePortfolioStore = create<PortfolioState>()(
           items: [
             { name: "React", level: 95 },
             { name: "Next.js", level: 90 },
+            { name: "Flutter", level: 85 },
             { name: "Vue.js", level: 85 },
             { name: "TailwindCSS", level: 90 },
             { name: "Material-UI", level: 85 },

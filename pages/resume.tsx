@@ -43,6 +43,7 @@ const Resume = () => {
       location: "London, United Kingdom · Remote · Contract",
       achievements: [
         "Developed blockchain solutions for UK visa application platform, enabling secure document storage and verification for international couples",
+        "Built internal mobile systems using Flutter to streamline document verification and partner communication for visa applicants",
         "Built AI-powered evidence matching algorithms to align and validate relationship documentation between partners across borders",
         "Implemented ICP blockchain smart contracts for tamper-proof storage of visa application evidence and partner verification records",
         "Collaborated with cross-functional teams across 3 time zones, delivering secure immigration tech solutions on schedule",
@@ -54,7 +55,7 @@ const Resume = () => {
       duration: "Apr 2023 - Mar 2025",
       location: "Kenya · Remote",
       achievements: [
-        "Delivered 20+ full-stack web applications and blockchain solutions for clients across Africa, Europe, and North America",
+        "Delivered 20+ full-stack web applications, cross-platform mobile apps with Flutter, and blockchain solutions for clients globally",
         "Built production-ready APIs and microservices using Node.js, Python, and Golang, serving 50,000+ monthly users",
         "Specialized in React, TypeScript, and Next.js for frontend, with ICP blockchain for decentralized applications",
         "Achieved 100% client satisfaction rate with repeat business from 70% of clients",
@@ -189,7 +190,7 @@ const Resume = () => {
       <Metadata
         title="Resume"
         description="Download Dedan Okware's professional resume - Full Stack Software Engineer & Instructor at Power Learn Project Africa, with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
-        keywords="resume, CV, software engineer, LMS developer, golang developer, WCHL, hackathon, full-stack developer, n8n automation, TypeScript developer, download resume, professional resume"
+        keywords="resume, CV, software engineer, mobile development, flutter, LMS developer, golang developer, WCHL, hackathon, full-stack developer, n8n automation, TypeScript developer, download resume, professional resume"
       />
       <AnimatedBackground />
       <Navbar />
@@ -358,7 +359,7 @@ const Resume = () => {
                   className="text-gray-700 leading-relaxed"
                   style={{ color: "#444", lineHeight: "1.8", fontSize: "14px" }}
                 >
-                  Results-driven Full Stack Software Engineer with 3+ years of experience delivering high-performance web applications, blockchain solutions, and enterprise automation systems. Currently enhancing the LMS tech ecosystem and automating Standard Operating Procedures at Power Learn Project Africa, while training and graduating 9,000+ students in Full Stack Development. Proven expertise from architecture design through production deployment, serving 50,000+ monthly users across 40+ countries. Award-winning blockchain developer with WCHL 2nd Place finishes at National (Kenya) and Regional (Africa) rounds. Core competencies: Golang, TypeScript, React, Next.js, Node.js, Python, Docker, n8n Automation, AWS, Internet Computer Protocol (ICP), and CI/CD pipelines. Creator of open-source tools trusted by 3,500+ developers globally.
+                  Results-driven Full Stack Software Engineer with 3+ years of experience delivering high-performance web applications, cross-platform mobile apps with Flutter, blockchain solutions, and enterprise automation systems. Currently enhancing the LMS tech ecosystem and automating Standard Operating Procedures at Power Learn Project Africa, while training and graduating 9,000+ students in Full Stack Development. Proven expertise from architecture design through production deployment, serving 50,000+ monthly users across 40+ countries. Award-winning blockchain developer with WCHL 2nd Place finishes at National (Kenya) and Regional (Africa) rounds. Core competencies: Flutter, Golang, TypeScript, React, Next.js, Node.js, Python, Docker, n8n Automation, AWS, Internet Computer Protocol (ICP), and CI/CD pipelines. Creator of open-source tools trusted by 3,500+ developers globally.
                 </p>
               </div>
 
@@ -387,6 +388,7 @@ const Resume = () => {
                   }}
                 >
                   <span style={{ color: "#444" }}>• Full Stack Development</span>
+                  <span style={{ color: "#444" }}>• Mobile Development</span>
                   <span style={{ color: "#444" }}>• Blockchain/Web3</span>
                   <span style={{ color: "#444" }}>• API Development</span>
                   <span style={{ color: "#444" }}>• Cloud Architecture</span>

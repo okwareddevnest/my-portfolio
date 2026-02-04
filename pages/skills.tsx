@@ -141,7 +141,7 @@ const Skills = () => {
       <Metadata
         title="Skills & Expertise"
         description="Discover my comprehensive skill set in software engineering, blockchain development, AI/ML, and cloud technologies. Expertise in Golang, Rust, TypeScript, Python, and more."
-        keywords="software engineering, blockchain development, rust programming, golang, typescript, python, AI/ML, cloud computing, ICP, web3, n8n automation"
+        keywords="software engineering, mobile development, flutter, blockchain development, rust programming, golang, typescript, python, AI/ML, cloud computing, ICP, web3, n8n automation"
       />
       <AnimatedBackground />
       <Navbar />

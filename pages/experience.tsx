@@ -130,8 +130,9 @@ const experiences: Experience[] = [
         startDate: "2025-04-01",
         endDate: "2025-07-31",
         description:
-          "Built blockchain and AI solutions for a UK startup helping international couples with UK visa applications. Developed AI-powered evidence matching algorithms to align relationship documentation between partners, and implemented ICP blockchain for secure, tamper-proof storage of visa application evidence.",
+          "Built blockchain and AI solutions for a UK startup helping international couples with UK visa applications. Developed AI-powered evidence matching algorithms and built internal mobile systems using Flutter to streamline document verification and partner communication. Implemented ICP blockchain for secure, tamper-proof storage of visa application evidence.",
         skills: [
+          "Flutter",
           "Blockchain Development",
           "ICP Protocol",
           "AI/Machine Learning",
@@ -154,8 +155,9 @@ const experiences: Experience[] = [
         startDate: "2023-04-01",
         endDate: "2025-03-31",
         description:
-          "Delivered full-stack web applications and blockchain solutions for diverse clients across Africa and globally. Built custom software products, APIs, and decentralized applications using modern technologies including React, TypeScript, Node.js, Python, and ICP blockchain. Specialized in creating scalable, production-ready systems with robust architecture and security best practices.",
+          "Delivered full-stack web applications, cross-platform mobile apps, and blockchain solutions for diverse clients across Africa and globally. Built custom software products, mobile applications with Flutter, APIs, and decentralized applications using modern technologies including React, TypeScript, Node.js, Python, and ICP blockchain. Specialized in creating scalable, production-ready systems with robust architecture and security best practices.",
         skills: [
+          "Flutter",
           "Full-Stack Development",
           "Blockchain Development",
           "API Development",
@@ -365,7 +367,7 @@ const Experience = () => {
       <Metadata
         title="Professional Experience"
         description="Explore Dedan Okware's professional journey as a Software Engineer, including roles at Power Learn Project Africa, Bonded, and various full-stack development positions."
-        keywords="software engineer experience, blockchain developer, ICP developer, golang developer, typescript developer, web development experience, LMS development, n8n automation"
+        keywords="software engineer experience, mobile development, flutter developer, blockchain developer, ICP developer, golang developer, typescript developer, web development experience, LMS development, n8n automation"
       />
       <AnimatedBackground />
       <Navbar />
