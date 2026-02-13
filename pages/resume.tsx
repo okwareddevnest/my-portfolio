@@ -24,6 +24,7 @@ const Resume = () => {
   const experiences = [
     {
       company: "Fingo Africa",
+      logo: "/companies/fingo_logo.webp",
       title: "Lead Front End Engineer",
       duration: "Feb 2026 - Present",
       location: "Nairobi, Kenya · Hybrid · Full-time",
@@ -38,6 +39,7 @@ const Resume = () => {
     },
     {
       company: "Power Learn Project Africa",
+      logo: "/companies/plp.jpeg",
       title: "Software Engineer & Instructor",
       duration: "Oct 2024 - Present",
       location: "Nairobi, Kenya · Consultancy",
@@ -52,6 +54,7 @@ const Resume = () => {
     },
     {
       company: "Bonded",
+      logo: "/companies/bonded_sq.png",
       title: "Blockchain Software Engineer",
       duration: "Apr 2025 - Jul 2025",
       location: "London, United Kingdom · Remote · Contract",
@@ -65,6 +68,7 @@ const Resume = () => {
     },
     {
       company: "Freelance",
+      logo: "/companies/freelance.png",
       title: "Freelance Software Engineer",
       duration: "Apr 2023 - Mar 2025",
       location: "Kenya · Remote",
@@ -77,6 +81,7 @@ const Resume = () => {
     },
     {
       company: "Open Source",
+      logo: "/companies/os.png",
       title: "Open Source Developer & Maintainer",
       duration: "Jan 2023 - Present",
       location: "Remote · Global",
@@ -546,74 +551,108 @@ const Resume = () => {
                   <div
                     key={idx}
                     className="mb-6"
-                    style={{ marginBottom: "20px", pageBreakInside: "avoid", breakInside: "avoid" }}
+                    style={{
+                      marginBottom: "20px",
+                      pageBreakInside: "avoid",
+                      breakInside: "avoid",
+                      position: "relative",
+                      overflow: "hidden",
+                    }}
                   >
-                    <div
-                      className="flex justify-between items-start mb-2"
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        marginBottom: "8px",
-                      }}
-                    >
-                      <div>
-                        <h3
-                          className="text-lg font-bold text-gray-900"
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "bold",
-                            color: "#000",
-                          }}
-                        >
-                          {exp.title}
-                        </h3>
-                        <p
-                          className="text-gray-700 font-semibold"
-                          style={{
-                            color: "#333",
-                            fontWeight: "600",
-                            fontSize: "14px",
-                          }}
-                        >
-                          {exp.company}
-                        </p>
-                      </div>
+                    {/* Watermark Logo */}
+                    {exp.logo && (
                       <div
-                        className="text-right text-sm text-gray-600"
                         style={{
-                          textAlign: "right",
-                          fontSize: "13px",
-                          color: "#666",
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          opacity: 0.12,
+                          pointerEvents: "none",
+                          zIndex: 0,
                         }}
                       >
-                        <p style={{ color: "#666" }}>{exp.duration}</p>
-                        <p style={{ color: "#666" }}>{exp.location}</p>
-                      </div>
-                    </div>
-                    <ul
-                      className="space-y-1 ml-4"
-                      style={{ marginLeft: "16px" }}
-                    >
-                      {exp.achievements.map((achievement, i) => (
-                        <li
-                          key={i}
-                          className="text-gray-700 text-sm flex items-start"
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={exp.logo}
+                          alt=""
                           style={{
-                            color: "#444",
+                            width: "280px",
+                            height: "280px",
+                            objectFit: "contain",
+                          }}
+                        />
+                      </div>
+                    )}
+                    {/* Experience Content */}
+                    <div style={{ position: "relative", zIndex: 1 }}>
+                      <div
+                        className="flex justify-between items-start mb-2"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "flex-start",
+                          marginBottom: "8px",
+                        }}
+                      >
+                        <div>
+                          <h3
+                            className="text-lg font-bold text-gray-900"
+                            style={{
+                              fontSize: "16px",
+                              fontWeight: "bold",
+                              color: "#000",
+                            }}
+                          >
+                            {exp.title}
+                          </h3>
+                          <p
+                            className="text-gray-700 font-semibold"
+                            style={{
+                              color: "#333",
+                              fontWeight: "600",
+                              fontSize: "14px",
+                            }}
+                          >
+                            {exp.company}
+                          </p>
+                        </div>
+                        <div
+                          className="text-right text-sm text-gray-600"
+                          style={{
+                            textAlign: "right",
                             fontSize: "13px",
-                            display: "flex",
-                            alignItems: "flex-start",
-                            marginBottom: "4px",
+                            color: "#666",
                           }}
                         >
-                          <span className="mr-2" style={{ marginRight: "8px" }}>
-                            •
-                          </span>
-                          <span style={{ color: "#444" }}>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
+                          <p style={{ color: "#666" }}>{exp.duration}</p>
+                          <p style={{ color: "#666" }}>{exp.location}</p>
+                        </div>
+                      </div>
+                      <ul
+                        className="space-y-1 ml-4"
+                        style={{ marginLeft: "16px" }}
+                      >
+                        {exp.achievements.map((achievement, i) => (
+                          <li
+                            key={i}
+                            className="text-gray-700 text-sm flex items-start"
+                            style={{
+                              color: "#444",
+                              fontSize: "13px",
+                              display: "flex",
+                              alignItems: "flex-start",
+                              marginBottom: "4px",
+                            }}
+                          >
+                            <span className="mr-2" style={{ marginRight: "8px" }}>
+                              •
+                            </span>
+                            <span style={{ color: "#444" }}>{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 ))}
               </div>
