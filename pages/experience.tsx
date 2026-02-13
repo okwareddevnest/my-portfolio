@@ -90,6 +90,35 @@ const getCompanyTotalDuration = (roles: Role[]): string => {
 
 const experiences: Experience[] = [
   {
+    company: "Fingo Africa",
+    logo: "/companies/fingo_logo.webp",
+    location: "Nairobi, Kenya",
+    isRemote: true,
+    roles: [
+      {
+        title: "Lead Front End Engineer",
+        type: "Full-time",
+        startDate: "2026-02-01",
+        description:
+          "Owning front-end development and user experience across Fingo Global, a stablecoin and cross-border payments platform. Leading front-end architecture and development for stablecoin wallets, on/off ramp interfaces, cross-border transfer flows, and KYC/onboarding screens. Building and shipping production Flutter mobile applications and Next.js web experiences. Defining and enforcing front-end engineering standards, code review practices, and testing frameworks across the team. Collaborating closely with the Stablecoin Product Lead and Engineering Lead to translate product specs into robust, performant UI. Owning the front-end deployment pipeline, CI/CD, and release management for mobile and web. Driving user experience quality—working with design to ensure pixel-perfect, accessible, and fast interfaces.",
+        skills: [
+          "Flutter",
+          "Next.js",
+          "Front-End Architecture",
+          "Stablecoin Wallets",
+          "Cross-Border Payments",
+          "KYC/Onboarding",
+          "CI/CD",
+          "Release Management",
+          "Code Review",
+          "Testing Frameworks",
+          "UI/UX",
+          "Team Leadership",
+        ],
+      },
+    ],
+  },
+  {
     company: "Power Learn Project Africa",
     logo: "/companies/plp.jpeg",
     location: "Nairobi, Kenya",

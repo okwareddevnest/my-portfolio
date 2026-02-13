@@ -23,6 +23,20 @@ const Resume = () => {
 
   const experiences = [
     {
+      company: "Fingo Africa",
+      title: "Lead Front End Engineer",
+      duration: "Feb 2026 - Present",
+      location: "Nairobi, Kenya · Hybrid · Full-time",
+      achievements: [
+        "Leading front-end architecture and development for Fingo Global-stablecoin wallets, on/off ramp interfaces, cross-border transfer flows, and KYC/onboarding screens",
+        "Building and shipping production Flutter mobile applications and Next.js web experiences for the stablecoin and cross-border payments platform",
+        "Defining and enforcing front-end engineering standards, code review practices, and testing frameworks across the engineering team",
+        "Collaborating closely with the Stablecoin Product Lead and Engineering Lead to translate product specs into robust, performant UI",
+        "Owning the front-end deployment pipeline, CI/CD, and release management for mobile and web applications",
+        "Driving user experience quality-working with design to ensure pixel-perfect, accessible, and fast interfaces",
+      ],
+    },
+    {
       company: "Power Learn Project Africa",
       title: "Software Engineer & Instructor",
       duration: "Oct 2024 - Present",
