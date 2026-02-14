@@ -25,7 +25,7 @@ interface Experience {
   company: string;
   logo?: string;
   location: string;
-  isRemote?: boolean;
+  workMode?: "remote" | "on-site" | "hybrid";
   roles: Role[];
 }
 
@@ -93,7 +93,7 @@ const experiences: Experience[] = [
     company: "Fingo Africa",
     logo: "/companies/fingo_logo.webp",
     location: "Nairobi, Kenya",
-    isRemote: true,
+    workMode: "hybrid",
     roles: [
       {
         title: "Lead Front End Engineer",
@@ -122,7 +122,7 @@ const experiences: Experience[] = [
     company: "Power Learn Project Africa",
     logo: "/companies/plp.jpeg",
     location: "Nairobi, Kenya",
-    isRemote: false,
+    workMode: "hybrid",
     roles: [
       {
         title: "Full Stack Software Engineer & Instructor",
@@ -151,7 +151,7 @@ const experiences: Experience[] = [
     company: "Bonded",
     logo: "/companies/bonded.png",
     location: "London, United Kingdom",
-    isRemote: true,
+    workMode: "remote",
     roles: [
       {
         title: "Blockchain Software Engineer",
@@ -176,7 +176,7 @@ const experiences: Experience[] = [
     company: "Freelance",
     logo: "/companies/freelance.png",
     location: "Kenya",
-    isRemote: true,
+    workMode: "remote",
     roles: [
       {
         title: "Freelance Software Engineer",
@@ -203,7 +203,7 @@ const experiences: Experience[] = [
     company: "Open Source",
     logo: "/companies/os.png",
     location: "Remote",
-    isRemote: true,
+    workMode: "remote",
     roles: [
       {
         title: "Open Source Developer",
@@ -293,12 +293,16 @@ const ExperienceCard = ({
                   <span>{totalDuration}</span>
                   <span>·</span>
                   <span>{experience.location}</span>
-                  {experience.isRemote && (
+                  {experience.workMode && (
                     <>
                       <span>·</span>
                       <span className="flex items-center gap-1">
                         <IconDevices className="w-3 h-3" />
-                        Remote
+                        {experience.workMode === "remote"
+                          ? "Remote"
+                          : experience.workMode === "on-site"
+                          ? "On-site"
+                          : "Hybrid"}
                       </span>
                     </>
                   )}
