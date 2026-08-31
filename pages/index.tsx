@@ -25,7 +25,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Metadata
         title="Software Engineer"
-        description="Software Engineer specializing in LMS development, automation systems, blockchain development, and innovative web solutions. Currently at Power Learn Project Africa and DevTrader."
+        description="Software Engineer specializing in front-end architecture, LMS development, automation systems, blockchain development, and innovative web solutions. Currently Lead Front End Engineer at Fingo Africa."
         keywords="software engineer, mobile development, flutter, blockchain developer, LMS development, n8n automation, golang developer, typescript, web development, ICP"
       />
       <WavyBackground
@@ -70,7 +70,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
           >
-            Results-driven Full Stack Software Engineer with 3+ years of experience delivering high-performance web applications, cross-platform mobile apps, and blockchain solutions serving 50,000+ users globally. Award-winning blockchain developer with WCHL 2nd Place finishes at National and Regional levels. Currently enhancing LMS platforms and automating SOPs at Power Learn Project Africa, while training 9,000+ developers. Creator of open-source tools trusted by 3,500+ developers worldwide. Expertise in Flutter, Golang, TypeScript, React, Next.js, Docker, n8n, and Internet Computer Protocol (ICP).
+            Results-driven Full Stack Software Engineer with 3+ years of experience delivering high-performance web applications, cross-platform mobile apps, and blockchain solutions serving 50,000+ users globally. Award-winning blockchain developer with WCHL 2nd Place finishes at National and Regional levels. Currently Lead Front End Engineer at Fingo Africa, building stablecoin and cross-border payment experiences, after enhancing LMS platforms and training 9,000+ developers at Power Learn Project Africa. Creator of open-source tools trusted by 3,500+ developers worldwide. Expertise in Flutter, Golang, TypeScript, React, Next.js, Docker, n8n, and Internet Computer Protocol (ICP).
           </motion.p>
 
           <motion.div

@@ -128,8 +128,9 @@ const experiences: Experience[] = [
         title: "Full Stack Software Engineer & Instructor",
         type: "Consultancy",
         startDate: "2024-10-01",
+        endDate: "2026-05-31",
         description:
-          "Dual role combining software engineering and developer education. Engineering: Enhancing the LMS tech ecosystem with new features and automating PLP Standard Operating Procedures. Deployed self-hosted n8n automation server, building 15+ webhook integrations that reduced manual operations by 60%. Working across the full stack using Golang for backend services, Next.js and React.js for frontend, Strapi for CMS, Docker for containerization, and Scaleway servers for cloud infrastructure. Instruction: Trained and graduated 9,000+ students in Full Stack Development using the MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025. Conducting 100+ live sessions, 500+ code reviews, and mentoring aspiring developers through the PLP Academy. Contributing to curriculum development and creating 15+ hands-on capstone projects.",
+          "Dual role combining software engineering and developer education. Engineering: Enhanced the LMS tech ecosystem with new features and automated PLP Standard Operating Procedures. Deployed self-hosted n8n automation server, building 15+ webhook integrations that reduced manual operations by 60%. Worked across the full stack using Golang for backend services, Next.js and React.js for frontend, Strapi for CMS, Docker for containerization, and Scaleway servers for cloud infrastructure. Instruction: Trained and graduated 9,000+ students in Full Stack Development using the MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025. Conducted 100+ live sessions, 500+ code reviews, and mentored aspiring developers through the PLP Academy. Contributed to curriculum development and created 15+ hands-on capstone projects.",
         skills: [
           "Golang",
           "Next.js",
