@@ -344,13 +344,7 @@ const Resume = () => {
                   }}
                 >
                   <span style={{ color: "#444" }}>
-                    soft.eng.dedan@gmail.com
-                  </span>
-                  <span style={{ color: "#666" }}>|</span>
-                  <span style={{ color: "#444" }}>+254704860552</span>
-                  <span style={{ color: "#666" }}>|</span>
-                  <span style={{ color: "#444" }}>
-                    Telegram: @CryptCysec
+                    softengdedan@gmail.com
                   </span>
                   <span style={{ color: "#666" }}>|</span>
                   <span style={{ color: "#444" }}>Nairobi, Kenya</span>
