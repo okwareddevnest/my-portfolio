@@ -44,11 +44,11 @@ const Resume = () => {
       duration: "Oct 2024 - May 2026",
       location: "Nairobi, Kenya · Consultancy",
       achievements: [
-        "Automated PLP Standard Operating Procedures (SOPs) and LMS workflows by deploying self-hosted n8n server, building 15+ webhook integrations that reduced manual operations by 60%",
-        "Enhanced and extended the existing LMS tech ecosystem with new features using Golang, Next.js, React.js, and Strapi CMS",
+        "Extended the LMS platform with new front-end features using Next.js, React.js, and Strapi CMS, backed by Golang services",
+        "Conducted 100+ live coding sessions and performed 500+ code reviews, raising front-end code quality to a 95% project completion rate",
         "Trained and graduated 9,000+ students in Full Stack Development using MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025",
-        "Conducted 100+ live coding sessions and performed 500+ code reviews, achieving 95% student project completion rate",
         "Developed comprehensive curriculum materials and 15+ hands-on capstone projects adopted as standard across the academy",
+        "Automated PLP Standard Operating Procedures (SOPs) and LMS workflows by deploying self-hosted n8n server, building 15+ webhook integrations that reduced manual operations by 60%",
         "Containerized deployment pipelines with Docker, improving release velocity and system reliability across the platform",
       ],
     },
@@ -208,8 +208,8 @@ const Resume = () => {
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
       <Metadata
         title="Resume"
-        description="Download Dedan Okware's professional resume - Lead Front End Engineer at Fingo Africa, formerly Full Stack Software Engineer & Instructor at Power Learn Project Africa, with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
-        keywords="resume, CV, software engineer, mobile development, flutter, LMS developer, golang developer, WCHL, hackathon, full-stack developer, n8n automation, TypeScript developer, download resume, professional resume"
+        description="Download Dedan Okware's professional resume - Front End Engineer specialising in TypeScript, React, Next.js, Vue and Flutter. Lead Front End Engineer at Fingo Africa, with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
+        keywords="resume, CV, front end engineer, frontend developer, React developer, Next.js developer, TypeScript developer, Vue developer, Flutter developer, web performance, accessibility, UI engineer, WCHL, download resume, professional resume"
       />
       <AnimatedBackground />
       <Navbar />
@@ -328,7 +328,7 @@ const Resume = () => {
                     textAlign: "center",
                   }}
                 >
-                  Full Stack Software Engineer | Blockchain Developer | Open Source Contributor
+                  Front End Engineer | TypeScript · React · Next.js · Vue · Flutter
                 </p>
                 <div
                   className="flex flex-wrap justify-center gap-4 text-sm text-gray-600"
@@ -378,7 +378,7 @@ const Resume = () => {
                   className="text-gray-700 leading-relaxed"
                   style={{ color: "#444", lineHeight: "1.8", fontSize: "14px" }}
                 >
-                  Results-driven Full Stack Software Engineer with 3+ years of experience delivering high-performance web applications, cross-platform mobile apps with Flutter, blockchain solutions, and enterprise automation systems. Currently Lead Front End Engineer at Fingo Africa, owning front-end architecture for stablecoin wallets and cross-border payment platforms. Previously enhanced the LMS tech ecosystem and automated Standard Operating Procedures at Power Learn Project Africa, training and graduating 9,000+ students in Full Stack Development. Proven expertise from architecture design through production deployment, serving 50,000+ monthly users across 40+ countries. Award-winning blockchain developer with WCHL 2nd Place finishes at National (Kenya) and Regional (Africa) rounds. Core competencies: Flutter, Golang, TypeScript, React, Next.js, Node.js, Python, Docker, n8n Automation, AWS, Internet Computer Protocol (ICP), and CI/CD pipelines. Creator of open-source tools trusted by 3,500+ developers globally.
+                  Front End Engineer with 3+ years of experience building production user interfaces for financial services, enterprise platforms, and developer tooling. Currently Lead Front End Engineer at Fingo Africa, owning front-end architecture for stablecoin wallets, cross-border transfer flows, and KYC onboarding across web and mobile. Deep TypeScript practitioner across component-driven frameworks — React, Next.js, Vue, and Flutter — shipping responsive desktop-and-mobile interfaces where performance is a requirement rather than a nice-to-have. Previously extended the LMS platform at Power Learn Project Africa with Next.js and React features, performed 500+ code reviews, and trained 9,000+ students in Full Stack Development. Proven ownership from component architecture through CI/CD and production release, serving 50,000+ monthly users across 40+ countries. Award-winning engineer with WCHL 2nd Place finishes at National (Kenya) and Regional (Africa) rounds. Core competencies: TypeScript, React, Next.js, Vue, Flutter, TailwindCSS, web performance, accessibility, Node.js, Docker, and CI/CD pipelines. Creator of open-source tools trusted by 3,500+ developers globally.
                 </p>
               </div>
 
@@ -406,18 +406,20 @@ const Resume = () => {
                     fontSize: "13px",
                   }}
                 >
-                  <span style={{ color: "#444" }}>• Full Stack Development</span>
-                  <span style={{ color: "#444" }}>• Mobile Development</span>
-                  <span style={{ color: "#444" }}>• Blockchain/Web3</span>
-                  <span style={{ color: "#444" }}>• API Development</span>
-                  <span style={{ color: "#444" }}>• Cloud Architecture</span>
-                  <span style={{ color: "#444" }}>• System Design</span>
+                  <span style={{ color: "#444" }}>• Front End Architecture</span>
+                  <span style={{ color: "#444" }}>• TypeScript & JavaScript</span>
+                  <span style={{ color: "#444" }}>• React & Next.js</span>
+                  <span style={{ color: "#444" }}>• Vue.js</span>
+                  <span style={{ color: "#444" }}>• Flutter & Mobile UI</span>
+                  <span style={{ color: "#444" }}>• Component Design Systems</span>
+                  <span style={{ color: "#444" }}>• Responsive & Mobile-First</span>
+                  <span style={{ color: "#444" }}>• Web Performance</span>
+                  <span style={{ color: "#444" }}>• Accessibility (WCAG)</span>
+                  <span style={{ color: "#444" }}>• API Integration</span>
                   <span style={{ color: "#444" }}>• CI/CD Pipelines</span>
-                  <span style={{ color: "#444" }}>• DevOps & Docker</span>
-                  <span style={{ color: "#444" }}>• Agile/Scrum</span>
+                  <span style={{ color: "#444" }}>• Code Review & Standards</span>
                   <span style={{ color: "#444" }}>• Technical Leadership</span>
-                  <span style={{ color: "#444" }}>• Database Design</span>
-                  <span style={{ color: "#444" }}>• Microservices</span>
+                  <span style={{ color: "#444" }}>• Agile/Scrum</span>
                   <span style={{ color: "#444" }}>• Process Automation</span>
                 </div>
               </div>
