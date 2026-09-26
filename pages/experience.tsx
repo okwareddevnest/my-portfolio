@@ -125,6 +125,27 @@ const experiences: Experience[] = [
     workMode: "hybrid",
     roles: [
       {
+        title: "Technical Lead Software Engineer",
+        type: "Consultancy",
+        startDate: "2026-01-01",
+        endDate: "2026-05-31",
+        description:
+          "Technical lead for Power Learn Project Africa's engineering function during the organisation's pivot into a new operating model. Led the setup and revamp of core internal systems, taking senior ownership of architecture decisions, platform consolidation and the migration path off legacy workflows. Set technical direction across backend services, front-end platforms and automation infrastructure, and led the engineering team through delivery against a compressed timeline while the organisational strategy was itself changing.",
+        skills: [
+          "Technical Leadership",
+          "Software Architecture",
+          "Systems Migration",
+          "Platform Modernisation",
+          "Next.js",
+          "React.js",
+          "Golang",
+          "Docker",
+          "n8n Automation",
+          "Stakeholder Management",
+          "Team Leadership",
+        ],
+      },
+      {
         title: "Full Stack Software Engineer & Instructor",
         type: "Consultancy",
         startDate: "2024-10-01",

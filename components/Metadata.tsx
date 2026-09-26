@@ -14,7 +14,7 @@ export const Metadata = ({
   ogImage = "/profile.png",
 }: MetadataProps) => {
   const fullTitle = title.includes("|") ? title : `${title} | Dedan Okware`;
-  const siteUrl = "https://dedan-okware.vercel.app";
+  const siteUrl = "https://my-portfolio-crypt.vercel.app";
   const fullOgImage = ogImage.startsWith("http")
     ? ogImage
     : `${siteUrl}${ogImage}`;

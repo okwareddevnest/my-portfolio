@@ -132,4 +132,4 @@ spinner $!
 echo -e "${GREEN}${CHECK} Deployed successfully${NC}"
 
 echo -e "\n${GREEN}🎉 Success! Your post has been added to your portfolio.${NC}"
-echo -e "${BLUE}🔗 View it at: https://dedan-okware.vercel.app/blogs${NC}\n" 
+echo -e "${BLUE}🔗 View it at: https://my-portfolio-crypt.vercel.app/blogs${NC}\n" 

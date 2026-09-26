@@ -129,11 +129,11 @@ export default function Blogs() {
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content="https://dedan-okware.vercel.app/blogs"
+          content="https://my-portfolio-crypt.vercel.app/blogs"
         />
         <meta
           property="og:image"
-          content="https://dedan-okware.vercel.app/og-image.jpg"
+          content="https://my-portfolio-crypt.vercel.app/og-image.jpg"
         />
 
         {/* Twitter/X Card */}
@@ -150,11 +150,11 @@ export default function Blogs() {
         />
         <meta
           name="twitter:image"
-          content="https://dedan-okware.vercel.app/og-image.jpg"
+          content="https://my-portfolio-crypt.vercel.app/og-image.jpg"
         />
 
         {/* Additional SEO */}
-        <link rel="canonical" href="https://dedan-okware.vercel.app/blogs" />
+        <link rel="canonical" href="https://my-portfolio-crypt.vercel.app/blogs" />
         <meta name="robots" content="index, follow" />
       </Head>
 

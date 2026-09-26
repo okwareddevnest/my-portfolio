@@ -1,12 +1,11 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { AnimatedBackground } from "../components/AnimatedBackground";
-import { usePortfolioStore } from "../store/store";
 import { motion } from "framer-motion";
 import { Metadata } from "../components/Metadata";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import { RESUME_FILE_NAME, resume } from "../data/resume";
+import type { ResumeCredential } from "../data/resume";
 import {
   IconDownload,
   IconFileTypePdf,
@@ -14,193 +13,58 @@ import {
   IconRocket,
 } from "@tabler/icons-react";
 
+// Revoking the object URL in the same tick as click() cancels the download in
+// some browsers, so it is released after the navigation has started.
+const OBJECT_URL_RELEASE_MS = 1000;
+
+// The PDF is typeset as real text (not a screenshot) so ATS parsers can read
+// every word; the renderer is loaded on click to keep it out of the page bundle.
+const downloadResumePdf = async (): Promise<void> => {
+  const [{ pdf }, { ResumePdf }] = await Promise.all([
+    import("@react-pdf/renderer"),
+    import("../components/ResumePdf"),
+  ]);
+  const blob = await pdf(<ResumePdf data={resume} />).toBlob();
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = RESUME_FILE_NAME;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), OBJECT_URL_RELEASE_MS);
+};
+
+const SectionHeading = ({ children }: { children: string }) => (
+  <h2 className="text-sm font-bold uppercase tracking-wider text-blue-900 border-b border-blue-900 pb-1 mb-3 mt-6">
+    {children}
+  </h2>
+);
+
+const CredentialList = ({ items }: { items: ResumeCredential[] }) => (
+  <ul className="space-y-1">
+    {items.map((item) => (
+      <li key={item.name} className="flex flex-wrap justify-between gap-x-4 text-sm">
+        <span>
+          <strong className="font-bold">{item.name}</strong> - {item.issuer}
+        </span>
+        <span className="text-gray-600">{item.date}</span>
+      </li>
+    ))}
+  </ul>
+);
+
 const Resume = () => {
   const [isGenerating, setIsGenerating] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const resumeRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const { skills, certificates } = usePortfolioStore();
-
-  const experiences = [
-    {
-      company: "Fingo Africa",
-      logo: "/companies/fingo_logo.webp",
-      title: "Lead Front End Engineer",
-      duration: "Feb 2026 - Present",
-      location: "Nairobi, Kenya · Hybrid · Full-time",
-      achievements: [
-        "Leading front-end architecture and development for Fingo Global-stablecoin wallets, on/off ramp interfaces, cross-border transfer flows, and KYC/onboarding screens",
-        "Building and shipping production Flutter mobile applications and Next.js web experiences for the stablecoin and cross-border payments platform",
-        "Defining and enforcing front-end engineering standards, code review practices, and testing frameworks across the engineering team",
-        "Collaborating closely with the Stablecoin Product Lead and Engineering Lead to translate product specs into robust, performant UI",
-        "Owning the front-end deployment pipeline, CI/CD, and release management for mobile and web applications",
-        "Driving user experience quality-working with design to ensure pixel-perfect, accessible, and fast interfaces",
-      ],
-    },
-    {
-      company: "Power Learn Project Africa",
-      logo: "/companies/plp.jpeg",
-      title: "Software Engineer & Instructor",
-      duration: "Oct 2024 - May 2026",
-      location: "Nairobi, Kenya · Consultancy",
-      achievements: [
-        "Extended the LMS platform with new front-end features using Next.js, React.js, and Strapi CMS, backed by Golang services",
-        "Conducted 100+ live coding sessions and performed 500+ code reviews, raising front-end code quality to a 95% project completion rate",
-        "Trained and graduated 9,000+ students in Full Stack Development using MERN Stack (MongoDB, Express.js, React.js, Node.js) across 3 cohorts in 2025",
-        "Developed comprehensive curriculum materials and 15+ hands-on capstone projects adopted as standard across the academy",
-        "Automated PLP Standard Operating Procedures (SOPs) and LMS workflows by deploying self-hosted n8n server, building 15+ webhook integrations that reduced manual operations by 60%",
-        "Containerized deployment pipelines with Docker, improving release velocity and system reliability across the platform",
-      ],
-    },
-    {
-      company: "Bonded",
-      logo: "/companies/bonded_sq.png",
-      title: "Blockchain Software Engineer",
-      duration: "Apr 2025 - Jul 2025",
-      location: "London, United Kingdom · Remote · Contract",
-      achievements: [
-        "Developed blockchain solutions for UK visa application platform, enabling secure document storage and verification for international couples",
-        "Built internal mobile systems using Flutter to streamline document verification and partner communication for visa applicants",
-        "Built AI-powered evidence matching algorithms to align and validate relationship documentation between partners across borders",
-        "Implemented ICP blockchain smart contracts for tamper-proof storage of visa application evidence and partner verification records",
-        "Collaborated with cross-functional teams across 3 time zones, delivering secure immigration tech solutions on schedule",
-      ],
-    },
-    {
-      company: "Freelance",
-      logo: "/companies/freelance.png",
-      title: "Freelance Software Engineer",
-      duration: "Apr 2023 - Mar 2025",
-      location: "Kenya · Remote",
-      achievements: [
-        "Delivered 20+ full-stack web applications, cross-platform mobile apps with Flutter, and blockchain solutions for clients globally",
-        "Built production-ready APIs and microservices using Node.js, Python, and Golang, serving 50,000+ monthly users",
-        "Specialized in React, TypeScript, and Next.js for frontend, with ICP blockchain for decentralized applications",
-        "Achieved 100% client satisfaction rate with repeat business from 70% of clients",
-      ],
-    },
-    {
-      company: "Open Source",
-      logo: "/companies/os.png",
-      title: "Open Source Developer & Maintainer",
-      duration: "Jan 2023 - Present",
-      location: "Remote · Global",
-      achievements: [
-        "Created Gitok: Git productivity CLI tool with 35+ commands, adopted by 2,000+ developers across 40+ countries",
-        "Built U-Download: Cross-platform YouTube downloader in Rust/Tauri, trusted by 1,500+ users with zero-dependency setup",
-        "Maintained 10+ open-source repositories with 150+ GitHub stars combined, processing 500+ issues and pull requests",
-        "Published technical articles and documentation, generating 10,000+ page views on developer tools and best practices",
-      ],
-    },
-  ];
-
-  const highlightedProjects = [
-    {
-      name: "OHMS 2.0 - Autonomous AI Agent Platform",
-      description:
-        "Award-winning decentralized AI agent platform - WCHL 2nd Place (Africa) & Global Finalist. Enables natural language agent composition with verifiable on-chain execution.",
-      tech: [
-        "Rust",
-        "TypeScript",
-        "React 19",
-        "Internet Computer (ICP)",
-        "AI Agents",
-        "LLM Integration",
-        "WebAssembly",
-      ],
-    },
-    {
-      name: "U-Download - Cross-Platform Media Downloader",
-      description:
-        "High-performance YouTube downloader built in Rust, trusted by 1,500+ users globally. Features multi-connection acceleration, video trimming, and zero external dependencies.",
-      tech: ["Rust", "Tauri", "React", "TypeScript", "FFmpeg", "aria2c"],
-    },
-    {
-      name: "Gitok - Developer Productivity CLI",
-      description:
-        "Git productivity toolkit with 35+ custom commands, adopted by 2,000+ developers worldwide. Features auto-updates, interactive cheatsheets, and cross-platform support.",
-      tech: ["Shell Script", "Bash", "Fish Shell", "Git", "GitHub Actions", "CI/CD"],
-    },
-    {
-      name: "RSON - Next-Generation Data Serialization",
-      description:
-        "Modern data serialization format evolving JSON with comments, rich types, and developer-friendly syntax. Full backward compatibility with JSON.",
-      tech: ["Rust", "Serde", "TypeScript", "Python", "Parser Design", "Language Specification"],
-    },
-  ];
-
-  const generatePDF = async () => {
-    if (!resumeRef.current) return;
-
+  const handleDownload = async () => {
     setIsGenerating(true);
-    setProgress(10);
-
+    setError(null);
     try {
-      // Capture the resume content with optimized settings
-      setProgress(30);
-      const canvas = await html2canvas(resumeRef.current, {
-        scale: 2, // Good quality
-        useCORS: true,
-        logging: false,
-        backgroundColor: "#ffffff",
-        windowWidth: 1200,
-        windowHeight: resumeRef.current.scrollHeight,
-        scrollY: -window.scrollY,
-        scrollX: -window.scrollX,
-        imageTimeout: 0,
-        removeContainer: false,
-      });
-
-      setProgress(60);
-
-      // Convert canvas to image
-      const imgData = canvas.toDataURL("image/jpeg", 0.90);
-
-      // A4 width in mm, height calculated based on content
-      const pdfWidth = 210; // A4 width in mm
-      const margin = 10; // 10mm margins
-      const contentWidth = pdfWidth - margin * 2;
-
-      // Calculate content height in mm (proportional to width)
-      const imgWidth = contentWidth;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const pdfHeight = imgHeight + margin * 2; // Total page height
-
-      // Create PDF with custom height (single continuous page)
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: [pdfWidth, pdfHeight], // A4 width, content height
-        compress: true,
-      });
-
-      // Add the entire content as one image
-      pdf.addImage(
-        imgData,
-        "JPEG",
-        margin,
-        margin,
-        imgWidth,
-        imgHeight,
-        undefined,
-        "FAST"
-      );
-
-      setProgress(90);
-
-      // Download the PDF
-      pdf.save("Dedan_Okware_Resume.pdf");
-
-      setProgress(100);
-
-      setTimeout(() => {
-        setIsGenerating(false);
-        setProgress(0);
-      }, 1000);
+      await downloadResumePdf();
     } catch {
+      setError("The PDF could not be generated. Please try again.");
+    } finally {
       setIsGenerating(false);
-      setProgress(0);
-      alert("Error generating PDF. Please try again.");
     }
   };
 
@@ -208,14 +72,13 @@ const Resume = () => {
     <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
       <Metadata
         title="Resume"
-        description="Download Dedan Okware's professional resume - Front End Engineer specialising in TypeScript, React, Next.js, Vue and Flutter. Lead Front End Engineer at Fingo Africa, with WCHL 2nd Place finishes (National & Regional), and creator of developer tools trusted by thousands."
-        keywords="resume, CV, front end engineer, frontend developer, React developer, Next.js developer, TypeScript developer, Vue developer, Flutter developer, web performance, accessibility, UI engineer, WCHL, download resume, professional resume"
+        description="Resume of Dedan Okware, Senior Software Engineer across frontend, backend, blockchain and technical leadership. Lead Front End Engineer at Fingo Africa, former Technical Lead at Power Learn Project Africa, Blockchain Software Engineer at Bonded, WCHL 2nd Place (Kenya and Africa)."
+        keywords="resume, CV, senior software engineer, full stack engineer, tech lead, frontend engineer, backend engineer, blockchain engineer, TypeScript, React, Next.js, Node.js, Golang, Python, Rust, Flutter, ICP, smart contracts, download resume"
       />
       <AnimatedBackground />
       <Navbar />
 
       <main className="flex-grow container mx-auto px-4 py-12">
-        {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -230,29 +93,30 @@ const Resume = () => {
             <IconRocket className="w-8 h-8 text-accent" />
           </div>
           <p className="text-lg text-text/80 dark:text-text-dark/80 max-w-2xl mx-auto">
-            Download my comprehensive resume showcasing award-winning projects,
-            international achievements, and open-source tools trusted by
-            thousands of developers
+            Senior Software Engineer across frontend, backend, blockchain and
+            technical leadership. The PDF is plain, parseable text built for
+            applicant tracking systems.
           </p>
         </motion.div>
 
-        {/* Download Button */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex justify-center mb-12"
+          className="flex flex-col items-center gap-3 mb-12"
         >
           <button
-            onClick={generatePDF}
+            type="button"
+            onClick={handleDownload}
             disabled={isGenerating}
-            className="group relative px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
+            aria-busy={isGenerating}
+            className="group relative px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <span className="relative z-10 flex items-center gap-3">
               {isGenerating ? (
                 <>
                   <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
-                  Generating PDF... {progress}%
+                  Generating PDF...
                 </>
               ) : (
                 <>
@@ -262,700 +126,104 @@ const Resume = () => {
                 </>
               )}
             </span>
-
-            {/* Animated background */}
             <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-            {/* Progress bar */}
-            {isGenerating && (
-              <div
-                className="absolute bottom-0 left-0 h-1 bg-white/50 transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              />
-            )}
           </button>
+          {error && (
+            <p role="alert" className="text-sm text-red-700 dark:text-red-400">
+              {error}
+            </p>
+          )}
         </motion.div>
 
-        {/* Resume Preview */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-border/20 dark:border-border-dark/20">
-            <div
-              ref={resumeRef}
-              className="p-12 bg-white"
-              style={{
-                fontFamily: "Arial, sans-serif",
-                color: "#333",
-                lineHeight: "1.6",
-                padding: "48px",
-                maxWidth: "1000px",
-                margin: "0 auto",
-                boxSizing: "border-box",
-              }}
-            >
-              {/* Header */}
-              <div
-                className="text-center mb-8 pb-6 border-b-2 border-gray-300"
-                style={{
-                  textAlign: "center",
-                  borderBottom: "2px solid #999",
-                  marginBottom: "24px",
-                  paddingBottom: "20px",
-                }}
-              >
-                <h1
-                  className="text-4xl font-bold text-gray-900 mb-2"
-                  style={{
-                    fontSize: "36px",
-                    fontWeight: "bold",
-                    marginBottom: "8px",
-                    color: "#000",
-                    textAlign: "center",
-                  }}
-                >
-                  DEDAN OKWARE
-                </h1>
-                <p
-                  className="text-xl text-gray-700 mb-3"
-                  style={{
-                    fontSize: "18px",
-                    marginBottom: "12px",
-                    color: "#333",
-                    textAlign: "center",
-                  }}
-                >
-                  Front End Engineer | TypeScript · React · Next.js · Vue · Flutter
-                </p>
-                <div
-                  className="flex flex-wrap justify-center gap-4 text-sm text-gray-600"
-                  style={{
-                    fontSize: "14px",
-                    color: "#666",
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                    gap: "16px",
-                    textAlign: "center",
-                    width: "100%",
-                  }}
-                >
-                  <span style={{ color: "#444" }}>
-                    softengdedan@gmail.com
-                  </span>
-                  <span style={{ color: "#666" }}>|</span>
-                  <span style={{ color: "#444" }}>Nairobi, Kenya</span>
-                  <span style={{ color: "#666" }}>|</span>
-                  <span style={{ color: "#444" }}>
-                    github.com/okwareddevnest
-                  </span>
-                  <span style={{ color: "#666" }}>|</span>
-                  <span style={{ color: "#444" }}>
-                    linkedin.com/in/softcysec-dedan-okware
-                  </span>
-                </div>
-              </div>
+          <article className="bg-white text-gray-900 rounded-2xl shadow-2xl border border-border/20 dark:border-border-dark/20 p-6 sm:p-12 leading-relaxed font-sans">
+            <header>
+              <p className="text-3xl font-bold tracking-wide uppercase">
+                {resume.name}
+              </p>
+              <p className="text-lg font-bold text-blue-900">{resume.headline}</p>
+              <p className="text-sm text-gray-600">{resume.specialties}</p>
+              <p className="text-sm text-gray-600 mt-2 break-words">
+                {resume.contact.join("  |  ")}
+              </p>
+            </header>
 
-              {/* Professional Summary */}
-              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "12px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  PROFESSIONAL SUMMARY
-                </h2>
-                <p
-                  className="text-gray-700 leading-relaxed"
-                  style={{ color: "#444", lineHeight: "1.8", fontSize: "14px" }}
-                >
-                  Front End Engineer with 3+ years of experience building production user interfaces for financial services, enterprise platforms, and developer tooling. Currently Lead Front End Engineer at Fingo Africa, owning front-end architecture for stablecoin wallets, cross-border transfer flows, and KYC onboarding across web and mobile. Deep TypeScript practitioner across component-driven frameworks — React, Next.js, Vue, and Flutter — shipping responsive desktop-and-mobile interfaces where performance is a requirement rather than a nice-to-have. Previously extended the LMS platform at Power Learn Project Africa with Next.js and React features, performed 500+ code reviews, and trained 9,000+ students in Full Stack Development. Proven ownership from component architecture through CI/CD and production release, serving 50,000+ monthly users across 40+ countries. Award-winning engineer with WCHL 2nd Place finishes at National (Kenya) and Regional (Africa) rounds. Core competencies: TypeScript, React, Next.js, Vue, Flutter, TailwindCSS, web performance, accessibility, Node.js, Docker, and CI/CD pipelines. Creator of open-source tools trusted by 3,500+ developers globally.
-                </p>
-              </div>
+            <section>
+              <SectionHeading>Professional Summary</SectionHeading>
+              <p className="text-sm">{resume.summary}</p>
+            </section>
 
-              {/* Core Competencies - ATS Keyword Section */}
-              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "12px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  CORE COMPETENCIES
-                </h2>
-                <div
-                  className="grid grid-cols-3 gap-2 text-sm"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, 1fr)",
-                    gap: "8px",
-                    fontSize: "13px",
-                  }}
-                >
-                  <span style={{ color: "#444" }}>• Front End Architecture</span>
-                  <span style={{ color: "#444" }}>• TypeScript & JavaScript</span>
-                  <span style={{ color: "#444" }}>• React & Next.js</span>
-                  <span style={{ color: "#444" }}>• Vue.js</span>
-                  <span style={{ color: "#444" }}>• Flutter & Mobile UI</span>
-                  <span style={{ color: "#444" }}>• Component Design Systems</span>
-                  <span style={{ color: "#444" }}>• Responsive & Mobile-First</span>
-                  <span style={{ color: "#444" }}>• Web Performance</span>
-                  <span style={{ color: "#444" }}>• Accessibility (WCAG)</span>
-                  <span style={{ color: "#444" }}>• API Integration</span>
-                  <span style={{ color: "#444" }}>• CI/CD Pipelines</span>
-                  <span style={{ color: "#444" }}>• Code Review & Standards</span>
-                  <span style={{ color: "#444" }}>• Technical Leadership</span>
-                  <span style={{ color: "#444" }}>• Agile/Scrum</span>
-                  <span style={{ color: "#444" }}>• Process Automation</span>
-                </div>
-              </div>
+            <section>
+              <SectionHeading>Technical Skills</SectionHeading>
+              <ul className="space-y-1 text-sm">
+                {resume.skills.map((group) => (
+                  <li key={group.label}>
+                    <strong className="font-bold">{group.label}:</strong>{" "}
+                    {group.items.join(", ")}
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-              {/* Key Achievements */}
-              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-3 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "12px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  KEY ACHIEVEMENTS
-                </h2>
-                <ul
-                  className="space-y-2 text-gray-700"
-                  style={{ color: "#444", fontSize: "14px" }}
-                >
-                  <li
-                    className="flex items-start"
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    <span
-                      className="mr-2 text-blue-600 font-bold"
-                      style={{
-                        marginRight: "8px",
-                        color: "#3b82f6",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      ★
-                    </span>
-                    <span style={{ color: "#444" }}>
-                      <strong>WCHL Blockchain Championship:</strong> Secured 2nd Place at both National (Kenya) and Regional (Africa) rounds with OHMS 2.0 AI agent platform
-                    </span>
-                  </li>
-                  <li
-                    className="flex items-start"
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    <span
-                      className="mr-2 text-blue-600 font-bold"
-                      style={{
-                        marginRight: "8px",
-                        color: "#3b82f6",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      ★
-                    </span>
-                    <span style={{ color: "#444" }}>
-                      <strong>Open Source Impact:</strong> Created developer tools adopted by 3,500+ users globally (Gitok: 2,000+ | U-Download: 1,500+)
-                    </span>
-                  </li>
-                  <li
-                    className="flex items-start"
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    <span
-                      className="mr-2 text-blue-600 font-bold"
-                      style={{
-                        marginRight: "8px",
-                        color: "#3b82f6",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      ★
-                    </span>
-                    <span style={{ color: "#444" }}>
-                      <strong>LMS Automation:</strong> Deployed n8n automation server, building 15+ webhook integrations that automated PLP SOPs and reduced manual operations by 60%
-                    </span>
-                  </li>
-                  <li
-                    className="flex items-start"
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    <span
-                      className="mr-2 text-blue-600 font-bold"
-                      style={{
-                        marginRight: "8px",
-                        color: "#3b82f6",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      ★
-                    </span>
-                    <span style={{ color: "#444" }}>
-                      <strong>Developer Training:</strong> Trained and graduated 9,000+ students across 3 cohorts in 2025 with 80%+ placement rate in technical roles
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Professional Experience */}
-              <div className="mb-8" style={{ marginBottom: "24px", pageBreakBefore: "auto" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "16px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  PROFESSIONAL EXPERIENCE
-                </h2>
-                {experiences.map((exp, idx) => (
-                  <div
-                    key={idx}
-                    className="mb-6"
-                    style={{
-                      marginBottom: "20px",
-                      pageBreakInside: "avoid",
-                      breakInside: "avoid",
-                      position: "relative",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {/* Watermark Logo */}
-                    {exp.logo && (
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          opacity: 0.12,
-                          pointerEvents: "none",
-                          zIndex: 0,
-                        }}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={exp.logo}
-                          alt=""
-                          style={{
-                            width: "280px",
-                            height: "280px",
-                            objectFit: "contain",
-                          }}
-                        />
-                      </div>
-                    )}
-                    {/* Experience Content */}
-                    <div style={{ position: "relative", zIndex: 1 }}>
-                      <div
-                        className="flex justify-between items-start mb-2"
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
-                          marginBottom: "8px",
-                        }}
-                      >
-                        <div>
-                          <h3
-                            className="text-lg font-bold text-gray-900"
-                            style={{
-                              fontSize: "16px",
-                              fontWeight: "bold",
-                              color: "#000",
-                            }}
-                          >
-                            {exp.title}
-                          </h3>
-                          <p
-                            className="text-gray-700 font-semibold"
-                            style={{
-                              color: "#333",
-                              fontWeight: "600",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {exp.company}
-                          </p>
-                        </div>
-                        <div
-                          className="text-right text-sm text-gray-600"
-                          style={{
-                            textAlign: "right",
-                            fontSize: "13px",
-                            color: "#666",
-                          }}
-                        >
-                          <p style={{ color: "#666" }}>{exp.duration}</p>
-                          <p style={{ color: "#666" }}>{exp.location}</p>
-                        </div>
-                      </div>
-                      <ul
-                        className="space-y-1 ml-4"
-                        style={{ marginLeft: "16px" }}
-                      >
-                        {exp.achievements.map((achievement, i) => (
-                          <li
-                            key={i}
-                            className="text-gray-700 text-sm flex items-start"
-                            style={{
-                              color: "#444",
-                              fontSize: "13px",
-                              display: "flex",
-                              alignItems: "flex-start",
-                              marginBottom: "4px",
-                            }}
-                          >
-                            <span className="mr-2" style={{ marginRight: "8px" }}>
-                              •
-                            </span>
-                            <span style={{ color: "#444" }}>{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
+            <section>
+              <SectionHeading>Professional Experience</SectionHeading>
+              <div className="space-y-5">
+                {resume.experience.map((role) => (
+                  <div key={`${role.company}-${role.title}`}>
+                    <div className="flex flex-wrap justify-between gap-x-4">
+                      <h3 className="font-bold">{role.title}</h3>
+                      <span className="text-sm text-gray-600">{role.period}</span>
                     </div>
+                    <p className="text-sm text-gray-600">
+                      {role.company} | {role.location}
+                    </p>
+                    <ul className="list-disc pl-5 mt-1 space-y-1 text-sm">
+                      {role.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
+            </section>
 
-              {/* Featured Projects */}
-              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "16px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  FEATURED PROJECTS
-                </h2>
-                {highlightedProjects.map((project, idx) => (
-                  <div
-                    key={idx}
-                    className="mb-4"
-                    style={{ marginBottom: "16px", pageBreakInside: "avoid", breakInside: "avoid" }}
-                  >
-                    <h3
-                      className="text-lg font-bold text-gray-900"
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        color: "#000",
-                      }}
-                    >
-                      {project.name}
-                    </h3>
-                    <p
-                      className="text-gray-700 text-sm mb-1"
-                      style={{
-                        color: "#444",
-                        fontSize: "13px",
-                        marginBottom: "4px",
-                      }}
-                    >
-                      {project.description}
-                    </p>
-                    <p
-                      className="text-gray-600 text-sm"
-                      style={{ color: "#666", fontSize: "13px" }}
-                    >
-                      <span
-                        className="font-semibold"
-                        style={{ fontWeight: "600" }}
-                      >
-                        Technologies:
-                      </span>{" "}
-                      {project.tech.join(", ")}
-                    </p>
+            <section>
+              <SectionHeading>Projects</SectionHeading>
+              <div className="space-y-4">
+                {resume.projects.map((project) => (
+                  <div key={project.name}>
+                    <h3 className="font-bold">{project.name}</h3>
+                    <p className="text-sm text-gray-600">{project.stack}</p>
+                    <ul className="list-disc pl-5 mt-1 space-y-1 text-sm">
+                      {project.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
+            </section>
 
-              {/* Technical Skills */}
-              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "16px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  TECHNICAL SKILLS
-                </h2>
-                {skills.map((category, idx) => (
-                  <div
-                    key={idx}
-                    className="mb-3"
-                    style={{ marginBottom: "12px", pageBreakInside: "avoid", breakInside: "avoid" }}
-                  >
-                    <p
-                      className="text-gray-900 font-bold mb-1"
-                      style={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        marginBottom: "4px",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {category.category}:
-                    </p>
-                    <p
-                      className="text-gray-700 text-sm"
-                      style={{ color: "#444", fontSize: "13px" }}
-                    >
-                      {category.items.map((skill) => skill.name).join(" • ")}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <section>
+              <SectionHeading>Awards</SectionHeading>
+              <CredentialList items={resume.awards} />
+            </section>
 
-              {/* Certifications */}
-              <div className="mb-8" style={{ marginBottom: "24px", pageBreakInside: "avoid", breakInside: "avoid" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "16px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  CERTIFICATIONS & ACHIEVEMENTS
-                </h2>
-                <div
-                  className="mb-2 flex justify-between items-start"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    marginBottom: "8px",
-                  }}
-                >
-                  <div>
-                    <p
-                      className="text-gray-900 font-bold text-sm"
-                      style={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
-                    >
-                      WCHL Regional Round (Africa) - 2nd Place
-                    </p>
-                    <p
-                      className="text-gray-700 text-sm"
-                      style={{ color: "#444", fontSize: "13px" }}
-                    >
-                      Internet Computer Protocol (ICP) Blockchain
-                    </p>
-                  </div>
-                  <p
-                    className="text-gray-600 text-sm"
-                    style={{ color: "#666", fontSize: "13px" }}
-                  >
-                    Sep 2025
-                  </p>
-                </div>
-                <div
-                  className="mb-2 flex justify-between items-start"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    marginBottom: "8px",
-                  }}
-                >
-                  <div>
-                    <p
-                      className="text-gray-900 font-bold text-sm"
-                      style={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
-                    >
-                      WCHL National Round (Kenya) - 2nd Place
-                    </p>
-                    <p
-                      className="text-gray-700 text-sm"
-                      style={{ color: "#444", fontSize: "13px" }}
-                    >
-                      Internet Computer Protocol (ICP) Blockchain
-                    </p>
-                  </div>
-                  <p
-                    className="text-gray-600 text-sm"
-                    style={{ color: "#666", fontSize: "13px" }}
-                  >
-                    Aug 2025
-                  </p>
-                </div>
-                {certificates.map((cert, idx) => (
-                  <div
-                    key={idx}
-                    className="mb-2 flex justify-between items-start"
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    <div>
-                      <p
-                        className="text-gray-900 font-bold text-sm"
-                        style={{
-                          color: "#000",
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                        }}
-                      >
-                        {cert.name}
-                      </p>
-                      <p
-                        className="text-gray-700 text-sm"
-                        style={{ color: "#444", fontSize: "13px" }}
-                      >
-                        {cert.issuer}
-                      </p>
-                    </div>
-                    <p
-                      className="text-gray-600 text-sm"
-                      style={{ color: "#666", fontSize: "13px" }}
-                    >
-                      {cert.date}
-                    </p>
-                  </div>
-                ))}
-                <div
-                  className="mb-2 flex justify-between items-start"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    marginBottom: "8px",
-                  }}
-                >
-                  <div>
-                    <p
-                      className="text-gray-900 font-bold text-sm"
-                      style={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
-                    >
-                      Open Source Developer Tools
-                    </p>
-                    <p
-                      className="text-gray-700 text-sm"
-                      style={{ color: "#444", fontSize: "13px" }}
-                    >
-                      Creator of Gitok (2K+ users) & U-Download (1.5K+ users)
-                    </p>
-                  </div>
-                  <p
-                    className="text-gray-600 text-sm"
-                    style={{ color: "#666", fontSize: "13px" }}
-                  >
-                    2023-Present
-                  </p>
-                </div>
-              </div>
+            <section>
+              <SectionHeading>Certifications</SectionHeading>
+              <CredentialList items={resume.certifications} />
+            </section>
 
-              {/* Education */}
-              <div style={{ marginBottom: "24px" }}>
-                <h2
-                  className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500"
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "16px",
-                    paddingBottom: "8px",
-                    borderBottom: "2px solid #3b82f6",
-                  }}
-                >
-                  EDUCATION & TRAINING
-                </h2>
-                <div className="mb-3" style={{ marginBottom: "12px" }}>
-                  <p
-                    className="text-gray-900 font-bold"
-                    style={{
-                      color: "#000",
-                      fontWeight: "bold",
-                      fontSize: "14px",
-                    }}
-                  >
-                    Software Engineering & Computer Science
-                  </p>
-                  <p
-                    className="text-gray-700 text-sm"
-                    style={{ color: "#444", fontSize: "13px" }}
-                  >
-                    Continuous learning and professional development
-                  </p>
-                  <p
-                    className="text-gray-600 text-sm"
-                    style={{ color: "#666", fontSize: "13px" }}
-                  >
-                    Specialized in Blockchain, AI, and Full-Stack Development
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+            <section>
+              <SectionHeading>Education</SectionHeading>
+              <p className="text-sm">{resume.education}</p>
+            </section>
+          </article>
         </motion.div>
       </main>
 
