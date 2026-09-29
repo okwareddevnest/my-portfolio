@@ -3,88 +3,90 @@
 @tailwind utilities;
 
 @layer base {
+  /* Colour tokens as RGB channels so Tailwind can apply opacity modifiers.
+     One neutral stone scale plus a single cobalt accent. */
   :root {
-    --background: #FFFFFF;
-    --background-dark: #121212;
-    --text: #1C1C1C;
-    --text-dark: #E0E0E0;
+    --c-bg: 244 244 241;
+    --c-surface: 255 255 255;
+    --c-ink: 20 21 24;
+    --c-ink-soft: 52 54 60;
+    --c-muted: 94 97 104;
+    --c-line: 223 223 218;
+    --c-accent: 42 69 194;
+    --c-accent-strong: 31 52 153;
+    --c-on-accent: 255 255 255;
+    color-scheme: light;
   }
 
   .dark {
-    --background: #121212;
-    --text: #E0E0E0;
+    --c-bg: 17 18 20;
+    --c-surface: 26 27 30;
+    --c-ink: 236 236 232;
+    --c-ink-soft: 200 201 197;
+    --c-muted: 154 157 164;
+    --c-line: 46 48 53;
+    --c-accent: 97 121 238;
+    --c-accent-strong: 140 159 244;
+    --c-on-accent: 12 14 26;
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-background text-text transition-colors duration-300;
+    @apply bg-background text-text font-sans antialiased;
   }
 
-  .dark body {
-    @apply bg-background-dark text-text-dark;
+  ::selection {
+    background: rgb(var(--c-accent) / 0.18);
   }
 
-  /* Grid Patterns */
-  .bg-grid-white {
-    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-accent));
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
-  .bg-grid-black {
-    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  /* Card styles */
+  /* Legacy helpers still used by the inner pages. */
   .card {
-    @apply bg-card border border-border backdrop-blur-sm;
+    @apply bg-card border border-border;
   }
 
-  .dark .card {
-    @apply bg-card-dark border-border-dark;
-  }
-
-  /* Button styles */
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-dark transition-colors duration-200;
+    @apply bg-primary text-on-accent hover:bg-primary-dark transition-colors duration-150;
   }
 
   .btn-accent {
-    @apply bg-accent text-secondary hover:bg-accent-dark transition-colors duration-200;
+    @apply bg-accent text-secondary hover:opacity-90 transition-opacity duration-150;
   }
 
-  /* Navigation styles */
-  .nav-bg {
-    @apply bg-primary/90 backdrop-blur-sm text-white dark:bg-primary-dark/90;
-  }
-
-  /* Footer styles */
   .footer-bg {
-    @apply bg-secondary/80 backdrop-blur-sm text-text dark:bg-secondary-dark/80 dark:text-text-dark;
+    @apply bg-background text-text;
   }
 
-  /* Glass Effect */
   .glass {
-    @apply bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-black/20;
+    @apply bg-card/80 border border-border;
   }
 
-  /* Custom Scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--c-accent) / 0.3) transparent;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-primary/30 dark:bg-primary-dark/30 rounded-full;
+    background: rgb(var(--c-accent) / 0.3);
+    border-radius: 9999px;
   }
+}
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary/50 dark:bg-primary-dark/50;
-  }
-
-  /* Firefox scrollbar */
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }

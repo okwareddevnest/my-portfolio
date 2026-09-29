@@ -1,209 +1,218 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ContainerScroll } from "../components/ui/container-scroll-animation";
-import { WavyBackground } from "../components/ui/wavy-background";
-import { usePortfolioStore } from "../store/store";
-import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
+import { useMemo } from "react";
+import { IconArrowRight, IconArrowUpRight } from "@tabler/icons-react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { Metadata } from "../components/Metadata";
+import { Reveal } from "../components/home/Reveal";
+import { Showcase, type ShowcaseItem } from "../components/home/Showcase";
+import { usePortfolioStore } from "../store/store";
+import { disciplines, featured, figures } from "../data/featured";
+import { resume } from "../data/resume";
+import { CONTACT_LABEL, contactHref, site } from "../lib/site";
 
 export default function Home() {
   const projects = usePortfolioStore((state) => state.projects);
-  // Feature OHMS, GitOk, and U-Download as top projects
-  const featuredProjects = projects
-    .filter(
-      (p) =>
-        p.name.includes("OHMS") ||
-        p.name.includes("Gitok") ||
-        p.name.includes("U-Download"),
-    )
-    .slice(0, 3);
+
+  const items = useMemo<ShowcaseItem[]>(
+    () =>
+      featured.flatMap((entry) => {
+        const project = projects.find((candidate) => candidate.name === entry.name);
+        if (!project) {
+          console.error(`[home] featured project "${entry.name}" is missing from the store`);
+          return [];
+        }
+        return [{ ...entry, project }];
+      }),
+    [projects],
+  );
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-[100dvh] flex-col bg-background">
       <Metadata
-        title="Software Engineer"
-        description="Software Engineer specializing in front-end architecture, LMS development, automation systems, blockchain development, and innovative web solutions. Currently Lead Front End Engineer at Fingo Africa."
-        keywords="software engineer, mobile development, flutter, blockchain developer, LMS development, n8n automation, golang developer, typescript, web development, ICP"
-      />
-      <WavyBackground
-        className="bg-background dark:bg-background-dark"
-        colors={["#38bdf8", "#818cf8", "#22d3ee"]}
-        waveWidth={50}
-        blur={10}
-        speed="fast"
-        waveOpacity={1}
+        title="Software Engineer and Studio"
+        description="Dedan Okware is a senior software engineer in Nairobi building payments, blockchain and developer tools, and client systems through his studio, okwaretech."
+        keywords="Dedan Okware, okwaretech, senior software engineer, Nairobi, Kenya, Next.js, Flutter, Rust, Tauri, Internet Computer, blockchain developer"
       />
       <Navbar />
-      <main className="flex-grow flex flex-col">
-        <div className="container mx-auto px-4 flex flex-col items-center text-center py-6 md:py-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 md:mb-8"
-          >
-            <Image
-              src="/profile.png"
-              alt="Profile"
-              layout="fill"
-              objectFit="cover"
-              className="rounded-full"
-              priority
-            />
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-text dark:text-text-dark px-4"
-          >
-            Hi, I&apos;m Dedan Okware
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-base md:text-lg text-text dark:text-text-dark max-w-2xl mb-6 md:mb-8 px-4"
-          >
-            Results-driven senior software engineer with deep front-end specialisation and full-stack architectural ownership, delivering high-performance web applications, cross-platform mobile apps, and blockchain solutions serving 50,000+ users globally. Award-winning blockchain developer with WCHL 2nd Place finishes at National and Regional levels. Currently Lead Front End Engineer at Fingo Africa, building stablecoin and cross-border payment experiences, after serving as Technical Lead Software Engineer at Power Learn Project Africa, where I led the setup and revamp of core systems through the organisation&apos;s pivot and trained 9,000+ developers. Creator of open-source tools trusted by 3,500+ developers worldwide. Expertise in Flutter, Golang, TypeScript, React, Next.js, Docker, n8n, and Internet Computer Protocol (ICP).
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12 px-4"
-          >
-            <Link
-              href="/projects"
-              className="btn-primary px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              View Projects
-            </Link>
-            <Link
-              href="/skills"
-              className="btn-accent px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              View Skills
-            </Link>
-          </motion.div>
-        </div>
-
-        <div className="flex flex-col overflow-hidden">
-          <ContainerScroll
-            titleComponent={
-              <>
-                <h1 className="text-4xl font-semibold text-black dark:text-white">
-                  Crafting Digital Experiences <br />
-                  <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                    with Modern Tech
-                  </span>
-                </h1>
-              </>
-            }
-          >
-            <Image
-              src="/Screenshot From 2025-11-07 17-58-19.png"
-              alt="hero"
-              height={720}
-              width={1400}
-              className="mx-auto rounded-2xl object-cover h-full object-left-top draggable-false"
-              draggable={false}
-            />
-          </ContainerScroll>
-        </div>
-
-        {/* Featured Projects Section */}
-        <section className="relative z-10 py-12 md:py-20 px-4 bg-background dark:bg-background-dark mt-32 md:mt-48">
-          <div className="container mx-auto">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-16 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
-            >
-              Featured Projects
-            </motion.h2>
-
-            <div className="space-y-8 md:space-y-16">
-              {featuredProjects.map((project, index) => (
-                <motion.div
-                  key={project.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: index * 0.2 }}
-                  className="bg-card dark:bg-card-dark rounded-xl md:rounded-2xl overflow-hidden shadow-lg md:shadow-xl border border-border/10 dark:border-border-dark/10"
-                >
-                  <div
-                    className={`grid md:grid-cols-2 gap-4 md:gap-8 ${index % 2 === 1 ? "md:grid-flow-dense" : ""}`}
-                  >
-                    <div
-                      className={`relative h-[200px] md:h-full ${index % 2 === 1 ? "md:col-start-2" : ""}`}
-                    >
-                      <Image
-                        src={project.previewImage}
-                        alt={project.name}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    </div>
-
-                    <div className="p-4 md:p-8 flex flex-col justify-center">
-                      <h3 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 text-text dark:text-text-dark">
-                        {project.name}
-                      </h3>
-                      <p className="text-sm md:text-base text-text/80 dark:text-text-dark/80 mb-4 md:mb-6">
-                        {project.longDescription}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-4 md:mb-8">
-                        {project.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 md:px-3 py-1 text-xs md:text-sm rounded-full bg-primary/10 dark:bg-primary-dark/10 text-primary dark:text-primary-dark"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="flex flex-wrap gap-3 md:gap-4">
-                        <a
-                          href={project.demoLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors"
-                        >
-                          <IconExternalLink className="w-4 h-4 md:w-5 md:h-5" />
-                          Visit Website
-                        </a>
-                        <a
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base rounded-lg border border-border dark:border-border-dark hover:bg-card dark:hover:bg-card-dark transition-colors"
-                        >
-                          <IconBrandGithub className="w-4 h-4 md:w-5 md:h-5" />
-                          View Source
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+      <main className="flex-grow">
+        <Showcase items={items} />
+        <Figures />
+        <Disciplines />
+        <Experience />
+        <Studio />
       </main>
       <Footer />
     </div>
+  );
+}
+
+function Figures() {
+  return (
+    <section aria-labelledby="figures-title" className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+      <Reveal>
+        <h2
+          id="figures-title"
+          className="max-w-[22ch] text-3xl font-semibold tracking-[-0.03em] text-text md:text-5xl"
+        >
+          Measured in the people who use it.
+        </h2>
+      </Reveal>
+      <dl className="mt-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+        {figures.map((figure, index) => (
+          <Reveal key={figure.value} delay={index * 0.08} className="border-t border-text pt-6">
+            <dt className="sr-only">{figure.label}</dt>
+            <dd>
+              <span
+                className={`block font-semibold tracking-[-0.045em] text-text ${
+                  index === 0 ? "text-6xl md:text-8xl" : "text-5xl md:text-6xl"
+                }`}
+              >
+                {figure.value}
+              </span>
+              <span className="mt-3 block max-w-[28ch] text-base text-muted">{figure.label}</span>
+            </dd>
+          </Reveal>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+function Disciplines() {
+  const [frontend, lead, backend, mobile, chain] = disciplines;
+  return (
+    <section aria-labelledby="roles-title" className="mx-auto max-w-[1400px] px-4 pb-24 md:px-8 md:pb-32">
+      <Reveal>
+        <h2
+          id="roles-title"
+          className="max-w-[22ch] text-3xl font-semibold tracking-[-0.03em] text-text md:text-5xl"
+        >
+          Five disciplines, all shipped to production.
+        </h2>
+      </Reveal>
+      <div className="mt-12 grid gap-3 md:grid-cols-6 md:grid-rows-[auto_auto_auto]">
+        <Reveal className="relative min-h-[360px] overflow-hidden rounded-md bg-card md:col-span-2 md:row-span-2">
+          <Image
+            src="/profile.png"
+            alt={`Portrait of ${site.owner}`}
+            fill
+            sizes="(min-width: 768px) 33vw, 100vw"
+            className="object-cover object-top grayscale"
+          />
+        </Reveal>
+        <Cell className="bg-primary text-on-accent md:col-span-4" discipline={frontend} tone="accent" />
+        <Cell className="border border-border bg-card md:col-span-2" discipline={lead} />
+        <Cell className="bg-text text-background md:col-span-2" discipline={backend} tone="ink" />
+        <Cell className="border border-border bg-card md:col-span-2" discipline={mobile} />
+        <Reveal className="relative overflow-hidden rounded-md border border-border bg-card md:col-span-4">
+          <div className="grid h-full md:grid-cols-[1fr_1fr]">
+            <div className="p-7 md:p-10">
+              <h3 className="text-2xl font-semibold tracking-[-0.02em] text-text">{chain.title}</h3>
+              <p className="mt-3 max-w-[44ch] text-base leading-relaxed text-muted">{chain.body}</p>
+            </div>
+            <div className="relative min-h-[220px]">
+              <Image
+                src="/achievements/regional-round-2nd-place.png"
+                alt="WCHL 2025 Regional Round certificate awarding 2nd place to OHMS by Dedan Okware"
+                fill
+                sizes="(min-width: 768px) 55vw, 100vw"
+                className="object-cover object-[50%_38%]"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Cell({
+  discipline,
+  className,
+  tone,
+}: {
+  discipline: (typeof disciplines)[number];
+  className: string;
+  tone?: "accent" | "ink";
+}) {
+  const bodyTone = tone ? "opacity-80" : "text-muted";
+  return (
+    <Reveal className={`flex min-h-[176px] flex-col justify-end rounded-md p-7 md:p-8 ${className}`}>
+      <h3 className={`text-2xl font-semibold tracking-[-0.02em] ${tone ? "" : "text-text"}`}>
+        {discipline.title}
+      </h3>
+      <p className={`mt-3 max-w-[48ch] text-base leading-relaxed ${bodyTone}`}>{discipline.body}</p>
+    </Reveal>
+  );
+}
+
+function Experience() {
+  return (
+    <section aria-labelledby="experience-title" className="border-t border-border">
+      <div className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+        <Reveal>
+          <h2
+            id="experience-title"
+            className="text-3xl font-semibold tracking-[-0.03em] text-text md:text-5xl"
+          >
+            Where I&apos;ve worked.
+          </h2>
+        </Reveal>
+        <ul className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+          {resume.experience.map((role, index) => (
+            <Reveal as="li" key={`${role.company}-${role.title}`} delay={(index % 2) * 0.06}>
+                <p className="tabular text-sm text-muted">{role.period}</p>
+                <p className="mt-2 text-xl font-semibold tracking-[-0.015em] text-text">{role.title}</p>
+                <p className="mt-1 text-base text-muted">{role.company}</p>
+            </Reveal>
+          ))}
+        </ul>
+        <Link
+          href="/experience"
+          className="mt-12 inline-flex items-center gap-2 text-base font-semibold text-primary underline-offset-4 hover:underline"
+        >
+          Full experience
+          <IconArrowRight size={18} stroke={2} aria-hidden="true" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+function Studio() {
+  return (
+    <section aria-labelledby="studio-title" className="border-t border-border bg-card">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-24 md:px-8 md:py-32 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+        <Reveal>
+          <p className="text-sm text-muted">okwaretech</p>
+          <h2
+            id="studio-title"
+            className="mt-4 max-w-[18ch] text-4xl font-semibold leading-[1.05] tracking-[-0.035em] text-text md:text-6xl"
+          >
+            Need something built that has to keep working?
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="max-w-[42ch] text-lg leading-relaxed text-muted">
+            okwaretech takes on business systems, web and mobile products, and integrations.
+            Send what you need and when you need it, and I&apos;ll reply with how I would build it.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a
+              href={contactHref}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-on-accent transition-[background-color,transform] duration-150 hover:bg-primary-dark active:scale-[0.98]"
+            >
+              {CONTACT_LABEL}
+              <IconArrowUpRight size={18} stroke={2} aria-hidden="true" />
+            </a>
+            <a href={`mailto:${site.email}`} className="text-base text-text underline underline-offset-4">
+              {site.email}
+            </a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }

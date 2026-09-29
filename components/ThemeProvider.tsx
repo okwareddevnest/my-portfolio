@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
@@ -11,43 +11,28 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
-  const [mounted, setMounted] = useState(false);
 
+  // The class itself is set before paint by the script in _document; this only
+  // brings React state in line with it.
   useEffect(() => {
-    setMounted(true);
-    // Check if user has a saved theme preference
-    const storedTheme = localStorage.getItem("theme") as Theme | null;
-    // Check if user has a system-level dark mode preference
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
-    // Use stored theme or system preference
-    const initialTheme = storedTheme || systemTheme;
-
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle("dark", initialTheme === "dark");
+    setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
   }, []);
 
-  const toggleTheme = () => {
-    setTheme((prevTheme) => {
-      const newTheme = prevTheme === "light" ? "dark" : "light";
-      localStorage.setItem("theme", newTheme);
-      document.documentElement.classList.remove("light", "dark");
-      document.documentElement.classList.add(newTheme);
-      return newTheme;
+  const toggleTheme = useCallback(() => {
+    setTheme((previous) => {
+      const next: Theme = previous === "light" ? "dark" : "light";
+      document.documentElement.classList.toggle("dark", next === "dark");
+      try {
+        localStorage.setItem("theme", next);
+      } catch {
+        // Storage can be blocked (private mode); the toggle still applies for this visit.
+      }
+      return next;
     });
-  };
-
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return null;
-  }
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
   );
 }
 
