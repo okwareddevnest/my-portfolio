@@ -9,7 +9,6 @@ const pages = [
   { href: "/skills", label: "Skills" },
   { href: "/achievements", label: "Achievements" },
   { href: "/certificates", label: "Certificates" },
-  { href: "/blogs", label: "Writing" },
   { href: "/resume", label: "Resume" },
 ];
 

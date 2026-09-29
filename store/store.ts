@@ -1,6 +1,4 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { blogs as initialBlogs } from '../data/blogs';
 
 interface Skill {
   name: string;
@@ -35,26 +33,6 @@ export type ProjectCategory =
   | "Linux tools"
   | "Automation";
 
-export interface Blog {
-  id: string;
-  title: string;
-  content: string;
-  publishedAt: string;
-  author: {
-    name: string;
-    image: string;
-    role: string;
-  };
-  tags: string[];
-  readTime: string;
-  thumbnail?: string;
-  source: {
-    type: 'linkedin' | 'twitter';
-    url: string;
-    preview?: string;
-  };
-}
-
 interface Certificate {
   name: string;
   issuer: string;
@@ -65,17 +43,13 @@ interface Certificate {
 interface PortfolioState {
   skills: SkillCategory[];
   projects: Project[];
-  blogs: Blog[];
   certificates: Certificate[];
   addSkill: (category: string, skill: Skill) => void;
   addProject: (project: Project) => void;
-  addBlog: (blog: Blog) => void;
   addCertificate: (cert: Certificate) => void;
-  removeBlog: (id: string) => void;
 }
 
 export const usePortfolioStore = create<PortfolioState>()(
-  persist(
     (set) => ({
       skills: [
         {
@@ -352,7 +326,6 @@ export const usePortfolioStore = create<PortfolioState>()(
           githubLink: "https://github.com/okwareddevnest"
         }
       ],
-      blogs: initialBlogs,
       certificates: [
         {
           name: "Google Cybersecurity Professional Certificate, Cyber Security",
@@ -385,21 +358,9 @@ export const usePortfolioStore = create<PortfolioState>()(
         set((state) => ({
           projects: [...state.projects, project]
         })),
-      addBlog: (blog: Blog) =>
-        set((state) => ({
-          blogs: [blog, ...state.blogs]
-        })),
       addCertificate: (cert: Certificate) =>
         set((state) => ({
           certificates: [...state.certificates, cert]
         })),
-      removeBlog: (id: string) => set((state) => ({
-        blogs: state.blogs.filter(b => b.id !== id)
-      })),
-    }),
-    {
-      name: 'portfolio-storage',
-      partialize: (state) => ({ blogs: state.blogs }),
-    }
-  )
+    })
 );

@@ -10,7 +10,6 @@ import { CONTACT_LABEL, contactHref } from "@/lib/site";
 const links = [
   { href: "/projects", label: "Work" },
   { href: "/experience", label: "Experience" },
-  { href: "/blogs", label: "Writing" },
   { href: "/resume", label: "Resume" },
 ];
 

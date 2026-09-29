@@ -6,10 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "clean": "rm -rf dist",
-    "build:script": "npm run clean && tsc -p scripts/tsconfig.json",
-    "post-to-blog": "./scripts/post-to-blog.sh"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -28,14 +25,12 @@
     "lucide-react": "^0.474.0",
     "motion": "^12.23.24",
     "next": "^15.5.7",
-    "puppeteer": "^24.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.186.1",
-    "uuid": "^11.0.5",
     "zod": "^3.24.1",
     "zustand": "^5.0.3"
   },
@@ -45,7 +40,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.186.0",
-    "@types/uuid": "^9.0.8",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8.5.1",
