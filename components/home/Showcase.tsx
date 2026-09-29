@@ -152,7 +152,7 @@ export function Showcase({ items }: { items: ShowcaseItem[] }) {
             Software that keeps working.
           </h1>
           <p className="mt-6 max-w-[40ch] text-lg leading-relaxed text-muted">
-            I ship payments, blockchain and developer tools from Nairobi, and client systems
+            I ship payments, blockchain and developer tools from Nairobi and Nakuru, and client systems
             through my studio, okwaretech.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">

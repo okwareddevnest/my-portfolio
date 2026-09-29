@@ -24,8 +24,7 @@ const Footer = () => (
       <div className="max-w-sm">
         <Logo />
         <p className="mt-4 text-sm leading-relaxed text-muted">
-          The software studio of {site.owner}. Products, client systems and open-source tools,
-          built and run from Nairobi.
+          The software studio of {site.owner}. Products, client systems and open-source tools built with passion.
         </p>
       </div>
 
