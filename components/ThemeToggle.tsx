@@ -1,24 +1,23 @@
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "./ThemeProvider";
-import { Sun, Moon } from "lucide-react";
-import { Button } from "./ui/button";
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
+  const next = theme === "light" ? "dark" : "light";
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
+    <button
+      type="button"
       onClick={toggleTheme}
-      className="rounded-full"
+      aria-label={`Switch to ${next} theme`}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full text-text/80 transition-colors duration-150 hover:bg-text/5 hover:text-text"
     >
       {theme === "light" ? (
-        <Sun className="h-5 w-5" />
+        <IconMoon className="h-[18px] w-[18px]" stroke={1.75} />
       ) : (
-        <Moon className="h-5 w-5" />
+        <IconSun className="h-[18px] w-[18px]" stroke={1.75} />
       )}
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+    </button>
   );
 };
 

@@ -1,61 +1,70 @@
+import Link from "next/link";
+import { IconBrandGithub, IconBrandLinkedin, IconBrandX } from "@tabler/icons-react";
 import Logo from "./Logo";
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconBrandX,
-} from "@tabler/icons-react";
+import { site } from "@/lib/site";
 
-const Footer = () => {
-  return (
-    <footer className="footer-bg">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <Logo className="w-32 h-8 text-text dark:text-text-dark" />
-            <p className="text-sm text-text/80 dark:text-text-dark/80">
-              Software Engineer | Blockchain Developer | AI Enthusiast
-            </p>
-          </div>
+const pages = [
+  { href: "/projects", label: "All projects" },
+  { href: "/experience", label: "Experience" },
+  { href: "/skills", label: "Skills" },
+  { href: "/achievements", label: "Achievements" },
+  { href: "/certificates", label: "Certificates" },
+  { href: "/blogs", label: "Writing" },
+  { href: "/resume", label: "Resume" },
+];
 
-          <div className="flex items-center gap-6">
-            <a
-              href="https://github.com/okwareddevnest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-colors"
-              aria-label="GitHub"
-            >
-              <IconBrandGithub className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/softcysec-dedan-okware/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-colors"
-              aria-label="LinkedIn"
-            >
-              <IconBrandLinkedin className="w-6 h-6" />
-            </a>
-            <a
-              href="https://x.com/okware_o"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-colors"
-              aria-label="X (formerly Twitter)"
-            >
-              <IconBrandX className="w-6 h-6" />
-            </a>
-          </div>
-        </div>
+const socials = [
+  { href: site.socials.github, label: "GitHub", Icon: IconBrandGithub },
+  { href: site.socials.linkedin, label: "LinkedIn", Icon: IconBrandLinkedin },
+  { href: site.socials.x, label: "X", Icon: IconBrandX },
+];
 
-        <div className="mt-8 pt-6 border-t border-border dark:border-border-dark">
-          <p className="text-center text-sm text-text/60 dark:text-text-dark/60">
-            © {new Date().getFullYear()} Dedan Okware. All rights reserved.
-          </p>
-        </div>
+const Footer = () => (
+  <footer className="border-t border-border bg-background">
+    <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-14 md:grid-cols-[1.4fr_1fr_auto] md:px-8">
+      <div className="max-w-sm">
+        <Logo />
+        <p className="mt-4 text-sm leading-relaxed text-muted">
+          The software studio of {site.owner}. Products, client systems and open-source tools,
+          built and run from Nairobi.
+        </p>
       </div>
-    </footer>
-  );
-};
+
+      <ul className="grid grid-cols-2 gap-x-8 gap-y-2.5 text-sm">
+        {pages.map(({ href, label }) => (
+          <li key={href}>
+            <Link href={href} className="text-muted transition-colors hover:text-text">
+              {label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <ul className="flex gap-2 md:flex-col">
+        {socials.map(({ href, label, Icon }) => (
+          <li key={label}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-text transition-colors hover:border-text"
+            >
+              <Icon size={18} stroke={1.75} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className="mx-auto flex max-w-[1400px] flex-wrap justify-between gap-2 border-t border-border px-4 py-6 text-xs text-muted md:px-8">
+      <span>
+        {new Date().getFullYear()} {site.studio}. {site.owner}.
+      </span>
+      <a href={site.url} className="hover:text-text">
+        okwaretech.com
+      </a>
+    </div>
+  </footer>
+);
 
 export default Footer;

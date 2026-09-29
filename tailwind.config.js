@@ -4,6 +4,10 @@ const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
+function token(name) {
+  return `rgb(var(--c-${name}) / <alpha-value>)`;
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -14,35 +18,23 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
+      },
+      // Every colour resolves through a CSS variable defined in globals.css,
+      // so the `.dark` class flips the whole site. The `dark` keys point at the
+      // same variables on purpose: older pages write `dark:bg-background-dark`
+      // and keep working without an edit.
       colors: {
-        primary: {
-          DEFAULT: '#47A248',
-          dark: '#3B8A3C'
-        },
-        secondary: {
-          DEFAULT: '#FFFFFF',
-          dark: '#1C1C1C'
-        },
-        accent: {
-          DEFAULT: '#FFCD00',
-          dark: '#E6B800'
-        },
-        background: {
-          DEFAULT: '#FFFFFF',
-          dark: '#121212'
-        },
-        text: {
-          DEFAULT: '#1C1C1C',
-          dark: '#E0E0E0'
-        },
-        card: {
-          DEFAULT: '#FFFFFF',
-          dark: '#1E1E1E'
-        },
-        border: {
-          DEFAULT: '#E5E7EB',
-          dark: '#2D2D2D'
-        }
+        primary: { DEFAULT: token("accent"), dark: token("accent-strong") },
+        secondary: { DEFAULT: token("surface"), dark: token("surface") },
+        accent: { DEFAULT: token("ink"), dark: token("ink-soft") },
+        background: { DEFAULT: token("bg"), dark: token("bg") },
+        text: { DEFAULT: token("ink"), dark: token("ink") },
+        muted: { DEFAULT: token("muted"), dark: token("muted") },
+        card: { DEFAULT: token("surface"), dark: token("surface") },
+        border: { DEFAULT: token("line"), dark: token("line") },
+        "on-accent": token("on-accent"),
       },
     },
   },

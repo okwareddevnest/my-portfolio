@@ -47,13 +47,13 @@ export const resume: ResumeData = {
   name: "Dedan Okware",
   headline: "Senior Software Engineer",
   specialties:
-    "Full-Stack | Frontend | Backend | Blockchain | Technical Leadership",
+    "Full-Stack | Frontend | Backend | Mobile | Blockchain | Technical Leadership",
   contact: [
     "softengdedan@gmail.com",
     "Nairobi, Kenya",
     "linkedin.com/in/softcysec-dedan-okware",
     "github.com/okwareddevnest",
-    "my-portfolio-crypt.vercel.app",
+    "okwaretech.com",
   ],
   summary:
     "Senior Software Engineer who has held Tech Lead, Frontend, Backend and Blockchain engineering roles, shipping production systems across fintech, stablecoin payments, edtech and developer tooling. Currently Lead Front End Engineer at Fingo Africa, owning architecture for stablecoin wallets, cross-border transfers and KYC onboarding across Next.js web and Flutter mobile. Previously Technical Lead Software Engineer at Power Learn Project Africa, leading the revamp of core systems, building Golang backend services and automating operations; and Blockchain Software Engineer at Bonded, delivering ICP smart contracts for tamper-proof evidence storage. Strong in system architecture, API design, TypeScript, React, Node.js, Python, Golang and Rust, CI/CD and engineering standards. WCHL 2nd Place (Kenya and Africa) and creator of open-source tools used by 3,500+ developers.",
@@ -80,7 +80,6 @@ export const resume: ResumeData = {
         "React",
         "Next.js",
         "Vue.js",
-        "Flutter",
         "Redux",
         "Tailwind CSS",
         "Material UI",
@@ -97,6 +96,7 @@ export const resume: ResumeData = {
         "Express.js",
         "Django",
         "FastAPI",
+        "Rust Services",
         "Golang Services",
         "REST APIs",
         "GraphQL",
@@ -105,6 +105,10 @@ export const resume: ResumeData = {
         "Microservices",
         "Strapi CMS",
       ],
+    },
+    {
+      label: "Mobile & Desktop",
+      items: ["Flutter", "Dart", "Tauri", "Android", "Windows, macOS & Linux Desktop Apps"],
     },
     {
       label: "Databases",

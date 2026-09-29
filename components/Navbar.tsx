@@ -1,130 +1,115 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { IconMenu2, IconX } from "@tabler/icons-react";
 import { Logo } from "./Logo";
 import ThemeToggle from "./ThemeToggle";
-import { useState } from "react";
+import { CONTACT_LABEL, contactHref } from "@/lib/site";
+
+const links = [
+  { href: "/projects", label: "Work" },
+  { href: "/experience", label: "Experience" },
+  { href: "/blogs", label: "Writing" },
+  { href: "/resume", label: "Resume" },
+];
 
 const Navbar = () => {
-  const router = useRouter();
-  const currentPath = router.pathname;
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { pathname } = useRouter();
+  const [open, setOpen] = useState(false);
+  const reduce = useReducedMotion();
 
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/projects", label: "Projects" },
-    { href: "/experience", label: "Experience" },
-    { href: "/achievements", label: "Achievements" },
-    { href: "/skills", label: "Skills" },
-    { href: "/certificates", label: "Certificates" },
-    { href: "/blogs", label: "Blog" },
-    { href: "/resume", label: "Resume" },
-  ];
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/80 dark:bg-background-dark/80 border-b border-border/10 dark:border-border-dark/10">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex-shrink-0 flex items-center">
-            <Logo className="w-32 h-8" />
-          </Link>
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
+      <nav
+        aria-label="Primary"
+        className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 md:px-8"
+      >
+        <Link href="/" aria-label="okwaretech home" className="rounded-md">
+          <Logo />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-end flex-1 space-x-1">
-            {links.map(({ href, label }) => (
+        <div className="hidden items-center gap-1 md:flex">
+          {links.map(({ href, label }) => {
+            const active = pathname === href;
+            return (
               <Link
                 key={href}
                 href={href}
-                className={`relative flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium transition-colors
-                          ${
-                            currentPath === href
-                              ? "text-primary dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/5"
-                              : "text-text/80 dark:text-text-dark/80 hover:text-primary dark:hover:text-primary-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5"
-                          }`}
+                aria-current={active ? "page" : undefined}
+                className={`rounded-full px-3.5 py-2 text-sm transition-colors duration-150 ${
+                  active ? "bg-text/[0.06] text-text" : "text-muted hover:text-text"
+                }`}
               >
-                <span className="relative">
-                  {label}
-                  {currentPath === href && (
-                    <motion.div
-                      layoutId="navbar-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent"
-                      initial={false}
-                    />
-                  )}
-                </span>
+                {label}
               </Link>
-            ))}
-            <div className="ml-4">
-              <ThemeToggle />
-            </div>
-          </div>
-
-          {/* Mobile Navigation Button */}
-          <div className="md:hidden flex items-center gap-4">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-md text-text dark:text-text-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5 transition-colors"
-              aria-label="Toggle menu"
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-border/10 dark:border-border-dark/10 bg-background/95 dark:bg-background-dark/95 backdrop-blur-md"
+            );
+          })}
+          <span className="mx-2 h-5 w-px bg-border" aria-hidden="true" />
+          <ThemeToggle />
+          <a
+            href={contactHref}
+            className="ml-2 rounded-full bg-text px-4 py-2 text-sm font-semibold text-background transition-transform duration-150 hover:bg-primary hover:text-on-accent active:scale-[0.98]"
           >
-            <div className="container mx-auto px-4 py-4 space-y-2">
+            {CONTACT_LABEL}
+          </a>
+        </div>
+
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-text hover:bg-text/5"
+          >
+            {open ? <IconX size={20} stroke={1.75} /> : <IconMenu2 size={20} stroke={1.75} />}
+          </button>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-menu"
+            initial={reduce ? false : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="border-t border-border bg-background md:hidden"
+          >
+            <div className="mx-auto flex max-w-[1400px] flex-col px-4 py-3">
               {links.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors
-                            ${
-                              currentPath === href
-                                ? "text-primary dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/5"
-                                : "text-text/80 dark:text-text-dark/80 hover:text-primary dark:hover:text-primary-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5"
-                            }`}
+                  onClick={() => setOpen(false)}
+                  aria-current={pathname === href ? "page" : undefined}
+                  className="border-b border-border/60 py-3.5 text-lg text-text last:border-0"
                 >
                   {label}
                 </Link>
               ))}
+              <a
+                href={contactHref}
+                className="mt-3 rounded-full bg-text px-4 py-3 text-center text-base font-semibold text-background"
+              >
+                {CONTACT_LABEL}
+              </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 

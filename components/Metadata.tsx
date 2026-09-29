@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { site } from "@/lib/site";
 
 interface MetadataProps {
   title: string;
@@ -13,8 +14,8 @@ export const Metadata = ({
   keywords = "software engineer, blockchain developer, web development, ICP, rust, typescript",
   ogImage = "/profile.png",
 }: MetadataProps) => {
-  const fullTitle = title.includes("|") ? title : `${title} | Dedan Okware`;
-  const siteUrl = "https://my-portfolio-crypt.vercel.app";
+  const fullTitle = title.includes("|") ? title : `${title} | ${site.owner}, ${site.studio}`;
+  const siteUrl = site.url;
   const fullOgImage = ogImage.startsWith("http")
     ? ogImage
     : `${siteUrl}${ogImage}`;
@@ -38,7 +39,7 @@ export const Metadata = ({
       <meta property="og:image:height" content="630" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={siteUrl} />
-      <meta property="og:site_name" content="Dedan Okware - Portfolio" />
+      <meta property="og:site_name" content={site.studio} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -50,7 +51,7 @@ export const Metadata = ({
 
       {/* Additional Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="theme-color" content="#3B82F6" />
+      <meta name="theme-color" content="#F4F4F1" />
       <meta name="author" content="Dedan Okware" />
     </Head>
   );

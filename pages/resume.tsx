@@ -1,17 +1,11 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { AnimatedBackground } from "../components/AnimatedBackground";
-import { motion } from "framer-motion";
 import { Metadata } from "../components/Metadata";
 import { RESUME_FILE_NAME, resume } from "../data/resume";
 import type { ResumeCredential } from "../data/resume";
-import {
-  IconDownload,
-  IconFileTypePdf,
-  IconSparkles,
-  IconRocket,
-} from "@tabler/icons-react";
+import { IconDownload, IconLoader2 } from "@tabler/icons-react";
+import { CONTACT_LABEL, contactHref } from "../lib/site";
 
 // Revoking the object URL in the same tick as click() cancels the download in
 // some browsers, so it is released after the navigation has started.
@@ -34,7 +28,7 @@ const downloadResumePdf = async (): Promise<void> => {
 };
 
 const SectionHeading = ({ children }: { children: string }) => (
-  <h2 className="text-sm font-bold uppercase tracking-wider text-blue-900 border-b border-blue-900 pb-1 mb-3 mt-6">
+  <h2 className="text-sm font-bold uppercase tracking-wider text-[#1F3499] border-b border-[#1F3499] pb-1 mb-3 mt-6">
     {children}
   </h2>
 );
@@ -69,84 +63,60 @@ const Resume = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark">
+    <div className="flex min-h-[100dvh] flex-col bg-background">
       <Metadata
         title="Resume"
         description="Resume of Dedan Okware, Senior Software Engineer across frontend, backend, blockchain and technical leadership. Lead Front End Engineer at Fingo Africa, former Technical Lead at Power Learn Project Africa, Blockchain Software Engineer at Bonded, WCHL 2nd Place (Kenya and Africa)."
         keywords="resume, CV, senior software engineer, full stack engineer, tech lead, frontend engineer, backend engineer, blockchain engineer, TypeScript, React, Next.js, Node.js, Golang, Python, Rust, Flutter, ICP, smart contracts, download resume"
       />
-      <AnimatedBackground />
       <Navbar />
 
-      <main className="flex-grow container mx-auto px-4 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <IconSparkles className="w-8 h-8 text-primary dark:text-primary-dark" />
-            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary dark:from-primary-dark dark:via-accent dark:to-primary-dark">
-              Professional Resume
-            </h1>
-            <IconRocket className="w-8 h-8 text-accent" />
-          </div>
-          <p className="text-lg text-text/80 dark:text-text-dark/80 max-w-2xl mx-auto">
-            Senior Software Engineer across frontend, backend, blockchain and
-            technical leadership. The PDF is plain, parseable text built for
-            applicant tracking systems.
+      <main className="mx-auto grid w-full max-w-[1400px] flex-grow gap-12 px-4 pb-24 pt-16 md:px-8 md:pt-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16">
+        <aside className="lg:sticky lg:top-28 lg:self-start">
+          <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.035em] text-text md:text-6xl">
+            Resume
+          </h1>
+          <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-muted">
+            Senior Software Engineer across frontend, backend, blockchain and technical
+            leadership. The PDF is plain, parseable text, so applicant tracking systems read
+            every line.
           </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col items-center gap-3 mb-12"
-        >
-          <button
-            type="button"
-            onClick={handleDownload}
-            disabled={isGenerating}
-            aria-busy={isGenerating}
-            className="group relative px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >
-            <span className="relative z-10 flex items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={handleDownload}
+              disabled={isGenerating}
+              aria-busy={isGenerating}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-on-accent transition-[background-color,transform] duration-150 hover:bg-primary-dark active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+            >
               {isGenerating ? (
-                <>
-                  <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
-                  Generating PDF...
-                </>
+                <IconLoader2 size={18} stroke={2} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />
               ) : (
-                <>
-                  <IconDownload className="w-6 h-6" />
-                  Download Resume PDF
-                  <IconFileTypePdf className="w-6 h-6" />
-                </>
+                <IconDownload size={18} stroke={2} aria-hidden="true" />
               )}
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </button>
+              {isGenerating ? "Preparing PDF" : "Download PDF"}
+            </button>
+            <a
+              href={contactHref}
+              className="inline-flex items-center rounded-full border border-border px-6 py-3 text-base text-text transition-colors duration-150 hover:border-text"
+            >
+              {CONTACT_LABEL}
+            </a>
+          </div>
           {error && (
-            <p role="alert" className="text-sm text-red-700 dark:text-red-400">
+            <p role="alert" className="mt-4 text-sm text-red-700 dark:text-red-400">
               {error}
             </p>
           )}
-        </motion.div>
+        </aside>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="max-w-4xl mx-auto"
-        >
-          <article className="bg-white text-gray-900 rounded-2xl shadow-2xl border border-border/20 dark:border-border-dark/20 p-6 sm:p-12 leading-relaxed font-sans">
+        <div>
+          <article className="rounded-md border border-border bg-white p-6 font-sans leading-relaxed text-gray-900 sm:p-12">
             <header>
               <p className="text-3xl font-bold tracking-wide uppercase">
                 {resume.name}
               </p>
-              <p className="text-lg font-bold text-blue-900">{resume.headline}</p>
+              <p className="text-lg font-bold text-[#1F3499]">{resume.headline}</p>
               <p className="text-sm text-gray-600">{resume.specialties}</p>
               <p className="text-sm text-gray-600 mt-2 break-words">
                 {resume.contact.join("  |  ")}
@@ -224,7 +194,7 @@ const Resume = () => {
               <p className="text-sm">{resume.education}</p>
             </section>
           </article>
-        </motion.div>
+        </div>
       </main>
 
       <Footer />
