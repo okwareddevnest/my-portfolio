@@ -242,7 +242,7 @@ export const usePortfolioStore = create<PortfolioState>()(
           previewImage: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2032&auto=format&fit=crop",
           technologies: ["Solidity", "Ethereum", "React", "Web3.js", "IPFS"],
           githubLink: "https://github.com/okwareddevnest/noether",
-          demoLink: "https://noether.vercel.app"
+          demoLink: "https://github.com/okwareddevnest/noether"
         },
         {
           name: "Backlight",
