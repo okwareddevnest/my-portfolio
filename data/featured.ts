@@ -64,6 +64,36 @@ export const figures: Figure[] = [
   { value: "3,500+", label: "developers using my open-source tools" },
 ];
 
+export interface CratePackage {
+  name: string; // crates.io crate name, also its URL slug
+  summary: string;
+  downloads: number; // all-time count from crates.io, read 2026-10-01
+}
+
+export const CRATES_PROFILE = "https://crates.io/users/okwareddevnest";
+
+export const packages: CratePackage[] = [
+  {
+    name: "ohms-adaptq",
+    summary: "LLM quantization CLI built on NOVAQ, so large models run on local hardware.",
+    downloads: 4848,
+  },
+  {
+    name: "vaultarq",
+    summary: "Rust SDK for Vaultarq, a developer-first secrets manager.",
+    downloads: 3918,
+  },
+  {
+    name: "dfxmon-cli",
+    summary: "CLI for the dfxmon canister on the Internet Computer.",
+    downloads: 2339,
+  },
+  { name: "rson-core", summary: "Core parsing and value types for RSON.", downloads: 1886 },
+  { name: "serde_rson", summary: "Serde integration for RSON.", downloads: 1375 },
+  { name: "rson-schema", summary: "Schema validation for RSON.", downloads: 1010 },
+  { name: "rson-cli", summary: "Command-line tools for RSON.", downloads: 974 },
+];
+
 export interface Discipline {
   title: string;
   body: string;

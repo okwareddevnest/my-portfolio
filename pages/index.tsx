@@ -8,7 +8,7 @@ import { Metadata } from "../components/Metadata";
 import { Reveal } from "../components/home/Reveal";
 import { Showcase, type ShowcaseItem } from "../components/home/Showcase";
 import { usePortfolioStore } from "../store/store";
-import { disciplines, featured, figures } from "../data/featured";
+import { CRATES_PROFILE, disciplines, featured, figures, packages } from "../data/featured";
 import { resume } from "../data/resume";
 import { CONTACT_LABEL, contactHref, site } from "../lib/site";
 
@@ -39,6 +39,7 @@ export default function Home() {
       <main className="flex-grow">
         <Showcase items={items} />
         <Figures />
+        <Packages />
         <Disciplines />
         <Experience />
         <Studio />
@@ -76,6 +77,60 @@ function Figures() {
           </Reveal>
         ))}
       </dl>
+    </section>
+  );
+}
+
+const totalDownloads = packages.reduce((sum, crate) => sum + crate.downloads, 0);
+
+function Packages() {
+  return (
+    <section aria-labelledby="packages-title" className="mx-auto max-w-[1400px] px-4 pb-24 md:px-8 md:pb-32">
+      <Reveal>
+        <h2
+          id="packages-title"
+          className="max-w-[22ch] text-3xl font-semibold tracking-[-0.03em] text-text md:text-5xl"
+        >
+          Published on crates.io.
+        </h2>
+        <p className="mt-4 max-w-[48ch] text-lg leading-relaxed text-muted">
+          {packages.length} Rust crates with{" "}
+          <span className="tabular text-text">{totalDownloads.toLocaleString("en-US")}</span> downloads
+          between them.
+        </p>
+      </Reveal>
+      <ul className="mt-12 border-b border-border">
+        {packages.map((crate) => (
+          <li key={crate.name} className="border-t border-border">
+            <a
+              href={`https://crates.io/crates/${crate.name}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group grid gap-1 py-5 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_auto] md:items-baseline md:gap-8"
+            >
+              <span className="inline-flex items-center gap-1.5 font-mono text-base font-semibold text-text group-hover:text-primary">
+                {crate.name}
+                <IconArrowUpRight size={16} stroke={2} aria-hidden="true" />
+                <span className="sr-only">on crates.io (opens in a new tab)</span>
+              </span>
+              <span className="text-base text-muted">{crate.summary}</span>
+              <span className="tabular text-sm text-muted">
+                {crate.downloads.toLocaleString("en-US")} downloads
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a
+        href={CRATES_PROFILE}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-8 inline-flex items-center gap-2 text-base font-semibold text-primary underline-offset-4 hover:underline"
+      >
+        All crates on crates.io
+        <IconArrowUpRight size={18} stroke={2} aria-hidden="true" />
+        <span className="sr-only">(opens in a new tab)</span>
+      </a>
     </section>
   );
 }
