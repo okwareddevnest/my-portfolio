@@ -10,6 +10,7 @@ const pages = [
   { href: "/achievements", label: "Achievements" },
   { href: "/certificates", label: "Certificates" },
   { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const socials = [
