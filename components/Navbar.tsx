@@ -11,6 +11,7 @@ const links = [
   { href: "/projects", label: "Work" },
   { href: "/experience", label: "Experience" },
   { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const Navbar = () => {
